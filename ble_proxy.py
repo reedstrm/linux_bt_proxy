@@ -5,7 +5,7 @@ import struct
 import argparse
 from zeroconf.asyncio import AsyncZeroconf
 from zeroconf import ServiceInfo
-from bleak import BleakScanner
+from bleak import BleakScanner, AdvertisementData
 import time
 
 # Load compiled protobuf messages
@@ -33,27 +33,16 @@ async def advertise_mdns(hostname, ip_address, port, mac):
 # === ESPHome Protocol ===
 clients = set()
 
-async def send_advertisement_to_clients(device):
-    adv_data = device.metadata.get("advertisement_data")
-    if adv_data is None:
-        return
-
-    msg = api.BluetoothDeviceAdvertisement()
+async def send_advertisement_to_clients(device, adv_data: AdvertisementData):
+    msg = api.BluetoothLERawAdvertisement()
     msg.address = device.address.replace(":", "")
     msg.rssi = device.rssi
     msg.name = device.name or ""
-    msg.service_uuids.extend(adv_data.service_uuids or [])
     msg.timestamp = int(time.time() * 1000)
-
-    if adv_data.manufacturer_data:
-        for key, val in adv_data.manufacturer_data.items():
-            entry = api.BluetoothDeviceAdvertisement.ManufacturerData()
-            entry.key = key
-            entry.data = val
-            msg.manufacturer_data.append(entry)
+    msg.data = adv_data.bytes or b""
 
     data = msg.SerializeToString()
-    packet = b'\x35' + struct.pack('>I', len(data)) + data  # opcode 0x35 = BluetoothDeviceAdvertisement
+    packet = b'\x33' + struct.pack('>I', len(data)) + data  # opcode 0x33 = BluetoothLERawAdvertisement
 
     for writer in clients:
         try:
@@ -63,14 +52,18 @@ async def send_advertisement_to_clients(device):
             log.warning(f"Failed to send to client: {e}")
 
 async def ble_scan_loop():
+    def detection_callback(device, adv_data):
+        return asyncio.create_task(send_advertisement_to_clients(device, adv_data))
+
+    scanner = BleakScanner(detection_callback)
     while True:
         try:
-            devices = await BleakScanner.discover()
-            for device in devices:
-                await send_advertisement_to_clients(device)
+            await scanner.start()
+            await asyncio.sleep(5)
+            await scanner.stop()
         except Exception as e:
             log.error(f"BLE scan error: {e}")
-        await asyncio.sleep(5)
+            await asyncio.sleep(5)
 
 async def handle_client(reader, writer):
     addr = writer.get_extra_info('peername')
