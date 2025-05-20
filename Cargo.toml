@@ -1,0 +1,21 @@
+[package]
+name = "linux_bt_proxy"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+rumble = "0.3"
+tokio = { version = "1", features = ["full"] }
+prost = "0.12"
+prost-types = "0.12"
+libmdns = "0.9.1"
+log = "0.4"
+env_logger = "0.10"
+bytes = "1"
+gethostname = "1.0.2"
+
+
+[build-dependencies]
+prost-build = "0.12"
