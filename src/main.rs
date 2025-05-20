@@ -1,134 +1,72 @@
-use clap::Parser;
-use log::{error, info};
 use rumble::bluez::manager::Manager;
-use rumble::api::{Central, CentralEvent};
-use std::sync::{Arc, Mutex};
+use rumble::api::{Central, Peripheral};
 use std::time::Duration;
 use std::thread;
-use std::net::{TcpListener, TcpStream};
-use std::io::Write;
-use prost::Message;
-use bytes::BytesMut;
-use libmdns::Responder;
-use std::process::exit;
+use log::info;
+use env_logger;
+use clap::Parser;
 use gethostname::gethostname;
 
-/// ESPHome-compatible Bluetooth proxy daemon
+/// Bluetooth proxy CLI
 #[derive(Parser, Debug)]
 #[command(name = "linux_bt_proxy")]
+#[command(about = "Linux Bluetooth Proxy for ESPHome", long_about = None)]
 struct Args {
-    /// HCI adapter index (e.g. 0 for hci0)
-    #[arg(long, default_value_t = 0)]
-    hci: usize,
+    /// HCI interface to use (e.g., hci0)
+    #[arg(long, default_value = "hci0")]
+    hci: String,
 
-    /// Hostname to advertise over mDNS
+    /// Hostname to advertise via mDNS
     #[arg(long)]
     hostname: Option<String>,
 
-    /// Fake MAC address to advertise
+    /// MAC address to advertise
     #[arg(long)]
     mac: Option<String>,
 
-    /// Interfaces to advertise on (optional)
+    /// Network interfaces to advertise on (comma-separated)
     #[arg(long)]
-    interfaces: Vec<String>,
-}
-
-mod api {
-    include!(concat!(env!("OUT_DIR"), "/api.rs"));
-}
-
-fn format_mac(mac: &[u8]) -> String {
-    mac.iter().map(|b| format!("{:02X}", b)).collect::<Vec<_>>().join(":")
-}
-
-fn start_mdns_service(hostname: &str, port: u16, mac: &str) {
-    let responder = Responder::new().expect("Failed to start mDNS responder");
-    let _svc = responder.register(
-        "_esphomelib._tcp".into(),
-        format!("{}._esphomelib._tcp.local.", hostname),
-        port,
-        &[("mac", mac.replace(":", "").to_lowercase().as_str())],
-    );
-
-    info!("mDNS service registered for {} on port {} with MAC {}", hostname, port, mac);
-    std::mem::forget(responder);
-}
-
-fn handle_client(stream: TcpStream, clients: Arc<Mutex<Vec<TcpStream>>>) {
-    let mut clients = clients.lock().unwrap();
-    clients.push(stream.try_clone().unwrap());
-    drop(clients);
-    info!("Client connected: {}", stream.peer_addr().unwrap());
-}
-
-fn start_server(clients: Arc<Mutex<Vec<TcpStream>>>, port: u16) {
-    let listener = TcpListener::bind(("0.0.0.0", port)).expect("Failed to bind TCP server");
-    info!("TCP server listening on port {}", port);
-    for stream in listener.incoming() {
-        if let Ok(stream) = stream {
-            let clients = clients.clone();
-            thread::spawn(move || handle_client(stream, clients));
-        }
-    }
+    interfaces: Option<String>,
 }
 
 fn main() {
     env_logger::init();
     let args = Args::parse();
 
-    let manager = Manager::new().unwrap();
-    let adapters = manager.adapters().unwrap();
+    let hostname = args
+        .hostname
+        .unwrap_or_else(|| gethostname().to_string_lossy().into_owned());
 
-    if args.hci >= adapters.len() {
-        error!("Invalid HCI index: {} (only {} adapter(s) found)", args.hci, adapters.len());
-        exit(1);
+    let manager = Manager::new().expect("Failed to initialize BLE manager");
+
+    // Find the adapter that matches the requested HCI interface
+    let adapters = manager.adapters().expect("Unable to retrieve adapters");
+    let adapter_info = adapters
+        .iter()
+        .find(|a| a.name == args.hci)
+        .expect("Specified HCI interface not found");
+
+    let adapter = manager.down(adapter_info).expect("Failed to bring adapter down");
+    let adapter = manager.up(&adapter).expect("Failed to bring adapter up");
+    let central = adapter.connect().expect("Failed to connect to adapter");
+
+    // Determine MAC address to advertise
+    let adapter_mac = args.mac.unwrap_or_else(|| adapter_info.mac_address.to_string());
+    info!("Using MAC address: {}", adapter_mac);
+
+    central.start_scan().expect("Failed to start scanning");
+
+    thread::sleep(Duration::from_secs(5));
+    let peripherals = central.peripherals();
+
+    for peripheral in peripherals {
+        let properties = peripheral.properties();
+        info!("Discovered device: {:?}", properties);
     }
 
-    let adapter = adapters[args.hci].connect().unwrap();
-    let adapter_mac = adapter.adapter_info().unwrap();
-    let hostname = args.hostname.unwrap_or_else(|| gethostname::gethostname().to_string_lossy().into_owned());
-    let fake_mac = args.mac.unwrap_or_else(|| adapter_mac.clone());
-
-    info!("Using HCI{} - MAC: {}", args.hci, adapter_mac);
-    info!("Hostname: {}", hostname);
-    info!("Advertised MAC: {}", fake_mac);
-
-    start_mdns_service(&hostname, 6053, &fake_mac);
-
-    let clients: Arc<Mutex<Vec<TcpStream>>> = Arc::new(Mutex::new(Vec::new()));
-    let server_clients = clients.clone();
-    thread::spawn(move || start_server(server_clients, 6053));
-
-    adapter.start_scan().expect("Failed to start scan");
-    info!("Started BLE scanning");
-
-    loop {
-        if let Ok(event) = adapter.event_receiver().recv_timeout(Duration::from_secs(2)) {
-            if let CentralEvent::DeviceDiscovered(d) = event {
-                if let Ok(properties) = adapter.device(&d).and_then(|dev| dev.properties()) {
-                    let addr_u64 = properties.address.iter().fold(0u64, |acc, &b| (acc << 8) | b as u64);
-                    let rssi = properties.rssi.unwrap_or(0);
-                    let data = properties.advertisement_data;
-
-                    let mut msg = api::BluetoothLeRawAdvertisement {
-                        address: addr_u64,
-                        rssi: rssi as i32,
-                        address_type: 0,
-                        data: data.clone().into(),
-                    };
-
-                    let mut buf = BytesMut::with_capacity(128);
-                    msg.encode(&mut buf).unwrap();
-
-                    let mut packet = vec![0x33];
-                    packet.extend_from_slice(&(buf.len() as u32).to_be_bytes());
-                    packet.extend_from_slice(&buf);
-
-                    let mut clients = clients.lock().unwrap();
-                    clients.retain(|c| c.write_all(&packet).is_ok());
-                }
-            }
-        }
-    }
+    info!(
+        "Advertising as '{}' on interfaces: {:?}",
+        hostname,
+        args.interfaces.as_deref().unwrap_or("all")
+    );
 }
