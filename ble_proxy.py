@@ -5,14 +5,16 @@ import struct
 import argparse
 from zeroconf.asyncio import AsyncZeroconf
 from zeroconf import ServiceInfo
-from bleak import BleakScanner, AdvertisementData
+from bleak import BleakScanner, AdvertisementData, BLEDevice
 import time
+import traceback
 
 # Load compiled protobuf messages
 from proto import api_pb2 as api
 
 # === Logging Setup ===
-logging.basicConfig(level=logging.INFO)
+#logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 log = logging.getLogger("bt-proxy")
 
 # === mDNS Advertisement ===
@@ -33,23 +35,51 @@ async def advertise_mdns(hostname, ip_address, port, mac):
 # === ESPHome Protocol ===
 clients = set()
 
-async def send_advertisement_to_clients(device, adv_data: AdvertisementData):
-    msg = api.BluetoothLERawAdvertisement()
-    msg.address = device.address.replace(":", "")
-    msg.rssi = device.rssi
-    msg.name = device.name or ""
-    msg.timestamp = int(time.time() * 1000)
-    msg.data = adv_data.bytes or b""
+async def send_advertisement_to_clients(device: BLEDevice, adv_data: AdvertisementData):
+    try:
+        # Ensure address is a string and strip colons
+        addr = str(device.address).replace(":", "")
+        if not addr:
+            raise ValueError("BLE device address is empty after formatting")
 
-    data = msg.SerializeToString()
-    packet = b'\x33' + struct.pack('>I', len(data)) + data  # opcode 0x33 = BluetoothLERawAdvertisement
+        log.debug(f"device.address: {device.address!r} (type: {type(device.address)})")
+        log.debug(f"stripped addr: {addr!r}")
 
-    for writer in clients:
-        try:
-            writer.write(packet)
-            await writer.drain()
-        except Exception as e:
-            log.warning(f"Failed to send to client: {e}")
+        msg = api.BluetoothLERawAdvertisement()
+        msg.address = int(addr, 16)
+        msg.rssi = int(device.rssi)
+        msg.name = device.name or ""
+        msg.timestamp = int(time.time() * 1000)
+
+        # Defensive handling of adv_data.bytes
+        raw = adv_data.bytes
+        log.debug(f"adv_data.bytes: {raw!r} (type={type(raw)})")
+        if isinstance(raw, bytes):
+            msg.data = raw
+        elif isinstance(raw, (list, tuple)):
+            msg.data = bytes(raw)
+        elif isinstance(raw, str):
+            try:
+                msg.data = bytes.fromhex(raw)
+            except ValueError:
+                raise ValueError(f"adv_data.bytes is a str but not hex-decodable: {raw}")
+        elif raw is None:
+            msg.data = b""
+        else:
+            raise TypeError(f"adv_data.bytes has unexpected type: {type(raw)}")
+
+        data = msg.SerializeToString()
+        packet = b'\x33' + struct.pack('>I', len(data)) + data  # opcode 0x33 = BluetoothLERawAdvertisement
+
+        for writer in clients:
+            try:
+                writer.write(packet)
+                await writer.drain()
+            except Exception as e:
+                log.warning(f"Failed to send to client: {e}")
+    except Exception as e:
+        log.error("Error building BLE advertisement message:")
+        log.error(traceback.format_exc())
 
 async def ble_scan_loop():
     def detection_callback(device, adv_data):
