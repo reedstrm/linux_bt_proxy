@@ -8,7 +8,7 @@ use std::os::fd::RawFd;
 use tokio::io::unix::AsyncFd;
 use log::{debug, info};
 
-use crate::api::BluetoothLeRawAdvertisement;
+use crate::BluetoothLeRawAdvertisement;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -153,8 +153,8 @@ pub fn open_monitor_socket() -> std::io::Result<RawFd> {
 
     let mut addr: sockaddr_hci = unsafe { zeroed() };
     addr.hci_family = AF_BLUETOOTH as u16;
-    addr.hci_dev = 0xffff; // HCI_DEV_NONE
-    addr.hci_channel = 3;  // HCI_CHANNEL_MONITOR
+    addr.hci_dev = HCI_DEV_NONE;
+    addr.hci_channel = HCI_CHANNEL_MONITOR;
 
     let ret = unsafe {
         bind(
