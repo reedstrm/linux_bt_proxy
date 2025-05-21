@@ -1,8 +1,9 @@
 mod ble;
-mod api;
 
 use ble::{open_monitor_socket, run_hci_monitor_async};
 use tokio;
+
+include!(concat!(env!("OUT_DIR"), "/api.rs"));
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

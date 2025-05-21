@@ -1,4 +1,4 @@
-use libc::{c_int, c_ushort, c_uchar, c_void, sockaddr, socket, bind, recv};
+use libc::{c_void, recv};
 //-use std::mem;
 //-use std::os::unix::io::RawFd;
 //-use std::ptr;
@@ -28,7 +28,7 @@ pub async fn run_hci_monitor_async(fd: RawFd) -> std::io::Result<()> {
 
     loop {
         let mut guard = async_fd.readable().await?;
-        match guard.try_io(|| Ok(read_hci_packet(fd))) {
+        match guard.try_io(|_| Ok(read_hci_packet(fd))) {
             Ok(Ok(Some(adv))) => {
                 debug!("Got advertisement: {:016x} len {}", adv.address, adv.data.len());
                 // TODO: forward or enqueue
@@ -142,7 +142,7 @@ fn bdaddr_to_u64(addr: &[u8]) -> u64 {
 }
 
 pub fn open_monitor_socket() -> std::io::Result<RawFd> {
-    use libc::{socket, bind, sockaddr, sockaddr_hci, AF_BLUETOOTH, BTPROTO_HCI};
+    use libc::{socket, bind, sockaddr, AF_BLUETOOTH};
     use std::mem::zeroed;
     use std::mem::size_of;
 
