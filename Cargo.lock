@@ -492,8 +492,10 @@ dependencies = [
  "clap",
  "env_logger",
  "gethostname",
+ "libc",
  "libmdns",
  "log 0.4.27",
+ "nix 0.27.1",
  "prost",
  "prost-build",
  "prost-types",
@@ -531,6 +533,15 @@ name = "memchr"
 version = "2.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "78ca9ab1a0babb1e7d5695e3530886289c18cf2f87ec19a575a0abdce112e3a3"
+
+[[package]]
+name = "memoffset"
+version = "0.9.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "488016bfae457b036d996092f6cb448677611ce4449e970ceaf42695203f218a"
+dependencies = [
+ "autocfg",
+]
 
 [[package]]
 name = "miniz_oxide"
@@ -572,6 +583,18 @@ dependencies = [
  "cfg-if 0.1.10",
  "libc",
  "void",
+]
+
+[[package]]
+name = "nix"
+version = "0.27.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2eb04e9c688eff1c89d72b407f168cf79bb9e867a9d3323ed6c01519eb9cc053"
+dependencies = [
+ "bitflags 2.9.1",
+ "cfg-if 1.0.0",
+ "libc",
+ "memoffset",
 ]
 
 [[package]]
@@ -948,7 +971,7 @@ dependencies = [
  "failure_derive",
  "libc",
  "log 0.3.9",
- "nix",
+ "nix 0.12.1",
  "nom",
  "num",
 ]
