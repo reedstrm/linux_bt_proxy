@@ -21,7 +21,7 @@ pub const HCI_CHANNEL_USER: u16 = 1;
 pub const HCI_CHANNEL_MONITOR: u16 = 2;
 pub const HCI_DEV_NONE: u16 = 0xffff;
 
-pub async fn run_hci_monitor_async_with_tx(fd: RawFd, tx: Sender<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_hci_monitor_async(fd: RawFd, tx: Sender<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
     let async_fd = AsyncFd::new(fd)?;
 
     loop {

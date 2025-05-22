@@ -1,7 +1,7 @@
 use mdns_sd::{ServiceDaemon, ServiceInfo};
-use log::info;
+use log::{info};
 
-pub fn start_mdns(hostname: &str, mac: &str, port: u16) {
+pub fn start_mdns(hostname: &str, mac: &str, port: u16) -> std::io::Result<()> {
     let mdns = ServiceDaemon::new().expect("Failed to create mDNS daemon");
 
     let stripped_mac = mac.replace(":", "").to_lowercase();
@@ -30,4 +30,5 @@ pub fn start_mdns(hostname: &str, mac: &str, port: u16) {
         .expect("Failed to register mDNS service");
 
     info!("mDNS service registered for {} on port {} with MAC {}", hostname, port, mac);
+    Ok(())
 }
