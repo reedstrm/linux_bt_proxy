@@ -46,10 +46,11 @@ async fn main() -> std::io::Result<()> {
 
     let (tx, rx) = broadcast::channel(100);
 
-    let hci_fd = match ble::open_hci_socket(0, ble::HCI_CHANNEL_USER) {
-        Ok(fd) => fd,
-        Err(_) => ble::open_hci_socket(ble::HCI_DEV_NONE, ble::HCI_CHANNEL_MONITOR)?,
-    };
+    let hci_fd = ble::open_hci_socket().unwrap_or_else(|e| {
+        eprintln!("Failed to open bluetooth device, exiting: {:?}", e);
+        std::process::exit(1);
+    });
+
 
     let ble_task = tokio::spawn(ble::run_hci_monitor_async_with_tx(hci_fd, tx));
     let tcp_task = tokio::spawn(server::run_tcp_server(

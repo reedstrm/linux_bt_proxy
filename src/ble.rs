@@ -17,9 +17,9 @@ struct sockaddr_hci {
 }
 
 const BTPROTO_HCI: c_int = 1;
-const HCI_CHANNEL_USER: u16 = 1;
-const HCI_CHANNEL_MONITOR: u16 = 2;
-const HCI_DEV_NONE: u16 = 0xffff;
+pub const HCI_CHANNEL_USER: u16 = 1;
+pub const HCI_CHANNEL_MONITOR: u16 = 2;
+pub const HCI_DEV_NONE: u16 = 0xffff;
 
 pub async fn run_hci_monitor_async_with_tx(fd: RawFd, tx: Sender<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
     let async_fd = AsyncFd::new(fd)?;
@@ -162,7 +162,7 @@ fn bdaddr_to_u64(addr: &[u8]) -> u64 {
     addr.iter().rev().fold(0u64, |acc, &b| (acc << 8) | b as u64)
 }
 
-pub fn open_monitor_socket() -> std::io::Result<RawFd> {
+pub fn open_hci_socket() -> std::io::Result<RawFd> {
     let try_open = |dev_id: u16, channel: u16| -> std::io::Result<RawFd> {
         let fd = unsafe { socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HCI) };
         if fd < 0 {

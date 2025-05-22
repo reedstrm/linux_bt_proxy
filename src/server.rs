@@ -1,4 +1,5 @@
 use tokio::net::{TcpListener, TcpStream};
+use tokio::io::AsyncWriteExt;
 use tokio::sync::broadcast;
 use std::net::SocketAddr;
 
@@ -23,7 +24,8 @@ pub async fn run_tcp_server(addr: SocketAddr, mut rx: broadcast::Receiver<Blueto
 async fn handle_client(mut stream: TcpStream, rx: &mut broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
     while let Ok(msg) = rx.recv().await {
         let data = serialize_advertisement(&msg);
-        tokio::io::write_all(&mut stream, &data).await?;
+        stream.write_all(&data).await?;
+        stream.flush().await?;
     }
     Ok(())
 }
