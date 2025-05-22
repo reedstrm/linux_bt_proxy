@@ -5,17 +5,15 @@ mod proto;
 mod server;
 
 use clap::Parser;
-use mac_address::get_mac_address;
+use mac_address::mac_address_by_name;
 use gethostname::gethostname;
 use std::net::SocketAddr;
 use tokio::sync::broadcast;
 use log::{info, warn};
 
-fn default_mac() -> String {
-    match get_mac_address() {
-        Ok(Some(ma)) => ma.to_string(),
-        _ => "00:11:22:33:44:55".to_string(), // Fallback
-    }
+fn get_mac_for_hci(hci: u16) -> Option<String> {
+    let iface_name = format!("hci{}", hci);
+    mac_address_by_name(&iface_name).ok().flatten().map(|ma| ma.to_string())
 }
 
 fn default_hostname() -> String {
@@ -27,7 +25,7 @@ fn default_hostname() -> String {
 #[command(about = "Bluetooth Proxy Daemon for ESPHome", long_about = None)]
 struct Cli {
      /// HCI adapter index (e.g. 0 for hci0)
-     #[arg(long, default_value_t = 0)]
+     #[arg(short = 'a', long, default_value_t = 0)]
      hci: u16,
 
     /// TCP listen address (default: 0.0.0.0:6053)
@@ -38,9 +36,9 @@ struct Cli {
     #[arg(long, default_value_t = default_hostname())]
     hostname: String,
 
-    /// MAC address for mDNS (default: system interface)
-    #[arg(short, long, default_value_t = default_mac())]
-    mac: String,
+    /// MAC address for mDNS 
+    #[arg(short, long)]
+    mac: Option<String>,
 }
 
 #[tokio::main]
@@ -48,7 +46,10 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let cli = Cli::parse();
 
-    let _mdns_service = mdns::start_mdns(&cli.hostname, &cli.mac, cli.listen.port()).unwrap_or_else(|e| {
+    let mac = cli.mac.clone().or_else(|| get_mac_for_hci(cli.hci))
+    .unwrap_or_else(|| "00:11:22:33:44:55".to_string());
+
+    let _mdns_service = mdns::start_mdns(&cli.hostname, &mac, cli.listen.port()).unwrap_or_else(|e| {
     warn!("Critical error: failed to register mDNS service: {}", e);
     std::process::exit(1);
 });
