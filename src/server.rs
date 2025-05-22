@@ -6,7 +6,7 @@ use std::net::SocketAddr;
 use crate::proto::serialize_advertisement;
 use crate::api::BluetoothLeRawAdvertisement;
 
-pub async fn run_tcp_server(addr: SocketAddr, mut rx: broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_tcp_server(addr: SocketAddr, rx: broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
     log::info!("Listening on {}", addr);
 

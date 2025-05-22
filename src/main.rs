@@ -7,10 +7,9 @@ mod server;
 use clap::Parser;
 use std::net::{IpAddr, Ipv4Addr, SocketAddr};
 use tokio::sync::broadcast;
-use log::{info, LevelFilter};
+use log::info;
 use env_logger::Env;
 
-use crate::api::BluetoothLeRawAdvertisement;
 
 /// ESPHome-compatible Bluetooth proxy daemon
 #[derive(Parser, Debug)]
