@@ -162,7 +162,7 @@ fn bdaddr_to_u64(addr: &[u8]) -> u64 {
     addr.iter().rev().fold(0u64, |acc, &b| (acc << 8) | b as u64)
 }
 
-pub fn open_hci_socket() -> std::io::Result<RawFd> {
+pub fn open_hci_socket(dev_id: u16) -> std::io::Result<RawFd> {
     let try_open = |dev_id: u16, channel: u16| -> std::io::Result<RawFd> {
         let fd = unsafe { socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HCI) };
         if fd < 0 {
@@ -188,7 +188,7 @@ pub fn open_hci_socket() -> std::io::Result<RawFd> {
         }
     };
 
-    match try_open(0, HCI_CHANNEL_USER) {
+    match try_open(dev_id, HCI_CHANNEL_USER) {
         Ok(fd) => {
             info!("Opened HCI socket in USER mode");
             Ok(fd)

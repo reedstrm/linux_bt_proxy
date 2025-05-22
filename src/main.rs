@@ -45,7 +45,7 @@ async fn main() -> std::io::Result<()> {
 
     let (tx, rx) = broadcast::channel(100);
 
-    let hci_fd = ble::open_hci_socket().unwrap_or_else(|e| {
+    let hci_fd = ble::open_hci_socket(0).unwrap_or_else(|e| {
         eprintln!("Failed to open bluetooth device, exiting: {:?}", e);
         std::process::exit(1);
     });
