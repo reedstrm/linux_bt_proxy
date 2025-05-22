@@ -45,7 +45,7 @@ pub async fn run_hci_monitor_async_with_tx(fd: RawFd, tx: Sender<BluetoothLeRawA
 fn read_hci_packet(fd: RawFd) -> Vec<BluetoothLeRawAdvertisement> {
     let mut buf = [0u8; 1024];
     let len = unsafe { recv(fd, buf.as_mut_ptr() as *mut c_void, buf.len(), 0) } as usize;
-    debug!("Raw packet header: {:02x?}", &buf[..16]);
+    // debug!("Raw packet header: {:02x?}", &buf[..16]);
     if len < 7 || buf[0] != 0x03 {
         return vec![];
     }
@@ -96,7 +96,7 @@ fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
 
         let adv_data = &data[cursor + 24..cursor + 24 + data_len];
 
-        info!(
+        debug!(
         "EXT ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
         addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
         );
@@ -140,8 +140,8 @@ fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
         let adv_data = &data[cursor + 8..cursor + 8 + data_len];
         let rssi = data[cursor + 8 + data_len] as i8;
 
-        info!(
-        "EXT ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
+        debug!(
+        "LEG ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
         addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
         );
 
