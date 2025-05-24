@@ -3,18 +3,14 @@ mod ble;
 mod mdns;
 mod proto;
 mod server;
+mod utils;
 
 use clap::Parser;
-use mac_address::mac_address_by_name;
+use mac_address::get_mac_address;
 use gethostname::gethostname;
 use std::net::SocketAddr;
 use tokio::sync::broadcast;
 use log::{info, warn};
-
-fn get_mac_for_hci(hci: u16) -> Option<String> {
-    let iface_name = format!("hci{}", hci);
-    mac_address_by_name(&iface_name).ok().flatten().map(|ma| ma.to_string())
-}
 
 fn default_hostname() -> String {
     gethostname().to_string_lossy().into_owned()
@@ -46,10 +42,27 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let cli = Cli::parse();
 
-    let mac = cli.mac.clone().or_else(|| get_mac_for_hci(cli.hci))
-    .unwrap_or_else(|| "00:11:22:33:44:55".to_string());
+    let mac: String = cli.mac.clone().or_else(|| {
+        // Try to call get_mac_address and handle possible errors and None
+        match get_mac_address() {
+            Ok(Some(mac)) => Some(mac.to_string()),
+            Ok(None) => {
+                log::warn!("System has no available MAC address.");
+                None
+            }
+            Err(e) => {
+                log::error!("Error while getting MAC address: {}", e);
+                None
+            }
+        }
+    }).unwrap_or_else(|| {
+        eprintln!("Fatal: No MAC address provided via CLI or available on system.");
+        std::process::exit(1);
+    });
 
-    let _mdns_service = mdns::start_mdns(&cli.hostname, &mac, cli.listen.port()).unwrap_or_else(|e| {
+    let bt_mac = utils::get_bt_mac(cli.hci).expect(&format!("Can't get Bluetooth MAC for hci{}", cli.hci));
+
+    let _mdns_service = mdns::start_mdns(&cli.hostname, &bt_mac, &mac, cli.listen.port()).unwrap_or_else(|e| {
     warn!("Critical error: failed to register mDNS service: {}", e);
     std::process::exit(1);
 });
@@ -64,6 +77,14 @@ async fn main() -> std::io::Result<()> {
         Err(e) => {
             warn!("Failed to open bluetooth device: {:?}", e);
             std::process::exit(1);
+        }
+    };
+
+    let _scan_connection = match ble::ensure_scanning_enabled(cli.hci).await {
+        Ok(conn) => Some(conn),
+        Err(e) => {
+            warn!("Failed to start scanning — start it manually: {}", e);
+            None
         }
     };
 

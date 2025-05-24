@@ -47,7 +47,7 @@ def send_hello_request(sock):
 
 def receive_message(sock):
     opcode = sock.recv(1)
-    length, _header_len = decode_varint(sock)
+    length, _header_len = read_varint(sock)
     payload = sock.recv(length)
     return opcode, payload
 

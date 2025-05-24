@@ -1,16 +1,17 @@
 use mdns_sd::{ServiceDaemon, ServiceInfo};
 use log::{info};
 
-pub fn start_mdns(hostname: &str, mac: &str, port: u16) -> std::io::Result<()> {
+pub fn start_mdns(hostname: &str, bt_mac: &str, mac: &str, port: u16) -> std::io::Result<()> {
     let mdns = ServiceDaemon::new().expect("Failed to create mDNS daemon");
 
-    let stripped_mac = mac.replace(":", "").to_lowercase();
+    let stripped_bt_mac = bt_mac.replace(":", "").to_lowercase();
+    let short_bt_mac = &stripped_bt_mac[stripped_bt_mac.len()-6..];
     let service_type = "_esphomelib._tcp.local.";
-    let service_name = format!("{}_{}", hostname, stripped_mac);
+    let service_name = format!("{}_{}", hostname, short_bt_mac);
     let service_hostname = format!("{}.local.", hostname);
 
     let txt_records = [
-        ("friendly_name".to_string(), format!("Bluetooth Proxy {}", &stripped_mac[stripped_mac.len()-6..])),
+        ("friendly_name".to_string(), format!("Bluetooth Proxy {}", &short_bt_mac)),
         ("version".to_string(), "0.1".to_string()),
         ("mac".to_string(), mac.to_lowercase()),
         ("platform".to_string(), "linux".to_string()),
@@ -26,8 +27,7 @@ pub fn start_mdns(hostname: &str, mac: &str, port: u16) -> std::io::Result<()> {
     ).expect("Invalid service info")
     .enable_addr_auto();
 
-    mdns.register(my_service)
-        .expect("Failed to register mDNS service");
+    mdns.register(my_service).expect("Failed to register mDNS service");
 
     info!("mDNS service registered for {} on port {} with MAC {}", hostname, port, mac);
     Ok(())

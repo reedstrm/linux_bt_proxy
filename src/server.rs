@@ -28,6 +28,22 @@ pub fn decode_varint(buf: &[u8]) -> Option<(u64, usize)> {
     None
 }
 
+pub fn encode_varint(mut value: u64) -> Vec<u8> {
+    let mut buf = Vec::new();
+    loop {
+        let mut byte = (value & 0x7F) as u8;
+        value >>= 7;
+        if value != 0 {
+            byte |= 0x80;
+        }
+        buf.push(byte);
+        if value == 0 {
+            break;
+        }
+    }
+    buf
+}
+
 pub async fn run_tcp_server(addr: SocketAddr, rx: broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
     info!("Listening on {}", addr);
@@ -76,8 +92,11 @@ async fn handle_client(mut stream: TcpStream, rx: &mut broadcast::Receiver<Bluet
                     };
                     let mut out = Vec::new();
                     resp.encode(&mut out).expect("Failed to encode HelloResponse");
+
+                    // Properly frame with opcode and varint-encoded length
                     let mut framed = vec![0x01]; // HelloResponse opcode
-                    framed.extend_from_slice(&(out.len() as u16).to_le_bytes());
+                    let len_prefix = encode_varint(out.len() as u64);
+                    framed.extend_from_slice(&len_prefix);
                     framed.extend_from_slice(&out);
                     stream.write_all(&framed).await?;
 

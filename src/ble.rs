@@ -5,6 +5,8 @@ use std::os::fd::RawFd;
 use tokio::io::unix::AsyncFd;
 use tokio::sync::broadcast::Sender;
 use log::{debug, info};
+use zbus::{Connection, Proxy};
+use zbus::zvariant::Value;
 
 use crate::api::BluetoothLeRawAdvertisement;
 
@@ -199,3 +201,33 @@ pub fn open_hci_socket(dev_id: u16) -> std::io::Result<RawFd> {
         }
     }
 }
+
+/// Starts discovery on hci via D-Bus, only if not already scanning.
+pub async fn ensure_scanning_enabled( hci: u16) -> zbus::Result<zbus::Connection> {
+    let path = format!("/org/bluez/hci{}", hci);
+
+    let conn = Connection::system().await?;
+    let proxy = Proxy::new(
+        &conn,
+        "org.bluez",
+        path,
+        "org.bluez.Adapter1",
+    )
+    .await?;
+
+    let discovering: bool = proxy
+        .get_property::<Value>("Discovering")
+        .await?
+        .downcast()
+        .expect("Discovering property has unexpected type");
+
+    if discovering {
+        log::info!("Adapter is already scanning (via D-Bus).");
+    } else {
+        log::info!("Starting Bluetooth discovery via D-Bus...");
+        proxy.call_method("StartDiscovery", &()).await?;
+    }
+
+    Ok(conn)
+}
+

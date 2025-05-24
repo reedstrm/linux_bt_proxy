@@ -6,19 +6,17 @@ build = "build.rs"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }
-rumble = "0.3"
 tokio = { version = "1", features = ["full"] }
-prost = "0.12"
-prost-types = "0.12"
+prost = "0.13"
+prost-types = "0.13"
 mdns-sd = "0.13"
 mac_address = "1.1"
 log = "0.4"
-env_logger = "0.10"
+env_logger = "0.11"
 bytes = "1"
 gethostname = "1.0.2"
-nix = { version = "0.27", features = ["socket"] }
 libc = "0.2.172"
-
+zbus  = "3"
 
 [build-dependencies]
-prost-build = "0.12"
+prost-build = "0.13"
