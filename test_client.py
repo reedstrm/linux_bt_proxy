@@ -1,3 +1,4 @@
+import argparse
 import socket
 import struct
 from proto import api_pb2 as api
@@ -47,12 +48,11 @@ def send_hello_request(sock):
 
 def receive_message(sock):
     opcode = sock.recv(1)
-    length, _header_len = decode_varint(sock)
+    length, _header_len = read_varint(sock)
     payload = sock.recv(length)
     return opcode, payload
 
-def main():
-    host = "192.168.29.141"  # or use LAN IP directly
+def main(host):
     port = 6053
 
     print(f"Connecting to {host}:{port}...")
@@ -61,11 +61,11 @@ def main():
         send_hello_request(sock)
 
         print("Receiving HelloResponse")
-        resp = receive_message(sock)
-        print(resp)
-        if resp and resp[0] == 0x01:
+        opcode, payload  = receive_message(sock)
+        print(type(payload))
+        if payload and opcode == b'\x01':
             hello_resp = api.HelloResponse()
-            hello_resp.ParseFromString(resp[1])
+            hello_resp.ParseFromString(payload)
             print(f"Received HelloResponse: server_info={hello_resp.server_info}, name={hello_resp.name}")
 
         print("Listening for BLE advertisements...")
@@ -75,13 +75,16 @@ def main():
                 if data is None:
                     break
                 opcode, payload = data
-                if opcode == 0x33:
+                if opcode == b'\x33':
                     adv = api.BluetoothLERawAdvertisement()
                     adv.ParseFromString(payload)
                     print(f"BLE ADV from {adv.address:012X} RSSI={adv.rssi} len={len(adv.data)}")
                 else:
-                    print(f"Unexpected opcode: {opcode:02X}")
+                    print(f"Unexpected opcode: {opcode.hex()}")
         except KeyboardInterrupt:
             print("Interrupted by user")
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description="ESPHome client tester")
+    parser.add_argument("--hostname", default=socket.gethostname(), help="Hostname or IP to connect to")
+    args = parser.parse_args()
+    main(args.hostname)
