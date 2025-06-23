@@ -25,7 +25,7 @@ def read_varint(sock):
         if shift >= 64:
             raise ValueError("Varint too long")
 
-    return result, bytes_read
+    return result
 
 def encode_varint(value):
     """Encode an integer as a protobuf varint."""
@@ -43,12 +43,19 @@ def encode_varint(value):
 
 def send_hello_request(sock):
     hello = api.HelloRequest()
+    hello.client_info='Test client'
+    hello.api_version_major = 1
+    hello.api_version_minor = 10
     payload = hello.SerializeToString()
-    sock.sendall(b'\x00' + encode_varint(len(payload)) + payload)
+    sock.sendall(b'\x00' + encode_varint(len(payload)) + b'\x01' + payload)
 
 def receive_message(sock):
-    opcode = sock.recv(1)
-    length, _header_len = read_varint(sock)
+    preamble = read_varint(sock)
+    if preamble != 0x00:
+       print('Bad preamble')
+       exit(1)
+    length = read_varint(sock)
+    opcode = read_varint(sock)
     payload = sock.recv(length)
     return opcode, payload
 
@@ -62,8 +69,9 @@ def main(host):
 
         print("Receiving HelloResponse")
         opcode, payload  = receive_message(sock)
-        print(type(payload))
-        if payload and opcode == b'\x01':
+        print(opcode, payload)
+        print(type(opcode))
+        if payload and opcode == 0x02:
             hello_resp = api.HelloResponse()
             hello_resp.ParseFromString(payload)
             print(f"Received HelloResponse: server_info={hello_resp.server_info}, name={hello_resp.name}")
@@ -75,12 +83,12 @@ def main(host):
                 if data is None:
                     break
                 opcode, payload = data
-                if opcode == b'\x33':
+                if opcode == 0x33:
                     adv = api.BluetoothLERawAdvertisement()
                     adv.ParseFromString(payload)
                     print(f"BLE ADV from {adv.address:012X} RSSI={adv.rssi} len={len(adv.data)}")
                 else:
-                    print(f"Unexpected opcode: {opcode.hex()}")
+                    print(f"Unexpected opcode: {opcode}")
         except KeyboardInterrupt:
             print("Interrupted by user")
 if __name__ == "__main__":
