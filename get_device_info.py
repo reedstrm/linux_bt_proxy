@@ -4,13 +4,18 @@ import asyncio
 import socket
 import pprint
 import dataclasses
+from aioesphomeapi.core import InvalidAuthAPIError
 
-async def main(hostname):
+async def main(hostname, password):
     """Connect to an ESPHome device and get details."""
 
-    # Establish connection
-    api = aioesphomeapi.APIClient(hostname, 6053, "")
-    await api.connect(login=True)
+    api = aioesphomeapi.APIClient(hostname, 6053, password)
+
+    try:
+        await api.connect(login=True)
+    except InvalidAuthAPIError:
+        print("ERROR: Invalid password!")
+        return
 
     pp = pprint.PrettyPrinter(indent=2, width=100)
 
@@ -19,8 +24,8 @@ async def main(hostname):
     print(api.api_version)
 
     # Show device details
-    print("\n=== Device Info ===")
     device_info = await api.device_info()
+    print("\n=== Device Info ===")
     pp.pprint(device_info)
 
     # List all entities and services of the device
@@ -41,5 +46,6 @@ async def main(hostname):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="ESPHome client tester")
     parser.add_argument("hostname", help="Hostname or IP to connect to")
+    parser.add_argument("--password", default="", help="API password (if required)")
     args = parser.parse_args()
-    asyncio.run(main(args.hostname))
+    asyncio.run(main(args.hostname, args.password))
