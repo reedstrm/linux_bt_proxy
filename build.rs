@@ -43,7 +43,53 @@ fn main() {
 
     assert!(status.success(), "protoc failed");
 
+    // Process descriptor
+    process_descriptor(&descriptor_set_path, &out_proto_dir);
+
     // Tell cargo when to rerun
     println!("cargo:rerun-if-changed=proto/api.proto");
     println!("cargo:rerun-if-changed=proto/api_options.proto");
+}
+
+fn process_descriptor(desc_path: &PathBuf, out_proto_dir: &PathBuf) {
+    use prost::Message;
+
+    let bytes = std::fs::read(desc_path).expect("Failed to read descriptor");
+
+    let desc: prost_types::FileDescriptorSet =
+        prost_types::FileDescriptorSet::decode(&*bytes).expect("Failed to parse descriptor");
+
+    let mut out = String::new();
+    out.push_str("// AUTO-GENERATED, DO NOT EDIT\n");
+    out.push_str("pub static MESSAGE_TYPE_MAP: &[(&str, u32)] = &[\n");
+
+    for file in &desc.file {
+        for message in &file.message_type {
+            if let Some(options) = &message.options {
+                for unknown in &options.uninterpreted_option {
+                    for part in &unknown.name {
+                        if part.name_part == "id" {
+                            if let Some(id_value) = unknown.positive_int_value {
+                                out.push_str(&format!(
+                                    "    (\"{}\", {}),\n",
+                                    message.name.as_ref().unwrap(),
+                                    id_value
+                                ));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    out.push_str("];\n");
+
+    let out_path = out_proto_dir.join("message_ids.rs");
+    std::fs::write(&out_path, out).expect("Failed to write message_ids.rs");
+
+    println!(
+        "cargo:warning=Generated message_ids.rs at {}",
+        out_path.display()
+    );
 }

@@ -1,2 +1,4 @@
 __pycache__
 target/
+# Ignore prost-generated raw API output
+/src/generated/_.rs
