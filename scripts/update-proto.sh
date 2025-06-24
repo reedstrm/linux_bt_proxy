@@ -1,5 +1,5 @@
 #!/bin/bash
-# Update ESPHome API proto files — safe version with hash check + rebuild reminder
+# Update ESPHome API proto files
 
 set -euo pipefail
 
@@ -42,6 +42,7 @@ echo "Done."
 
 if [[ $changed -eq 1 ]]; then
     echo
+    git diff --stat "$PROTO_DIR"
     echo ">>> Proto files updated."
     echo ">>> Run: cargo clean && cargo build"
     echo
