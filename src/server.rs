@@ -2,11 +2,11 @@ use tokio::net::{TcpListener, TcpStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::sync::broadcast;
 use std::net::SocketAddr;
-use prost::Message;
 use log::{warn,info,debug};
+use protobuf::Message;
 
 use crate::proto::{serialize_advertisement};
-use crate::api::{BluetoothLeRawAdvertisement, HelloRequest, HelloResponse};
+use crate::api::api::{BluetoothLERawAdvertisement, HelloRequest, HelloResponse};
 
 /// Decodes a protobuf varint from a byte slice, returning the value and the number of bytes consumed.
 /// Returns None if the input does not contain a valid varint.
@@ -44,7 +44,7 @@ pub fn encode_varint(mut value: u64) -> Vec<u8> {
     buf
 }
 
-pub async fn run_tcp_server(addr: SocketAddr, rx: broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_tcp_server(addr: SocketAddr, rx: broadcast::Receiver<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
     info!("Listening on {}", addr);
 
@@ -60,7 +60,7 @@ pub async fn run_tcp_server(addr: SocketAddr, rx: broadcast::Receiver<BluetoothL
     }
 }
 
-async fn handle_client(mut stream: TcpStream, rx: &mut broadcast::Receiver<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
+async fn handle_client(mut stream: TcpStream, rx: &mut broadcast::Receiver<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
     let mut buf = [0u8; 1024];
 
     loop {
@@ -83,15 +83,15 @@ async fn handle_client(mut stream: TcpStream, rx: &mut broadcast::Receiver<Bluet
             match opcode {
                 0x00 => {  // HelloRequest
                     info!("Handling HelloRequest");
-                    let _req = HelloRequest::decode(msg_buf)?;
+                    let _req = HelloRequest::parse_from_bytes(msg_buf)?;
                     let resp = HelloResponse {
                         api_version_major: 1,
                         api_version_minor: 7,
                         server_info: "linux_bt_proxy".into(),
                         name: "Linux Bluetooth Proxy".into(),
+                        ..Default::default() // fill special_fields
                     };
-                    let mut out = Vec::new();
-                    resp.encode(&mut out).expect("Failed to encode HelloResponse");
+                    let mut out = resp.write_to_vec().expect("Failed to encode HelloResponse");
 
                     // Properly frame with opcode and varint-encoded length
                     let mut framed = vec![0x01]; // HelloResponse opcode

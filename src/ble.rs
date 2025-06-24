@@ -8,7 +8,7 @@ use log::{debug, info};
 use zbus::{Connection, Proxy};
 use zbus::zvariant::Value;
 
-use crate::api::BluetoothLeRawAdvertisement;
+use crate::api::api::BluetoothLERawAdvertisement;
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
@@ -23,7 +23,7 @@ pub const HCI_CHANNEL_USER: u16 = 1;
 pub const HCI_CHANNEL_MONITOR: u16 = 2;
 pub const HCI_DEV_NONE: u16 = 0xffff;
 
-pub async fn run_hci_monitor_async(fd: RawFd, tx: Sender<BluetoothLeRawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_hci_monitor_async(fd: RawFd, tx: Sender<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
     let async_fd = AsyncFd::new(fd)?;
 
     loop {
@@ -44,7 +44,7 @@ pub async fn run_hci_monitor_async(fd: RawFd, tx: Sender<BluetoothLeRawAdvertise
     }
 }
 
-fn read_hci_packet(fd: RawFd) -> Vec<BluetoothLeRawAdvertisement> {
+fn read_hci_packet(fd: RawFd) -> Vec<BluetoothLERawAdvertisement> {
     let mut buf = [0u8; 1024];
     let len = unsafe { recv(fd, buf.as_mut_ptr() as *mut c_void, buf.len(), 0) } as usize;
     // debug!("Raw packet header: {:02x?}", &buf[..16]);
@@ -60,7 +60,7 @@ fn read_hci_packet(fd: RawFd) -> Vec<BluetoothLeRawAdvertisement> {
     parse_ble_advertisement(evt)
 }
 
-fn parse_ble_advertisement(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
+fn parse_ble_advertisement(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
     if data.len() < 3 {
         return vec![];
     }
@@ -72,7 +72,7 @@ fn parse_ble_advertisement(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
     }
 }
 
-fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
+fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
     let mut ads = Vec::new();
 
     if data.len() < 1 {
@@ -103,7 +103,7 @@ fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
         addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
         );
 
-        ads.push(BluetoothLeRawAdvertisement {
+        ads.push(BluetoothLERawAdvertisement {
             address: bdaddr_to_u64(addr),
             rssi: rssi as i32,
             address_type: addr_type as u32,
@@ -116,7 +116,7 @@ fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
     ads
 }
 
-fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
+fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
     let mut ads = Vec::new();
 
     if data.len() < 1 {
@@ -147,7 +147,7 @@ fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLeRawAdvertisement> {
         addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
         );
 
-        ads.push(BluetoothLeRawAdvertisement {
+        ads.push(BluetoothLERawAdvertisement {
             address: bdaddr_to_u64(addr),
             rssi: rssi as i32,
             address_type: addr_type as u32,

@@ -1,14 +1,16 @@
-use prost::Message;
-use crate::api::BluetoothLeRawAdvertisement;
+use crate::api::api::BluetoothLERawAdvertisement;
+use protobuf::Message;
 
-pub const BLE_ADV_OPCODE: u8 = 0x33;
+const adv_opcode = BluetoothLERawAdvertisement::descriptor()
+    .options()
+    .get_extension(api_options::id);
 
-pub fn serialize_advertisement(msg: &BluetoothLeRawAdvertisement) -> Vec<u8> {
-    let mut buf = Vec::new();
-    msg.encode(&mut buf).expect("Encoding failed");
+
+pub fn serialize_advertisement(msg: &BluetoothLERawAdvertisement) -> Vec<u8> {
+    let mut buf = msg.write_to_vec().expect("Encoding failed");
 
     let mut framed = Vec::with_capacity(1 + 2 + buf.len());
-    framed.push(BLE_ADV_OPCODE);
+    framed.push(adv_opcode);
     let len_prefix = encode_varint(buf.len() as u64);
     framed.extend_from_slice(&len_prefix);
     framed.extend_from_slice(&buf);
