@@ -3,7 +3,7 @@ import argparse
 import asyncio
 import pprint
 import contextlib
-from aioesphomeapi.api_pb2 import BluetoothLEAdvertisementResponse
+from aioesphomeapi.api_pb2 import BluetoothLEAdvertisementResponse, BluetoothLERawAdvertisementsResponse
 from aioesphomeapi.core import InvalidAuthAPIError, APIConnectionError
 
 pp = pprint.PrettyPrinter(indent=2, width=100)
@@ -13,6 +13,10 @@ async def main(hostname, password):
 
     def handle_ble_adv(msg: BluetoothLEAdvertisementResponse):
         pp.pprint(msg)
+
+    def handle_raw_ble_adv(msg: BluetoothLERawAdvertisementsResponse):
+        for adv in msg.advertisements:
+            pp.pprint(adv)
 
     try:
         await api.connect(login=True)
@@ -29,7 +33,7 @@ async def main(hostname, password):
 
     unsubscribe = None
     try:
-        unsubscribe = api.subscribe_bluetooth_le_advertisements(handle_ble_adv)
+        unsubscribe = api.subscribe_bluetooth_le_raw_advertisements(handle_raw_ble_adv)
         if not unsubscribe:
             print("ERROR: Subscription failed — device busy?")
             return
