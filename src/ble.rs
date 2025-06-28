@@ -108,6 +108,7 @@ fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
             rssi: rssi as i32,
             address_type: addr_type as u32,
             data: adv_data.to_vec(),
+            ..Default::default()
         });
 
         cursor += 24 + data_len;
@@ -152,6 +153,7 @@ fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
             rssi: rssi as i32,
             address_type: addr_type as u32,
             data: adv_data.to_vec(),
+            ..Default::default()
         });
 
         cursor += 9 + data_len;

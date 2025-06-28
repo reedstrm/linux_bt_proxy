@@ -1,22 +1,36 @@
-use crate::api::api::BluetoothLERawAdvertisement;
-use protobuf::Message;
+use crate::api::api_options;
+use protobuf::MessageFull;
+use protobuf;
+use bytes::{Bytes, BytesMut};
+use std::io::{Error, ErrorKind};
 
-const adv_opcode = BluetoothLERawAdvertisement::descriptor()
-    .options()
-    .get_extension(api_options::id);
 
-
-pub fn serialize_advertisement(msg: &BluetoothLERawAdvertisement) -> Vec<u8> {
-    let mut buf = msg.write_to_vec().expect("Encoding failed");
-
-    let mut framed = Vec::with_capacity(1 + 2 + buf.len());
-    framed.push(adv_opcode);
-    let len_prefix = encode_varint(buf.len() as u64);
-    framed.extend_from_slice(&len_prefix);
-    framed.extend_from_slice(&buf);
-    framed
+pub fn get_message_id<M: MessageFull>() -> u8 {
+    protobuf::ext::ExtFieldOptional::get(
+        &api_options::exts::id,
+        M::descriptor().proto().options.as_ref().unwrap(),
+    )
+    .expect("Missing extension id") as u8
 }
 
+
+/// Decodes a protobuf varint from a byte slice, returning the value and the number of bytes consumed.
+pub fn decode_varint(buf: &[u8]) -> Result<(u64, usize), Error> {
+    let mut result = 0u64;
+    let mut shift = 0;
+    for (i, &byte) in buf.iter().enumerate() {
+        let val = (byte & 0x7F) as u64;
+        result |= val << shift;
+        if byte & 0x80 == 0 {
+            return Ok((result, i + 1));
+        }
+        shift += 7;
+        if shift > 63 {
+            return Err(Error::new(ErrorKind::InvalidData, "Varint too long"));
+        }
+    }
+    Err(Error::new(ErrorKind::UnexpectedEof, "Incomplete varint"))
+}
 
 pub fn encode_varint(mut value: u64) -> Vec<u8> {
     let mut buf = Vec::new();
@@ -33,3 +47,33 @@ pub fn encode_varint(mut value: u64) -> Vec<u8> {
     }
     buf
 }
+
+pub fn next_message(buf: &mut BytesMut) -> Option<(u32, Bytes)> {
+
+    // Step 1: check framing byte
+    if buf.len() < 1 || buf[0] != 0x00 {
+        return None;
+    }
+
+    let mut offset = 1;
+
+    // Step 2: parse total message length
+    let (length, len_size) = decode_varint(&buf[offset..]).ok()?;
+    offset += len_size;
+
+    // Step 3: make sure buffer contains entire message
+    if buf.len() < offset + length as usize {
+        return None;
+    }
+
+    // Step 4: parse message type
+    let (msg_type, type_size) = decode_varint(&buf[offset..]).ok()?;
+    offset += type_size;
+
+    let payload_len = length as usize;
+    let mut head = buf.split_to(offset + payload_len); // remove the message from buf
+    let payload = head.split_off(offset).freeze();     // skip to payload and freeze it
+
+    Some((msg_type as u32, payload))
+}
+

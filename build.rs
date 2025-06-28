@@ -3,8 +3,12 @@ use std::{
     path::PathBuf,
 };
 use protobuf_codegen;
+use chrono::Utc;
 
 fn main() {
+    // Build time for device info
+    println!("cargo:rustc-env=BUILD_TIME={}", Utc::now());
+
     // Proto input dir
     let proto_dir = PathBuf::from("proto");
 

@@ -1,7 +1,9 @@
 use libc::{self, c_int, c_uint, c_ushort, c_ulong, c_void};
 use std::mem::zeroed;
+use anyhow::{Result};
 
-pub fn get_bt_mac(hci_index: u16) -> Option<String> {
+
+pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
     // These are constants from BlueZ / Bluetooth headers
     const AF_BLUETOOTH: c_int = 31;
     const SOCK_RAW: c_int = 3;
@@ -42,16 +44,27 @@ pub fn get_bt_mac(hci_index: u16) -> Option<String> {
         return None;
     }
 
-    let mac = format!(
-        "{:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X}",
-        devinfo.bdaddr[5],
-        devinfo.bdaddr[4],
-        devinfo.bdaddr[3],
-        devinfo.bdaddr[2],
-        devinfo.bdaddr[1],
-        devinfo.bdaddr[0],
-    );
+    // linux bluetooth devices store mac little-endian. Need big-endian for protocols
+    let mac: [u8; 6] = devinfo.bdaddr.iter().rev().cloned().collect::<Vec<_>>().try_into().unwrap();
 
-    log::info!("Retrieved MAC for hci{}: {}", hci_index, mac);
+    log::info!("Retrieved MAC for hci{}: {}", hci_index, format_mac(&mac, &":"));
     Some(mac)
+}
+
+pub fn format_mac(mac: &[u8], sep: &str) -> String {
+    mac.iter().map(|b| format!("{:02X}", b)).collect::<Vec<_>>().join(sep)
+}
+
+pub fn parse_mac(s: &str) -> Result<[u8; 6], String> {
+    let parts: Vec<&str> = s.split(':').collect();
+    if parts.len() != 6 {
+        return Err("Invalid MAC format: expected 6 hex bytes separated by ':'".to_string());
+    }
+
+    let mut mac = [0u8; 6];
+    for (i, part) in parts.iter().enumerate() {
+        mac[i] = u8::from_str_radix(part, 16)
+            .map_err(|_| format!("Invalid hex byte: '{}'", part))?;
+    }
+    Ok(mac)
 }

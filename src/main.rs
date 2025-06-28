@@ -4,13 +4,19 @@ mod mdns;
 mod proto;
 mod server;
 mod utils;
+mod context;
+mod handlers;
 
 use clap::Parser;
 use mac_address::get_mac_address;
 use gethostname::gethostname;
 use std::net::SocketAddr;
+use std::sync::Arc;
 use tokio::sync::broadcast;
 use log::{info, warn};
+
+use crate::context::ProxyContext;
+use crate::utils::parse_mac;
 
 fn default_hostname() -> String {
     gethostname().to_string_lossy().into_owned()
@@ -33,8 +39,8 @@ struct Cli {
     hostname: String,
 
     /// MAC address for mDNS 
-    #[arg(short, long)]
-    mac: Option<String>,
+    #[arg(short, long, value_parser = parse_mac)]
+    mac: Option<[u8; 6]>,
 }
 
 #[tokio::main]
@@ -42,27 +48,38 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
     let cli = Cli::parse();
 
-    let mac: String = cli.mac.clone().or_else(|| {
-        // Try to call get_mac_address and handle possible errors and None
-        match get_mac_address() {
-            Ok(Some(mac)) => Some(mac.to_string()),
+
+    let mac: [u8; 6] = match cli.mac {
+        Some(mac) => mac,
+        None => match get_mac_address() {
+            Ok(Some(mac)) => mac.bytes(),
             Ok(None) => {
                 log::warn!("System has no available MAC address.");
-                None
+                eprintln!("Fatal: No MAC address provided via CLI or available on system.");
+                std::process::exit(1);
             }
             Err(e) => {
                 log::error!("Error while getting MAC address: {}", e);
-                None
+                eprintln!("Fatal: Could not determine MAC address.");
+                std::process::exit(1);
             }
-        }
-    }).unwrap_or_else(|| {
-        eprintln!("Fatal: No MAC address provided via CLI or available on system.");
-        std::process::exit(1);
-    });
+        },
+    };
+
 
     let bt_mac = utils::get_bt_mac(cli.hci).expect(&format!("Can't get Bluetooth MAC for hci{}", cli.hci));
 
-    let _mdns_service = mdns::start_mdns(&cli.hostname, &bt_mac, &mac, cli.listen.port()).unwrap_or_else(|e| {
+
+    let ctx = Arc::new(ProxyContext {
+        hostname: cli.hostname,
+        port: cli.listen.port(),
+        net_mac: mac,
+        bt_mac: bt_mac,
+        build_time: env!("BUILD_TIME"),
+        version: env!("CARGO_PKG_VERSION"),
+    });
+
+    let _mdns_service = mdns::start_mdns(ctx.clone()).unwrap_or_else(|e| {
     warn!("Critical error: failed to register mDNS service: {}", e);
     std::process::exit(1);
 });
@@ -88,7 +105,7 @@ async fn main() -> std::io::Result<()> {
         }
     };
 
-    tokio::spawn(server::run_tcp_server(cli.listen, rx));
+    tokio::spawn(server::run_tcp_server(ctx.clone(), cli.listen, rx));
 
     ble::run_hci_monitor_async(hci_fd, tx).await?;
 

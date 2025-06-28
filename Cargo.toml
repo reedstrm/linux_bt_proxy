@@ -16,7 +16,9 @@ bytes = "1"
 gethostname = "1.0.2"
 libc = "0.2.172"
 zbus  = "3"
+anyhow = "1.0.98"
 
 [build-dependencies]
 protobuf = "3.7"
 protobuf-codegen = "3.7"
+chrono = "0.4.41"
