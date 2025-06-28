@@ -1,12 +1,12 @@
-use libc::{c_int, c_void, socket, bind, sockaddr, AF_BLUETOOTH, SOCK_RAW, recv};
+use libc::{bind, c_int, c_void, recv, sockaddr, socket, AF_BLUETOOTH, SOCK_RAW};
 use std::mem::{size_of, zeroed};
 
+use log::{debug, info};
 use std::os::fd::RawFd;
 use tokio::io::unix::AsyncFd;
 use tokio::sync::broadcast::Sender;
-use log::{debug, info};
-use zbus::{Connection, Proxy};
 use zbus::zvariant::Value;
+use zbus::{Connection, Proxy};
 
 use crate::api::api::BluetoothLERawAdvertisement;
 
@@ -23,7 +23,10 @@ pub const HCI_CHANNEL_USER: u16 = 1;
 pub const HCI_CHANNEL_MONITOR: u16 = 2;
 pub const HCI_DEV_NONE: u16 = 0xffff;
 
-pub async fn run_hci_monitor_async(fd: RawFd, tx: Sender<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_hci_monitor_async(
+    fd: RawFd,
+    tx: Sender<BluetoothLERawAdvertisement>,
+) -> std::io::Result<()> {
     let async_fd = AsyncFd::new(fd)?;
 
     loop {
@@ -99,8 +102,15 @@ fn parse_extended_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
         let adv_data = &data[cursor + 24..cursor + 24 + data_len];
 
         debug!(
-        "EXT ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
-        addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
+            "EXT ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
+            addr[5],
+            addr[4],
+            addr[3],
+            addr[2],
+            addr[1],
+            addr[0],
+            rssi,
+            adv_data.len()
         );
 
         ads.push(BluetoothLERawAdvertisement {
@@ -144,8 +154,15 @@ fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
         let rssi = data[cursor + 8 + data_len] as i8;
 
         debug!(
-        "LEG ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
-        addr[5], addr[4], addr[3], addr[2], addr[1], addr[0], rssi, adv_data.len()
+            "LEG ADV: {:02X}:{:02X}:{:02X}:{:02X}:{:02X}:{:02X} RSSI: {} dBm LEN: {}",
+            addr[5],
+            addr[4],
+            addr[3],
+            addr[2],
+            addr[1],
+            addr[0],
+            rssi,
+            adv_data.len()
         );
 
         ads.push(BluetoothLERawAdvertisement {
@@ -163,7 +180,9 @@ fn parse_legacy_adv(data: &[u8]) -> Vec<BluetoothLERawAdvertisement> {
 }
 
 fn bdaddr_to_u64(addr: &[u8]) -> u64 {
-    addr.iter().rev().fold(0u64, |acc, &b| (acc << 8) | b as u64)
+    addr.iter()
+        .rev()
+        .fold(0u64, |acc, &b| (acc << 8) | b as u64)
 }
 
 pub fn open_hci_socket(dev_id: u16) -> std::io::Result<RawFd> {
@@ -198,24 +217,21 @@ pub fn open_hci_socket(dev_id: u16) -> std::io::Result<RawFd> {
             Ok(fd)
         }
         Err(e) => {
-            info!("Failed to open USER mode: {}. Falling back to MONITOR mode.", e);
+            info!(
+                "Failed to open USER mode: {}. Falling back to MONITOR mode.",
+                e
+            );
             try_open(HCI_DEV_NONE, HCI_CHANNEL_MONITOR)
         }
     }
 }
 
 /// Starts discovery on hci via D-Bus, only if not already scanning.
-pub async fn ensure_scanning_enabled( hci: u16) -> zbus::Result<zbus::Connection> {
+pub async fn ensure_scanning_enabled(hci: u16) -> zbus::Result<zbus::Connection> {
     let path = format!("/org/bluez/hci{}", hci);
 
     let conn = Connection::system().await?;
-    let proxy = Proxy::new(
-        &conn,
-        "org.bluez",
-        path,
-        "org.bluez.Adapter1",
-    )
-    .await?;
+    let proxy = Proxy::new(&conn, "org.bluez", path, "org.bluez.Adapter1").await?;
 
     let discovering: bool = proxy
         .get_property::<Value>("Discovering")
@@ -232,4 +248,3 @@ pub async fn ensure_scanning_enabled( hci: u16) -> zbus::Result<zbus::Connection
 
     Ok(conn)
 }
-

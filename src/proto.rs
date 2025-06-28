@@ -1,9 +1,8 @@
 use crate::api::api_options;
-use protobuf::MessageFull;
-use protobuf;
 use bytes::{Bytes, BytesMut};
+use protobuf;
+use protobuf::MessageFull;
 use std::io::{Error, ErrorKind};
-
 
 pub fn get_message_id<M: MessageFull>() -> u8 {
     protobuf::ext::ExtFieldOptional::get(
@@ -12,7 +11,6 @@ pub fn get_message_id<M: MessageFull>() -> u8 {
     )
     .expect("Missing extension id") as u8
 }
-
 
 /// Decodes a protobuf varint from a byte slice, returning the value and the number of bytes consumed.
 pub fn decode_varint(buf: &[u8]) -> Result<(u64, usize), Error> {
@@ -49,7 +47,6 @@ pub fn encode_varint(mut value: u64) -> Vec<u8> {
 }
 
 pub fn next_message(buf: &mut BytesMut) -> Option<(u32, Bytes)> {
-
     // Step 1: check framing byte
     if buf.len() < 1 || buf[0] != 0x00 {
         return None;
@@ -72,8 +69,7 @@ pub fn next_message(buf: &mut BytesMut) -> Option<(u32, Bytes)> {
 
     let payload_len = length as usize;
     let mut head = buf.split_to(offset + payload_len); // remove the message from buf
-    let payload = head.split_off(offset).freeze();     // skip to payload and freeze it
+    let payload = head.split_off(offset).freeze(); // skip to payload and freeze it
 
     Some((msg_type as u32, payload))
 }
-

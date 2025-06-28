@@ -1,7 +1,6 @@
-use libc::{self, c_int, c_uint, c_ushort, c_ulong, c_void};
+use anyhow::Result;
+use libc::{self, c_int, c_uint, c_ulong, c_ushort, c_void};
 use std::mem::zeroed;
-use anyhow::{Result};
-
 
 pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
     // These are constants from BlueZ / Bluetooth headers
@@ -31,28 +30,44 @@ pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
     let mut devinfo: HciDevInfo = unsafe { zeroed() };
     devinfo.dev_id = hci_index;
 
-    let ret = unsafe {
-        libc::ioctl(sock, HCIGETDEVINFO, &mut devinfo as *mut _ as *mut c_void)
-    };
+    let ret = unsafe { libc::ioctl(sock, HCIGETDEVINFO, &mut devinfo as *mut _ as *mut c_void) };
 
     unsafe {
         libc::close(sock);
     }
 
     if ret < 0 {
-        log::error!("ioctl HCIGETDEVINFO failed for hci{} (ret = {})", hci_index, ret);
+        log::error!(
+            "ioctl HCIGETDEVINFO failed for hci{} (ret = {})",
+            hci_index,
+            ret
+        );
         return None;
     }
 
     // linux bluetooth devices store mac little-endian. Need big-endian for protocols
-    let mac: [u8; 6] = devinfo.bdaddr.iter().rev().cloned().collect::<Vec<_>>().try_into().unwrap();
+    let mac: [u8; 6] = devinfo
+        .bdaddr
+        .iter()
+        .rev()
+        .cloned()
+        .collect::<Vec<_>>()
+        .try_into()
+        .unwrap();
 
-    log::info!("Retrieved MAC for hci{}: {}", hci_index, format_mac(&mac, &":"));
+    log::info!(
+        "Retrieved MAC for hci{}: {}",
+        hci_index,
+        format_mac(&mac, &":")
+    );
     Some(mac)
 }
 
 pub fn format_mac(mac: &[u8], sep: &str) -> String {
-    mac.iter().map(|b| format!("{:02X}", b)).collect::<Vec<_>>().join(sep)
+    mac.iter()
+        .map(|b| format!("{:02X}", b))
+        .collect::<Vec<_>>()
+        .join(sep)
 }
 
 pub fn parse_mac(s: &str) -> Result<[u8; 6], String> {
@@ -63,8 +78,8 @@ pub fn parse_mac(s: &str) -> Result<[u8; 6], String> {
 
     let mut mac = [0u8; 6];
     for (i, part) in parts.iter().enumerate() {
-        mac[i] = u8::from_str_radix(part, 16)
-            .map_err(|_| format!("Invalid hex byte: '{}'", part))?;
+        mac[i] =
+            u8::from_str_radix(part, 16).map_err(|_| format!("Invalid hex byte: '{}'", part))?;
     }
     Ok(mac)
 }

@@ -1,9 +1,6 @@
-use std::{
-    fs,
-    path::PathBuf,
-};
-use protobuf_codegen;
 use chrono::Utc;
+use protobuf_codegen;
+use std::{fs, path::PathBuf};
 
 fn main() {
     // Build time for device info

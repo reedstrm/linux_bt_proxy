@@ -1,19 +1,18 @@
-use std::sync::Arc;
 use protobuf::Message;
-use tokio::net::TcpStream;
+use std::sync::Arc;
 use tokio::io::AsyncWriteExt;
+use tokio::net::TcpStream;
 
-use log::info;
-use crate::proto::{ get_message_id, encode_varint};
-use crate::api::api::{ HelloRequest, HelloResponse,
-                       PingRequest, PingResponse,
-                       ListEntitiesRequest, ListEntitiesDoneResponse,
-                       ConnectRequest, ConnectResponse,
-                       DeviceInfoRequest, DeviceInfoResponse};
-use crate::utils::format_mac;
+use crate::api::api::{
+    ConnectRequest, ConnectResponse, DeviceInfoRequest, DeviceInfoResponse, HelloRequest,
+    HelloResponse, ListEntitiesDoneResponse, ListEntitiesRequest, PingRequest, PingResponse,
+};
 use crate::context::ProxyContext;
+use crate::proto::{encode_varint, get_message_id};
+use crate::utils::format_mac;
+use log::info;
 
-fn encode_response<M: Message>(msg_type: u32, message: &M,) -> Result<Vec<u8>, std::io::Error> {
+fn encode_response<M: Message>(msg_type: u32, message: &M) -> Result<Vec<u8>, std::io::Error> {
     let size = message.compute_size() as usize;
 
     let mut out = Vec::with_capacity(1 + 5 + 5 + size); // start + varints + payload
@@ -22,12 +21,12 @@ fn encode_response<M: Message>(msg_type: u32, message: &M,) -> Result<Vec<u8>, s
     out.extend_from_slice(&encode_varint(size as u64));
     out.extend_from_slice(&encode_varint(msg_type as u64));
 
-    message.write_to_writer(&mut out)?;  // ✨ direct append
+    message.write_to_writer(&mut out)?; // ✨ direct append
 
     Ok(out)
 }
 
-pub async fn hello_request( stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn hello_request(stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
     // HelloRequest -> inital contact from HA server
     info!("Handling HelloRequest");
     let _req = HelloRequest::parse_from_bytes(payload)?;
@@ -40,31 +39,41 @@ pub async fn hello_request( stream: &mut TcpStream, payload: &[u8]) -> Result<()
     };
 
     let hello_resp_type = get_message_id::<HelloResponse>();
-    stream.write_all(&encode_response(hello_resp_type as u32, &resp)?).await?;
+    stream
+        .write_all(&encode_response(hello_resp_type as u32, &resp)?)
+        .await?;
     Ok(())
 }
 
-pub async fn connect_request( stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn connect_request(stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
     // ConnectRequest -> no pasword plaintext, reply with empty Response
     info!("Handling ConnectRequest");
     let _req = ConnectRequest::parse_from_bytes(payload)?;
     let resp = ConnectResponse::new();
     let connect_resp_type = get_message_id::<ConnectResponse>();
-    stream.write_all(&encode_response(connect_resp_type as u32, &resp)?).await?;
+    stream
+        .write_all(&encode_response(connect_resp_type as u32, &resp)?)
+        .await?;
     Ok(())
 }
 
-pub async fn ping_request( stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn ping_request(stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
     // Ping -> reply with pong (PingResponse, actually)
     info!("Handling PingRequest");
     let _req = PingRequest::parse_from_bytes(payload)?;
     let resp = PingResponse::new();
     let ping_resp_type = get_message_id::<PingResponse>();
-    stream.write_all(&encode_response(ping_resp_type as u32, &resp)?).await?;
+    stream
+        .write_all(&encode_response(ping_resp_type as u32, &resp)?)
+        .await?;
     Ok(())
 }
 
-pub async fn device_info_request( ctx: Arc<ProxyContext>, stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn device_info_request(
+    ctx: Arc<ProxyContext>,
+    stream: &mut TcpStream,
+    payload: &[u8],
+) -> Result<(), std::io::Error> {
     // DeviceInfoRequest -> reply with values from ProxyContext
     info!("Handling DeviceInfoRequest");
     let _req = DeviceInfoRequest::parse_from_bytes(payload)?;
@@ -101,17 +110,23 @@ pub async fn device_info_request( ctx: Arc<ProxyContext>, stream: &mut TcpStream
         ..Default::default()
     };
     let device_info_resp_type = get_message_id::<DeviceInfoResponse>();
-    stream.write_all(&encode_response(device_info_resp_type as u32, &resp)?).await?;
+    stream
+        .write_all(&encode_response(device_info_resp_type as u32, &resp)?)
+        .await?;
     Ok(())
 }
 
-pub async fn list_entities_request( stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn list_entities_request(
+    stream: &mut TcpStream,
+    payload: &[u8],
+) -> Result<(), std::io::Error> {
     // ListEntitiesRequest ->  we have none, respond with Done
     info!("Handling PingRequest");
     let _req = ListEntitiesRequest::parse_from_bytes(payload)?;
     let resp = ListEntitiesDoneResponse::new();
     let list_entitities_resp_type = get_message_id::<ListEntitiesDoneResponse>();
-    stream.write_all(&encode_response(list_entitities_resp_type as u32, &resp)?).await?;
+    stream
+        .write_all(&encode_response(list_entitities_resp_type as u32, &resp)?)
+        .await?;
     Ok(())
 }
-

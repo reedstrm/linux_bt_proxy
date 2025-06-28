@@ -1,19 +1,19 @@
 mod api;
 mod ble;
+mod context;
+mod handlers;
 mod mdns;
 mod proto;
 mod server;
 mod utils;
-mod context;
-mod handlers;
 
 use clap::Parser;
-use mac_address::get_mac_address;
 use gethostname::gethostname;
+use log::{info, warn};
+use mac_address::get_mac_address;
 use std::net::SocketAddr;
 use std::sync::Arc;
 use tokio::sync::broadcast;
-use log::{info, warn};
 
 use crate::context::ProxyContext;
 use crate::utils::parse_mac;
@@ -26,9 +26,9 @@ fn default_hostname() -> String {
 #[command(name = "linux_bt_proxy")]
 #[command(about = "Bluetooth Proxy Daemon for ESPHome", long_about = None)]
 struct Cli {
-     /// HCI adapter index (e.g. 0 for hci0)
-     #[arg(short = 'a', long, default_value_t = 0)]
-     hci: u16,
+    /// HCI adapter index (e.g. 0 for hci0)
+    #[arg(short = 'a', long, default_value_t = 0)]
+    hci: u16,
 
     /// TCP listen address (default: 0.0.0.0:6053)
     #[arg(short, long, default_value = "0.0.0.0:6053")]
@@ -38,7 +38,7 @@ struct Cli {
     #[arg(long, default_value_t = default_hostname())]
     hostname: String,
 
-    /// MAC address for mDNS 
+    /// MAC address for mDNS
     #[arg(short, long, value_parser = parse_mac)]
     mac: Option<[u8; 6]>,
 }
@@ -47,7 +47,6 @@ struct Cli {
 async fn main() -> std::io::Result<()> {
     env_logger::init();
     let cli = Cli::parse();
-
 
     let mac: [u8; 6] = match cli.mac {
         Some(mac) => mac,
@@ -66,9 +65,8 @@ async fn main() -> std::io::Result<()> {
         },
     };
 
-
-    let bt_mac = utils::get_bt_mac(cli.hci).expect(&format!("Can't get Bluetooth MAC for hci{}", cli.hci));
-
+    let bt_mac =
+        utils::get_bt_mac(cli.hci).expect(&format!("Can't get Bluetooth MAC for hci{}", cli.hci));
 
     let ctx = Arc::new(ProxyContext {
         hostname: cli.hostname,
@@ -80,9 +78,9 @@ async fn main() -> std::io::Result<()> {
     });
 
     let _mdns_service = mdns::start_mdns(ctx.clone()).unwrap_or_else(|e| {
-    warn!("Critical error: failed to register mDNS service: {}", e);
-    std::process::exit(1);
-});
+        warn!("Critical error: failed to register mDNS service: {}", e);
+        std::process::exit(1);
+    });
 
     info!("mDNS service registered");
 

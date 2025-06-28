@@ -1,17 +1,23 @@
-use tokio::net::{TcpListener, TcpStream};
-use tokio::io::AsyncReadExt;
-use tokio::sync::broadcast;
+use bytes::BytesMut;
+use log::{info, warn};
 use std::net::SocketAddr;
 use std::sync::Arc;
-use log::{warn,info};
-use bytes::BytesMut;
+use tokio::io::AsyncReadExt;
+use tokio::net::{TcpListener, TcpStream};
+use tokio::sync::broadcast;
 
-use crate::proto::next_message;
-use crate::handlers::{hello_request, connect_request, device_info_request, ping_request, list_entities_request};
-use crate::context::ProxyContext;
 use crate::api::api::BluetoothLERawAdvertisement;
+use crate::context::ProxyContext;
+use crate::handlers::{
+    connect_request, device_info_request, hello_request, list_entities_request, ping_request,
+};
+use crate::proto::next_message;
 
-pub async fn run_tcp_server(ctx: Arc<ProxyContext>, addr: SocketAddr, rx: broadcast::Receiver<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
+pub async fn run_tcp_server(
+    ctx: Arc<ProxyContext>,
+    addr: SocketAddr,
+    rx: broadcast::Receiver<BluetoothLERawAdvertisement>,
+) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
     info!("Listening on {}", addr);
 
@@ -28,13 +34,18 @@ pub async fn run_tcp_server(ctx: Arc<ProxyContext>, addr: SocketAddr, rx: broadc
     }
 }
 
-async fn handle_client(ctx: Arc<ProxyContext>, mut stream: TcpStream, rx: &mut broadcast::Receiver<BluetoothLERawAdvertisement>) -> std::io::Result<()> {
+async fn handle_client(
+    ctx: Arc<ProxyContext>,
+    mut stream: TcpStream,
+    rx: &mut broadcast::Receiver<BluetoothLERawAdvertisement>,
+) -> std::io::Result<()> {
     let mut buf = BytesMut::with_capacity(1024);
 
     loop {
         let n = stream.read_buf(&mut buf).await?;
-        if n == 0 { break; }
-
+        if n == 0 {
+            break;
+        }
 
         while let Some((msg_type, payload)) = next_message(&mut buf) {
             match msg_type {
