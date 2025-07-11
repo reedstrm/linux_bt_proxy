@@ -14,9 +14,10 @@ log = "0.4"
 env_logger = "0.11"
 bytes = "1"
 gethostname = "1.0.2"
-libc = "0.2.172"
-zbus  = "3"
+libc = "0.2.174"
+zbus  = "5"
 anyhow = "1.0.98"
+futures-util = "0.3.31"
 
 [build-dependencies]
 protobuf = "3.7"

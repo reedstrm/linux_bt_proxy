@@ -26,7 +26,7 @@ fn default_hostname() -> String {
 #[command(name = "linux_bt_proxy")]
 #[command(about = "Bluetooth Proxy Daemon for ESPHome", long_about = None)]
 struct Cli {
-    /// HCI adapter index (e.g. 0 for hci0)
+    /// Bluetooth adapter index (e.g. 0 for hci0)
     #[arg(short = 'a', long, default_value_t = 0)]
     hci: u16,
 
@@ -77,35 +77,22 @@ async fn main() -> std::io::Result<()> {
         version: env!("CARGO_PKG_VERSION"),
     });
 
+
+    let (tx, rx) = broadcast::channel(100);
+
+    // first cut: use bluez stack, ask for active scanning
+    tokio::spawn(ble::run_bluez_advertisement_listener(cli.hci, tx.clone()));
+
+    info!("Listening for ble advertisements on hci{}", cli.hci);
+
     let _mdns_service = mdns::start_mdns(ctx.clone()).unwrap_or_else(|e| {
         warn!("Critical error: failed to register mDNS service: {}", e);
         std::process::exit(1);
     });
 
     info!("mDNS service registered");
-
-    let (tx, rx) = broadcast::channel(100);
-
-    // Open Bluetooth device
-    let hci_fd = match ble::open_hci_socket(cli.hci) {
-        Ok(fd) => fd,
-        Err(e) => {
-            warn!("Failed to open bluetooth device: {:?}", e);
-            std::process::exit(1);
-        }
-    };
-
-    let _scan_connection = match ble::ensure_scanning_enabled(cli.hci).await {
-        Ok(conn) => Some(conn),
-        Err(e) => {
-            warn!("Failed to start scanning — start it manually: {}", e);
-            None
-        }
-    };
-
-    tokio::spawn(server::run_tcp_server(ctx.clone(), cli.listen, rx));
-
-    ble::run_hci_monitor_async(hci_fd, tx).await?;
+    
+    let _ = server::run_tcp_server(ctx.clone(), cli.listen, rx).await;
 
     Ok(())
 }
