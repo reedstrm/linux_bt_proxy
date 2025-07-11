@@ -5,11 +5,22 @@ use tokio::io::AsyncWriteExt;
 use tokio::net::TcpStream;
 
 use crate::api::api::{
-    BluetoothLEAdvertisementResponse, ConnectRequest,
-    ConnectResponse, DeviceInfoRequest, DeviceInfoResponse, DisconnectRequest, DisconnectResponse,
-    HelloRequest, HelloResponse, ListEntitiesDoneResponse, ListEntitiesRequest, PingRequest,
-    PingResponse, SubscribeBluetoothConnectionsFreeRequest, BluetoothConnectionsFreeResponse //,
-//  SensorStateClass, ListEntitiesSensorResponse
+    BluetoothConnectionsFreeResponse, //,
+                                      //  SensorStateClass, ListEntitiesSensorResponse
+    BluetoothLEAdvertisementResponse,
+    ConnectRequest,
+    ConnectResponse,
+    DeviceInfoRequest,
+    DeviceInfoResponse,
+    DisconnectRequest,
+    DisconnectResponse,
+    HelloRequest,
+    HelloResponse,
+    ListEntitiesDoneResponse,
+    ListEntitiesRequest,
+    PingRequest,
+    PingResponse,
+    SubscribeBluetoothConnectionsFreeRequest,
 };
 use crate::context::ProxyContext;
 use crate::proto::{encode_varint, get_message_id};
@@ -66,7 +77,10 @@ pub async fn disconnect_request(
     payload: &[u8],
 ) -> Result<(), std::io::Error> {
     // DisconnectRequest
-    info!("Handling DisconnectRequest from {}", stream.peer_addr()?.ip());
+    info!(
+        "Handling DisconnectRequest from {}",
+        stream.peer_addr()?.ip()
+    );
     let _req = DisconnectRequest::parse_from_bytes(payload)?;
     let resp = DisconnectResponse::new();
     let disconnect_resp_type = get_message_id::<DisconnectResponse>();
@@ -89,9 +103,15 @@ pub async fn ping_request(stream: &mut TcpStream, payload: &[u8]) -> Result<(), 
     Ok(())
 }
 
-pub async fn subscribe_bluetooth_connections_free_request(stream: &mut TcpStream, payload: &[u8]) -> Result<(), std::io::Error> {
+pub async fn subscribe_bluetooth_connections_free_request(
+    stream: &mut TcpStream,
+    payload: &[u8],
+) -> Result<(), std::io::Error> {
     // Bluetooth Connections Free -> BluetoothConnectionsFreeResponse
-    info!("Handling BluetoothConnectionsFree from {}", stream.peer_addr()?.ip());
+    info!(
+        "Handling BluetoothConnectionsFree from {}",
+        stream.peer_addr()?.ip()
+    );
     let _req = SubscribeBluetoothConnectionsFreeRequest::parse_from_bytes(payload)?;
     let resp = BluetoothConnectionsFreeResponse {
         free: 0,
@@ -111,7 +131,10 @@ pub async fn device_info_request(
     payload: &[u8],
 ) -> Result<(), std::io::Error> {
     // DeviceInfoRequest -> reply with values from ProxyContext
-    info!("Handling DeviceInfoRequest from {}", stream.peer_addr()?.ip());
+    info!(
+        "Handling DeviceInfoRequest from {}",
+        stream.peer_addr()?.ip()
+    );
     let _req = DeviceInfoRequest::parse_from_bytes(payload)?;
 
     let resp = DeviceInfoResponse {
@@ -132,7 +155,6 @@ pub async fn device_info_request(
         // The esphome project details if set
         // project_name: "linux_bt_proxy".to_string(),
         // project_version: ctx.version.to_string(),
-
         legacy_bluetooth_proxy_version: 5,
         bluetooth_proxy_feature_flags: 3,
 
@@ -156,29 +178,35 @@ pub async fn list_entities_request(
     stream: &mut TcpStream,
     payload: &[u8],
 ) -> Result<(), std::io::Error> {
-    // ListEntitiesRequest 
-    info!("Handling ListEntitiesRequest from {}", stream.peer_addr()?.ip());
+    // ListEntitiesRequest
+    info!(
+        "Handling ListEntitiesRequest from {}",
+        stream.peer_addr()?.ip()
+    );
     let _req = ListEntitiesRequest::parse_from_bytes(payload)?;
-//    let resp = ListEntitiesSensorResponse {
-//        object_id: "uptime".to_string(),
-//        unique_id: "uptime_sensor".to_string(),
-//        name: "Proxy Service Uptime".to_string(),
-//        unit_of_measurement: "s".to_string(),
-//        accuracy_decimals: 0,
-//        device_class: "duration".to_string(),
-//        state_class: EnumOrUnknown::new(SensorStateClass::STATE_CLASS_TOTAL_INCREASING),
-//        icon: "mdi:clock-time-four-outline".to_string(),
-//        key: 42 as u32, 
-//        ..Default::default()
-//    };
-//    let list_entitities_sensor_resp_type = get_message_id::<ListEntitiesSensorResponse>();
-//    stream
-//        .write_all(&encode_response(list_entitities_sensor_resp_type as u32, &resp)?)
-//        .await?;
+    //    let resp = ListEntitiesSensorResponse {
+    //        object_id: "uptime".to_string(),
+    //        unique_id: "uptime_sensor".to_string(),
+    //        name: "Proxy Service Uptime".to_string(),
+    //        unit_of_measurement: "s".to_string(),
+    //        accuracy_decimals: 0,
+    //        device_class: "duration".to_string(),
+    //        state_class: EnumOrUnknown::new(SensorStateClass::STATE_CLASS_TOTAL_INCREASING),
+    //        icon: "mdi:clock-time-four-outline".to_string(),
+    //        key: 42 as u32,
+    //        ..Default::default()
+    //    };
+    //    let list_entitities_sensor_resp_type = get_message_id::<ListEntitiesSensorResponse>();
+    //    stream
+    //        .write_all(&encode_response(list_entitities_sensor_resp_type as u32, &resp)?)
+    //        .await?;
     let resp = ListEntitiesDoneResponse::new();
     let list_entitities_done_resp_type = get_message_id::<ListEntitiesDoneResponse>();
     stream
-        .write_all(&encode_response(list_entitities_done_resp_type as u32, &resp)?)
+        .write_all(&encode_response(
+            list_entitities_done_resp_type as u32,
+            &resp,
+        )?)
         .await?;
     Ok(())
 }

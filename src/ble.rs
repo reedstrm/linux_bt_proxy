@@ -1,15 +1,14 @@
 use futures_util::stream::StreamExt;
-use std::collections::HashMap;
 use log::{debug, info, warn};
+use std::collections::HashMap;
 
 use tokio::sync::broadcast::Sender;
 
 use zbus::fdo::PropertiesProxy;
 use zbus::match_rule::MatchRule;
 use zbus::names::InterfaceName;
-use zbus::zvariant::{ObjectPath, OwnedValue, Dict};
+use zbus::zvariant::{Dict, ObjectPath, OwnedValue};
 use zbus::{message::Type, Connection, MessageStream, Proxy};
-
 
 use crate::api::api::{BluetoothLEAdvertisementResponse, BluetoothServiceData};
 
@@ -123,8 +122,7 @@ pub async fn run_bluez_advertisement_listener(
             }
         } // select
     } // loop
-
-    Ok(())
+      // Note: This function will run indefinitely, listening for advertisements.
 }
 
 fn build_advertisement_response(
@@ -156,11 +154,10 @@ fn build_advertisement_response(
         .and_then(|v| Vec::<String>::try_from(v).ok())
         .unwrap_or_default();
 
-    let service_data = extract_service_data(props.get("ServiceData"), true)
-        .unwrap_or_default();
+    let service_data = extract_service_data(props.get("ServiceData"), true).unwrap_or_default();
 
-    let manufacturer_data = extract_service_data(props.get("ManufacturerData"), false)
-        .unwrap_or_default();
+    let manufacturer_data =
+        extract_service_data(props.get("ManufacturerData"), false).unwrap_or_default();
 
     if let Some(mac_str) = mac_opt {
         let msg = BluetoothLEAdvertisementResponse {
@@ -182,14 +179,11 @@ async fn get_device_properties(
     conn: &Connection,
     path: &str,
 ) -> zbus::Result<HashMap<String, OwnedValue>> {
-    let proxy = PropertiesProxy::new(
-        conn,
-        "org.bluez",
-        ObjectPath::try_from(path)?,
-    )
-    .await?;
+    let proxy = PropertiesProxy::new(conn, "org.bluez", ObjectPath::try_from(path)?).await?;
 
-    let props: HashMap<String, OwnedValue> = proxy.get_all(InterfaceName::try_from("org.bluez.Device1")?).await?;
+    let props: HashMap<String, OwnedValue> = proxy
+        .get_all(InterfaceName::try_from("org.bluez.Device1")?)
+        .await?;
 
     Ok(props)
 }
@@ -227,9 +221,9 @@ async fn try_start_discovery(conn: &Connection, adapter_index: u16) -> zbus::Res
 }
 
 fn parse_ble_address(address: &str) -> u64 {
-    address
-        .split(':')
-        .fold(0, |acc, part| (acc << 8) | u8::from_str_radix(part, 16).unwrap_or(0) as u64)
+    address.split(':').fold(0, |acc, part| {
+        (acc << 8) | u8::from_str_radix(part, 16).unwrap_or(0) as u64
+    })
 }
 
 fn extract_service_data(

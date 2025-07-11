@@ -77,7 +77,6 @@ async fn main() -> std::io::Result<()> {
         version: env!("CARGO_PKG_VERSION"),
     });
 
-
     let (tx, rx) = broadcast::channel(100);
 
     // first cut: use bluez stack, ask for active scanning
@@ -91,7 +90,7 @@ async fn main() -> std::io::Result<()> {
     });
 
     info!("mDNS service registered");
-    
+
     let _ = server::run_tcp_server(ctx.clone(), cli.listen, rx).await;
 
     Ok(())

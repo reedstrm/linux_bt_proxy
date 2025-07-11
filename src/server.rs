@@ -10,7 +10,8 @@ use crate::api::api::BluetoothLEAdvertisementResponse;
 use crate::context::ProxyContext;
 use crate::handlers::{
     connect_request, device_info_request, disconnect_request, forward_ble_advertisement,
-    hello_request, list_entities_request, ping_request, subscribe_bluetooth_connections_free_request,
+    hello_request, list_entities_request, ping_request,
+    subscribe_bluetooth_connections_free_request,
 };
 use crate::proto::next_message;
 
