@@ -1,2 +1,8 @@
 __pycache__
 target/
+lib
+lib64
+bin
+include
+doc
+pyvenv.cfg

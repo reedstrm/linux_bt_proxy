@@ -33,7 +33,8 @@ async def main(hostname, password):
 
     unsubscribe = None
     try:
-        unsubscribe = api.subscribe_bluetooth_le_raw_advertisements(handle_raw_ble_adv)
+        # unsubscribe = api.subscribe_bluetooth_le_raw_advertisements(handle_raw_ble_adv)
+        unsubscribe = api.subscribe_bluetooth_le_advertisements(handle_ble_adv)
         if not unsubscribe:
             print("ERROR: Subscription failed — device busy?")
             return

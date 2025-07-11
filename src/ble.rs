@@ -1,13 +1,15 @@
+use futures_util::stream::StreamExt;
 use std::collections::HashMap;
-use log::{debug, info};
+use log::{debug, info, warn};
 
-use futures_util::StreamExt;
 use tokio::sync::broadcast::Sender;
-use zbus::{
-    zvariant::{ObjectPath, OwnedValue,  Dict},
-    zbus_core::MessageType, 
-    Connection, MatchRule, Message, MessageStream, Proxy,
-};
+
+use zbus::fdo::PropertiesProxy;
+use zbus::match_rule::MatchRule;
+use zbus::names::InterfaceName;
+use zbus::zvariant::{ObjectPath, OwnedValue, Dict};
+use zbus::{message::Type, Connection, MessageStream, Proxy};
+
 
 use crate::api::api::{BluetoothLEAdvertisementResponse, BluetoothServiceData};
 
@@ -16,87 +18,209 @@ pub async fn run_bluez_advertisement_listener(
     tx: Sender<BluetoothLEAdvertisementResponse>,
 ) -> zbus::Result<()> {
     let conn = Connection::system().await?;
+    let adapter_rule = MatchRule::builder()
+        .msg_type(Type::Signal)
+        .interface("org.freedesktop.DBus.Properties")?
+        .member("PropertiesChanged")?
+        .arg(0, "org.bluez.Adapter1")?
+        .build();
 
+    let props_rule = MatchRule::builder()
+        .msg_type(Type::Signal)
+        .interface("org.freedesktop.DBus.Properties")?
+        .member("PropertiesChanged")?
+        .arg(0, "org.bluez.Device1")?
+        .build();
+
+    let iface_rule = MatchRule::builder()
+        .msg_type(Type::Signal)
+        .interface("org.freedesktop.DBus.ObjectManager")?
+        .member("InterfacesAdded")?
+        .build();
+
+    let mut adapter_stream = MessageStream::for_match_rule(adapter_rule, &conn, None).await?;
+    let mut props_stream = MessageStream::for_match_rule(props_rule, &conn, None).await?;
+    let mut iface_stream = MessageStream::for_match_rule(iface_rule, &conn, None).await?;
+
+    // All streams ready: now start discovery
+    try_start_discovery(&conn, adapter_index).await?;
+
+    loop {
+        tokio::select! {
+            maybe_msg = adapter_stream.next() => {
+                if let Some(Ok(msg)) = maybe_msg {
+                    let body = msg.body();
+                    let (interface, changed, _invalidated): (String, HashMap<String, OwnedValue>, Vec<String>) =
+                        body.deserialize()?;
+
+                    if interface == "org.bluez.Adapter1" {
+                        if let Some(value) = changed.get("Discovering") {
+                            if let Some(is_discovering) = value.downcast_ref::<bool>().ok() {
+                                if !is_discovering {
+                                    info!("Discovery was turned off — restarting discovery.");
+                                    try_start_discovery(&conn, adapter_index).await?;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            maybe_msg = props_stream.next() => {
+                if let Some(msg) = maybe_msg.transpose()? {
+                    let device_path = msg.header().path().map(|p| p.to_string());
+                    if let Some(path) = device_path {
+                        match get_device_properties(&conn, &path).await {
+                            Ok(props) => {
+                                debug!("Changed properties for device {}:", path);
+                                match build_advertisement_response(&props) {
+                                    Some(msg) => {
+                                        if let Err(e) = tx.send(msg) {
+                                            warn!("Failed to send advertisement response: {}", e);
+                                        }
+                                    }
+                                    None => {
+                                        warn!("Failed to build advertisement response for {}", path);
+                                    }
+                                };
+                                }
+                            Err(e) => {
+                                warn!("Failed to fetch properties for {}: {}", path, e);
+                            }
+                        }
+                    }
+                }
+            }
+
+            maybe_msg = iface_stream.next() => {
+                if let Some(msg) = maybe_msg.transpose()? {
+                    let body = msg.body();
+                    let (path, interfaces): (
+                        ObjectPath<'_>,
+                        HashMap<String, HashMap<String, OwnedValue>>
+                    ) = body.deserialize()?;
+
+                    debug!("InterfacesAdded at path: {}", path);
+                    match interfaces.get("org.bluez.Device1") {
+                        Some(props) => {
+                            debug!("New properties for device {}:", path);
+                            match build_advertisement_response(&props) {
+                                Some(msg) => {
+                                    if let Err(e) = tx.send(msg) {
+                                        warn!("Failed to send advertisement response: {}", e);
+                                    }
+                                }
+                                None => {
+                                    warn!("Failed to build advertisement response for {}", path);
+                                }
+                            };
+                        }
+                        _ => {
+                            debug!("Failed to fetch properties for {}", path);
+                        }
+                    }
+                }
+            }
+        } // select
+    } // loop
+
+    Ok(())
+}
+
+fn build_advertisement_response(
+    props: &HashMap<String, OwnedValue>,
+) -> Option<BluetoothLEAdvertisementResponse> {
+    let mac_opt = props
+        .get("Address")
+        .and_then(|v| v.downcast_ref::<String>().ok());
+
+    let address_type = props
+        .get("AddressType")
+        .and_then(|v| v.downcast_ref::<String>().ok())
+        .map(|s| if s == "random" { 1 } else { 0 })
+        .unwrap_or(0);
+
+    let rssi = props
+        .get("RSSI")
+        .and_then(|v| v.downcast_ref::<i32>().ok())
+        .unwrap_or(-127);
+
+    let name = props
+        .get("Name")
+        .and_then(|v| v.downcast_ref::<String>().ok())
+        .map_or_else(Vec::new, |s| s.into_bytes());
+
+    let service_uuids = props
+        .get("UUIDs")
+        .cloned()
+        .and_then(|v| Vec::<String>::try_from(v).ok())
+        .unwrap_or_default();
+
+    let service_data = extract_service_data(props.get("ServiceData"), true)
+        .unwrap_or_default();
+
+    let manufacturer_data = extract_service_data(props.get("ManufacturerData"), false)
+        .unwrap_or_default();
+
+    if let Some(mac_str) = mac_opt {
+        let msg = BluetoothLEAdvertisementResponse {
+            address: parse_ble_address(&mac_str),
+            address_type,
+            name,
+            rssi,
+            service_uuids,
+            service_data,
+            manufacturer_data,
+            ..Default::default()
+        };
+        return Some(msg);
+    }
+    None
+}
+
+async fn get_device_properties(
+    conn: &Connection,
+    path: &str,
+) -> zbus::Result<HashMap<String, OwnedValue>> {
+    let proxy = PropertiesProxy::new(
+        conn,
+        "org.bluez",
+        ObjectPath::try_from(path)?,
+    )
+    .await?;
+
+    let props: HashMap<String, OwnedValue> = proxy.get_all(InterfaceName::try_from("org.bluez.Device1")?).await?;
+
+    Ok(props)
+}
+
+//fn print_props(props: &HashMap<String, OwnedValue>) {
+//    for (key, value) in props {
+//        println!("  {} => {:?}", key, value);
+//    }
+//}
+
+async fn try_start_discovery(conn: &Connection, adapter_index: u16) -> zbus::Result<()> {
     let adapter_path = format!("/org/bluez/hci{}", adapter_index);
-    let adapter_proxy = Proxy::new(
-        &conn,
+    let proxy = Proxy::new(
+        conn,
         "org.bluez",
         ObjectPath::try_from(adapter_path.as_str())?,
         "org.bluez.Adapter1",
     )
     .await?;
 
-    adapter_proxy
+    proxy
         .call_method("SetDiscoveryFilter", &(HashMap::<&str, OwnedValue>::new()))
         .await?;
-    adapter_proxy.call_method("StartDiscovery", &()).await?;
-
-    let mut stream = MessageStream::from(conn);
-
-    let match_rule = MatchRule::builder()
-        .member("PropertiesChanged")?
-        .msg_type(MessageType::Signal)
-        .interface("org.freedesktop.DBus.Properties")?
-        .build();
-
-    while let Some(Ok(msg)) = stream.next().await {
-        if match_rule.matches(&msg)? {
-
-            info!("Raw D-Bus msg: {:?}", msg);
-
-            let Ok((interface, changed_props, _)) = msg.body().deserialize::<(String, HashMap<String, OwnedValue>, Vec<String>)>() else {
-                continue;
-            };
-
-            if interface != "org.bluez.Device1" {
-                continue;
-            }
-
-            let mac_opt = changed_props
-                .get("Address")
-                .and_then(|v| v.downcast_ref::<String>().ok());
-
-            let address_type = changed_props
-                .get("AddressType")
-                .and_then(|v| v.downcast_ref::<String>().ok())
-                .map(|s| if s == "random" { 1 } else { 0 })
-                .unwrap_or(0);
-
-            let rssi = changed_props
-                .get("RSSI")
-                .and_then(|v| v.downcast_ref::<i32>().ok());
-
-            let name = changed_props
-                .get("Name")
-                .and_then(|v| v.downcast_ref::<String>().ok());
-
-            let service_uuids = changed_props
-                .get("UUIDs")
-                .cloned()
-                .and_then(|v| Vec::<String>::try_from(v).ok())
-                .unwrap_or_default();
-
-            let service_data = extract_service_data(changed_props.get("ServiceData"), true)
-                .unwrap_or_default();
-
-            let manufacturer_data = extract_service_data(changed_props.get("ManufacturerData"), false)
-                .unwrap_or_default();
-
-            if let Some(mac_str) = mac_opt {
-                let msg = BluetoothLEAdvertisementResponse {
-                    address: parse_ble_address(&mac_str),
-                    address_type,
-                    name: name.map_or_else(Vec::new, |s| s.into_bytes()),
-                    rssi: rssi.unwrap_or(-127),
-                    service_uuids,
-                    service_data,
-                    manufacturer_data,
-                    ..Default::default()
-                };
-
-                let _ = tx.send(msg);
-            }
+    match proxy.call_method("StartDiscovery", &()).await {
+        Ok(_) => info!("Discovery started"),
+        Err(zbus::Error::MethodError(ref name, _, _))
+            if name.as_str() == "org.bluez.Error.InProgress" =>
+        {
+            warn!("Discovery already in progress");
         }
+        Err(e) => return Err(e),
     }
 
     Ok(())
