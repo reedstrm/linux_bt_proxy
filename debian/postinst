@@ -2,10 +2,11 @@
 set -e
 
 SERVICE=linux-bt-proxy
+SYSUSER=linuxbtproxy
 
 # Create a system user and group if it doesn't exist
-if ! id "$SERVICE" >/dev/null 2>&1; then
-    adduser --system --no-create-home --group "$SERVICE"
+if ! id "$SYSUSER" >/dev/null 2>&1; then
+    adduser --system --no-create-home --group "$SYSUSER"
 fi
 
 # Enable the service (no harm if already enabled)
