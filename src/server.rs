@@ -93,7 +93,7 @@ async fn handle_client(
                 match ble_msg {
                     Ok(advert) => {
                         if subscription_flags.is_subscribed() {
-                            debug!("Forwarding BLE advertisement to {} (flags: {:?})", 
+                            debug!("Forwarding BLE advertisement to {} (flags: {:?})",
                                    stream.peer_addr()?.ip(), subscription_flags);
                             forward_ble_advertisement(&mut stream, advert).await?;
                         }

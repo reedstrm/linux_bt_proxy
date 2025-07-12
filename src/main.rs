@@ -50,7 +50,10 @@ async fn main() -> std::io::Result<()> {
 
     // Validate HCI adapter exists before proceeding
     if utils::get_bt_mac(cli.hci).is_none() {
-        log::error!("Bluetooth adapter hci{} does not exist or is not accessible", cli.hci);
+        log::error!(
+            "Bluetooth adapter hci{} does not exist or is not accessible",
+            cli.hci
+        );
         log::error!("Fatal: Check available adapters with 'hciconfig' or 'bluetoothctl list'");
         std::process::exit(1);
     }
@@ -94,7 +97,7 @@ async fn main() -> std::io::Result<()> {
 
     // first cut: use bluez stack, ask for active scanning
     let mut ble_handle = tokio::spawn(ble::run_bluez_advertisement_listener(cli.hci, tx.clone()));
-    
+
     // Check if BLE listener started successfully
     tokio::select! {
         _ = tokio::time::sleep(tokio::time::Duration::from_millis(100)) => {

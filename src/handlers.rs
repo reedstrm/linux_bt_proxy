@@ -39,16 +39,19 @@ pub struct SubscriptionFlags {
 
 impl SubscriptionFlags {
     pub fn none() -> Self {
-        SubscriptionFlags { regular: false, raw: false }
+        SubscriptionFlags {
+            regular: false,
+            raw: false,
+        }
     }
-    
+
     pub fn from_flags(flags: u32) -> Self {
         SubscriptionFlags {
             regular: flags == 0 || (flags & SUBSCRIPTION_RAW_ADVERTISEMENTS) == 0,
             raw: (flags & SUBSCRIPTION_RAW_ADVERTISEMENTS) != 0,
         }
     }
-    
+
     pub fn is_subscribed(&self) -> bool {
         self.regular || self.raw
     }
@@ -251,15 +254,15 @@ pub async fn subscribe_bluetooth_le_advertisements_request(
         "Handling SubscribeBluetoothLEAdvertisementsRequest from {}",
         stream.peer_addr()?.ip()
     );
-    
+
     let req = SubscribeBluetoothLEAdvertisementsRequest::parse_from_bytes(payload)?;
     let subscription_flags = SubscriptionFlags::from_flags(req.flags);
-    
+
     info!(
         "BLE advertisement subscription flags: {:?} (raw flags: 0x{:02x})",
         subscription_flags, req.flags
     );
-    
+
     Ok(subscription_flags)
 }
 
