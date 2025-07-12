@@ -71,7 +71,10 @@ pub async fn run_bluez_advertisement_listener(
                     if let Some(path) = device_path {
                         match get_device_properties(&conn, &path).await {
                             Ok(props) => {
-                                debug!("Changed properties for device {}:", path);
+                                debug!("Changed properties for device {}", path);
+                                if log::log_enabled!(log::Level::Debug) {
+                                    print_props(&props);
+                                }
                                 match build_advertisement_response(&props) {
                                     Some(msg) => {
                                         if let Err(e) = tx.send(msg) {
@@ -102,7 +105,10 @@ pub async fn run_bluez_advertisement_listener(
                     debug!("InterfacesAdded at path: {}", path);
                     match interfaces.get("org.bluez.Device1") {
                         Some(props) => {
-                            debug!("New properties for device {}:", path);
+                            debug!("New properties for device {}", path);
+                            if log::log_enabled!(log::Level::Debug) {
+                                print_props(props);
+                            }
                             match build_advertisement_response(&props) {
                                 Some(msg) => {
                                     if let Err(e) = tx.send(msg) {
@@ -140,7 +146,7 @@ fn build_advertisement_response(
 
     let rssi = props
         .get("RSSI")
-        .and_then(|v| v.downcast_ref::<i32>().ok())
+        .and_then(|v| v.downcast_ref::<i16>().ok().map(|x| x as i32))
         .unwrap_or(-127);
 
     let name = props
@@ -188,11 +194,11 @@ async fn get_device_properties(
     Ok(props)
 }
 
-//fn print_props(props: &HashMap<String, OwnedValue>) {
-//    for (key, value) in props {
-//        println!("  {} => {:?}", key, value);
-//    }
-//}
+fn print_props(props: &HashMap<String, OwnedValue>) {
+    for (key, value) in props {
+        debug!("  {} => {:?}", key, value);
+    }
+}
 
 async fn try_start_discovery(conn: &Connection, adapter_index: u16) -> zbus::Result<()> {
     let adapter_path = format!("/org/bluez/hci{}", adapter_index);

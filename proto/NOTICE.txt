@@ -1,0 +1,19 @@
+The files in this directory are derived from the ESPHome project:
+
+  https://github.com/esphome/esphome
+
+Specifically, they are copied from:
+  https://github.com/esphome/esphome/tree/dev/esphome/components/api
+
+Files:
+  - api.proto
+  - api_options.proto
+
+Upstream branch: dev
+Upstream commit: 143bf694c79304ac597008e6a90b414df98c537d
+
+ESPHome is licensed under the GNU General Public License v3.0 (GPL-3.0).
+See: https://github.com/esphome/esphome/blob/dev/LICENSE
+
+These .proto files are used to generate compatible code for the ESPHome API.
+Their inclusion in this project is governed by the terms of the GPL.

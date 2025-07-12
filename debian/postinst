@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+
+SERVICE=linux-bt-proxy
+
+# Create a system user and group if it doesn't exist
+if ! id "$SERVICE" >/dev/null 2>&1; then
+    adduser --system --no-create-home --group "$SERVICE"
+fi
+
+# Enable the service (no harm if already enabled)
+systemctl enable "$SERVICE".service || true
+
+# Restart if the service is running (after upgrade)
+if systemctl is-active --quiet "$SERVICE".service; then
+    systemctl restart "$SERVICE".service
+else
+    systemctl start "$SERVICE".service
+fi
+
+exit 0
+

@@ -1,0 +1,16 @@
+[Unit]
+Description=Linux Bluetooth Advertisement Proxy for Home Assistant
+After=network.target bluetooth.service
+Requires=bluetooth.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/linux_bt_proxy
+Restart=on-failure
+RestartSec=5s
+User=linuxbtproxy
+Group=linuxbtproxy
+SupplementaryGroups=bluetooth
+
+[Install]
+WantedBy=multi-user.target

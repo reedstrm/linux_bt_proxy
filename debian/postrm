@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+SERVICE=linux-bt-proxy
+
+# Only stop and disable on actual remove, not upgrade
+if [ "$1" = "remove" ]; then
+    systemctl stop "$SERVICE".service || true
+    systemctl disable "$SERVICE".service || true
+fi
+
+exit 0

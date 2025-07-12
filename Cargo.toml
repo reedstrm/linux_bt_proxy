@@ -3,6 +3,25 @@ name = "linux_bt_proxy"
 version = "0.1.0"
 edition = "2021"
 build = "build.rs"
+authors = ["Ross Reedstrom <ross@reedstrom.org>"]
+description = "A Bluetooth advertisement proxy for Home Assistant using the ESPHome API"
+license = "GPL-3.0-or-later"
+
+[package.metadata.deb]
+name = "linux-bt-proxy"
+maintainer = "Ross Reedstrom <ross@reedstrom.org>"
+depends = "systemd"
+section = "utils"
+priority = "optional"
+assets = [
+    ["target/release/linux_bt_proxy", "usr/bin/", "755"],
+    ["systemd/linux-bt-proxy.service", "lib/systemd/system/", "644"]
+]
+maintainer-scripts = "debian"
+extended-description = """
+A Bluetooth advertisement proxy for Home Assistant using the ESPHome API.
+Runs as a daemon, forwarding BLE advertisements via TCP to Home Assistant.
+"""
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }

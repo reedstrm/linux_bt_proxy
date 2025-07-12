@@ -1117,6 +1117,304 @@ impl ::protobuf::reflect::ProtobufValue for DeviceInfoRequest {
     type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
 }
 
+// @@protoc_insertion_point(message:AreaInfo)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct AreaInfo {
+    // message fields
+    // @@protoc_insertion_point(field:AreaInfo.area_id)
+    pub area_id: u32,
+    // @@protoc_insertion_point(field:AreaInfo.name)
+    pub name: ::std::string::String,
+    // special fields
+    // @@protoc_insertion_point(special_field:AreaInfo.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a AreaInfo {
+    fn default() -> &'a AreaInfo {
+        <AreaInfo as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl AreaInfo {
+    pub fn new() -> AreaInfo {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "area_id",
+            |m: &AreaInfo| { &m.area_id },
+            |m: &mut AreaInfo| { &mut m.area_id },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "name",
+            |m: &AreaInfo| { &m.name },
+            |m: &mut AreaInfo| { &mut m.name },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<AreaInfo>(
+            "AreaInfo",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for AreaInfo {
+    const NAME: &'static str = "AreaInfo";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.area_id = is.read_uint32()?;
+                },
+                18 => {
+                    self.name = is.read_string()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if self.area_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(1, self.area_id);
+        }
+        if !self.name.is_empty() {
+            my_size += ::protobuf::rt::string_size(2, &self.name);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if self.area_id != 0 {
+            os.write_uint32(1, self.area_id)?;
+        }
+        if !self.name.is_empty() {
+            os.write_string(2, &self.name)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> AreaInfo {
+        AreaInfo::new()
+    }
+
+    fn clear(&mut self) {
+        self.area_id = 0;
+        self.name.clear();
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static AreaInfo {
+        static instance: AreaInfo = AreaInfo {
+            area_id: 0,
+            name: ::std::string::String::new(),
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for AreaInfo {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("AreaInfo").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for AreaInfo {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for AreaInfo {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
+// @@protoc_insertion_point(message:DeviceInfo)
+#[derive(PartialEq,Clone,Default,Debug)]
+pub struct DeviceInfo {
+    // message fields
+    // @@protoc_insertion_point(field:DeviceInfo.device_id)
+    pub device_id: u32,
+    // @@protoc_insertion_point(field:DeviceInfo.name)
+    pub name: ::std::string::String,
+    // @@protoc_insertion_point(field:DeviceInfo.area_id)
+    pub area_id: u32,
+    // special fields
+    // @@protoc_insertion_point(special_field:DeviceInfo.special_fields)
+    pub special_fields: ::protobuf::SpecialFields,
+}
+
+impl<'a> ::std::default::Default for &'a DeviceInfo {
+    fn default() -> &'a DeviceInfo {
+        <DeviceInfo as ::protobuf::Message>::default_instance()
+    }
+}
+
+impl DeviceInfo {
+    pub fn new() -> DeviceInfo {
+        ::std::default::Default::default()
+    }
+
+    fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
+        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut oneofs = ::std::vec::Vec::with_capacity(0);
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &DeviceInfo| { &m.device_id },
+            |m: &mut DeviceInfo| { &mut m.device_id },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "name",
+            |m: &DeviceInfo| { &m.name },
+            |m: &mut DeviceInfo| { &mut m.name },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "area_id",
+            |m: &DeviceInfo| { &m.area_id },
+            |m: &mut DeviceInfo| { &mut m.area_id },
+        ));
+        ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DeviceInfo>(
+            "DeviceInfo",
+            fields,
+            oneofs,
+        )
+    }
+}
+
+impl ::protobuf::Message for DeviceInfo {
+    const NAME: &'static str = "DeviceInfo";
+
+    fn is_initialized(&self) -> bool {
+        true
+    }
+
+    fn merge_from(&mut self, is: &mut ::protobuf::CodedInputStream<'_>) -> ::protobuf::Result<()> {
+        while let Some(tag) = is.read_raw_tag_or_eof()? {
+            match tag {
+                8 => {
+                    self.device_id = is.read_uint32()?;
+                },
+                18 => {
+                    self.name = is.read_string()?;
+                },
+                24 => {
+                    self.area_id = is.read_uint32()?;
+                },
+                tag => {
+                    ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
+                },
+            };
+        }
+        ::std::result::Result::Ok(())
+    }
+
+    // Compute sizes of nested messages
+    #[allow(unused_variables)]
+    fn compute_size(&self) -> u64 {
+        let mut my_size = 0;
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(1, self.device_id);
+        }
+        if !self.name.is_empty() {
+            my_size += ::protobuf::rt::string_size(2, &self.name);
+        }
+        if self.area_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.area_id);
+        }
+        my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
+        self.special_fields.cached_size().set(my_size as u32);
+        my_size
+    }
+
+    fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
+        if self.device_id != 0 {
+            os.write_uint32(1, self.device_id)?;
+        }
+        if !self.name.is_empty() {
+            os.write_string(2, &self.name)?;
+        }
+        if self.area_id != 0 {
+            os.write_uint32(3, self.area_id)?;
+        }
+        os.write_unknown_fields(self.special_fields.unknown_fields())?;
+        ::std::result::Result::Ok(())
+    }
+
+    fn special_fields(&self) -> &::protobuf::SpecialFields {
+        &self.special_fields
+    }
+
+    fn mut_special_fields(&mut self) -> &mut ::protobuf::SpecialFields {
+        &mut self.special_fields
+    }
+
+    fn new() -> DeviceInfo {
+        DeviceInfo::new()
+    }
+
+    fn clear(&mut self) {
+        self.device_id = 0;
+        self.name.clear();
+        self.area_id = 0;
+        self.special_fields.clear();
+    }
+
+    fn default_instance() -> &'static DeviceInfo {
+        static instance: DeviceInfo = DeviceInfo {
+            device_id: 0,
+            name: ::std::string::String::new(),
+            area_id: 0,
+            special_fields: ::protobuf::SpecialFields::new(),
+        };
+        &instance
+    }
+}
+
+impl ::protobuf::MessageFull for DeviceInfo {
+    fn descriptor() -> ::protobuf::reflect::MessageDescriptor {
+        static descriptor: ::protobuf::rt::Lazy<::protobuf::reflect::MessageDescriptor> = ::protobuf::rt::Lazy::new();
+        descriptor.get(|| file_descriptor().message_by_package_relative_name("DeviceInfo").unwrap()).clone()
+    }
+}
+
+impl ::std::fmt::Display for DeviceInfo {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        ::protobuf::text_format::fmt(self, f)
+    }
+}
+
+impl ::protobuf::reflect::ProtobufValue for DeviceInfo {
+    type RuntimeType = ::protobuf::reflect::rt::RuntimeTypeMessage<Self>;
+}
+
 // @@protoc_insertion_point(message:DeviceInfoResponse)
 #[derive(PartialEq,Clone,Default,Debug)]
 pub struct DeviceInfoResponse {
@@ -1159,6 +1457,12 @@ pub struct DeviceInfoResponse {
     pub bluetooth_mac_address: ::std::string::String,
     // @@protoc_insertion_point(field:DeviceInfoResponse.api_encryption_supported)
     pub api_encryption_supported: bool,
+    // @@protoc_insertion_point(field:DeviceInfoResponse.devices)
+    pub devices: ::std::vec::Vec<DeviceInfo>,
+    // @@protoc_insertion_point(field:DeviceInfoResponse.areas)
+    pub areas: ::std::vec::Vec<AreaInfo>,
+    // @@protoc_insertion_point(field:DeviceInfoResponse.area)
+    pub area: ::protobuf::MessageField<AreaInfo>,
     // special fields
     // @@protoc_insertion_point(special_field:DeviceInfoResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -1176,7 +1480,7 @@ impl DeviceInfoResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(19);
+        let mut fields = ::std::vec::Vec::with_capacity(22);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "uses_password",
@@ -1273,6 +1577,21 @@ impl DeviceInfoResponse {
             |m: &DeviceInfoResponse| { &m.api_encryption_supported },
             |m: &mut DeviceInfoResponse| { &mut m.api_encryption_supported },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "devices",
+            |m: &DeviceInfoResponse| { &m.devices },
+            |m: &mut DeviceInfoResponse| { &mut m.devices },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_vec_simpler_accessor::<_, _>(
+            "areas",
+            |m: &DeviceInfoResponse| { &m.areas },
+            |m: &mut DeviceInfoResponse| { &mut m.areas },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_message_field_accessor::<_, AreaInfo>(
+            "area",
+            |m: &DeviceInfoResponse| { &m.area },
+            |m: &mut DeviceInfoResponse| { &mut m.area },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DeviceInfoResponse>(
             "DeviceInfoResponse",
             fields,
@@ -1348,6 +1667,15 @@ impl ::protobuf::Message for DeviceInfoResponse {
                 152 => {
                     self.api_encryption_supported = is.read_bool()?;
                 },
+                162 => {
+                    self.devices.push(is.read_message()?);
+                },
+                170 => {
+                    self.areas.push(is.read_message()?);
+                },
+                178 => {
+                    ::protobuf::rt::read_singular_message_into_field(is, &mut self.area)?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -1417,6 +1745,18 @@ impl ::protobuf::Message for DeviceInfoResponse {
         if self.api_encryption_supported != false {
             my_size += 2 + 1;
         }
+        for value in &self.devices {
+            let len = value.compute_size();
+            my_size += 2 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        for value in &self.areas {
+            let len = value.compute_size();
+            my_size += 2 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        };
+        if let Some(v) = self.area.as_ref() {
+            let len = v.compute_size();
+            my_size += 2 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -1480,6 +1820,15 @@ impl ::protobuf::Message for DeviceInfoResponse {
         if self.api_encryption_supported != false {
             os.write_bool(19, self.api_encryption_supported)?;
         }
+        for v in &self.devices {
+            ::protobuf::rt::write_message_field_with_cached_size(20, v, os)?;
+        };
+        for v in &self.areas {
+            ::protobuf::rt::write_message_field_with_cached_size(21, v, os)?;
+        };
+        if let Some(v) = self.area.as_ref() {
+            ::protobuf::rt::write_message_field_with_cached_size(22, v, os)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -1516,6 +1865,9 @@ impl ::protobuf::Message for DeviceInfoResponse {
         self.suggested_area.clear();
         self.bluetooth_mac_address.clear();
         self.api_encryption_supported = false;
+        self.devices.clear();
+        self.areas.clear();
+        self.area.clear();
         self.special_fields.clear();
     }
 
@@ -1540,6 +1892,9 @@ impl ::protobuf::Message for DeviceInfoResponse {
             suggested_area: ::std::string::String::new(),
             bluetooth_mac_address: ::std::string::String::new(),
             api_encryption_supported: false,
+            devices: ::std::vec::Vec::new(),
+            areas: ::std::vec::Vec::new(),
+            area: ::protobuf::MessageField::none(),
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -1894,6 +2249,8 @@ pub struct ListEntitiesBinarySensorResponse {
     pub icon: ::std::string::String,
     // @@protoc_insertion_point(field:ListEntitiesBinarySensorResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesBinarySensorResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesBinarySensorResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -1911,7 +2268,7 @@ impl ListEntitiesBinarySensorResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -1958,6 +2315,11 @@ impl ListEntitiesBinarySensorResponse {
             |m: &ListEntitiesBinarySensorResponse| { &m.entity_category },
             |m: &mut ListEntitiesBinarySensorResponse| { &mut m.entity_category },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesBinarySensorResponse| { &m.device_id },
+            |m: &mut ListEntitiesBinarySensorResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesBinarySensorResponse>(
             "ListEntitiesBinarySensorResponse",
             fields,
@@ -2003,6 +2365,9 @@ impl ::protobuf::Message for ListEntitiesBinarySensorResponse {
                 72 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2042,6 +2407,9 @@ impl ::protobuf::Message for ListEntitiesBinarySensorResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(9, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2075,6 +2443,9 @@ impl ::protobuf::Message for ListEntitiesBinarySensorResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(9, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2101,6 +2472,7 @@ impl ::protobuf::Message for ListEntitiesBinarySensorResponse {
         self.disabled_by_default = false;
         self.icon.clear();
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -2115,6 +2487,7 @@ impl ::protobuf::Message for ListEntitiesBinarySensorResponse {
             disabled_by_default: false,
             icon: ::std::string::String::new(),
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2148,6 +2521,8 @@ pub struct BinarySensorStateResponse {
     pub state: bool,
     // @@protoc_insertion_point(field:BinarySensorStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:BinarySensorStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:BinarySensorStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -2165,7 +2540,7 @@ impl BinarySensorStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -2181,6 +2556,11 @@ impl BinarySensorStateResponse {
             "missing_state",
             |m: &BinarySensorStateResponse| { &m.missing_state },
             |m: &mut BinarySensorStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &BinarySensorStateResponse| { &m.device_id },
+            |m: &mut BinarySensorStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<BinarySensorStateResponse>(
             "BinarySensorStateResponse",
@@ -2209,6 +2589,9 @@ impl ::protobuf::Message for BinarySensorStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2230,6 +2613,9 @@ impl ::protobuf::Message for BinarySensorStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2244,6 +2630,9 @@ impl ::protobuf::Message for BinarySensorStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -2265,6 +2654,7 @@ impl ::protobuf::Message for BinarySensorStateResponse {
         self.key = 0;
         self.state = false;
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -2273,6 +2663,7 @@ impl ::protobuf::Message for BinarySensorStateResponse {
             key: 0,
             state: false,
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2324,6 +2715,8 @@ pub struct ListEntitiesCoverResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesCoverResponse.supports_stop)
     pub supports_stop: bool,
+    // @@protoc_insertion_point(field:ListEntitiesCoverResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesCoverResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -2341,7 +2734,7 @@ impl ListEntitiesCoverResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(12);
+        let mut fields = ::std::vec::Vec::with_capacity(13);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -2403,6 +2796,11 @@ impl ListEntitiesCoverResponse {
             |m: &ListEntitiesCoverResponse| { &m.supports_stop },
             |m: &mut ListEntitiesCoverResponse| { &mut m.supports_stop },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesCoverResponse| { &m.device_id },
+            |m: &mut ListEntitiesCoverResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesCoverResponse>(
             "ListEntitiesCoverResponse",
             fields,
@@ -2457,6 +2855,9 @@ impl ::protobuf::Message for ListEntitiesCoverResponse {
                 96 => {
                     self.supports_stop = is.read_bool()?;
                 },
+                104 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2505,6 +2906,9 @@ impl ::protobuf::Message for ListEntitiesCoverResponse {
         if self.supports_stop != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(13, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2547,6 +2951,9 @@ impl ::protobuf::Message for ListEntitiesCoverResponse {
         if self.supports_stop != false {
             os.write_bool(12, self.supports_stop)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(13, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -2576,6 +2983,7 @@ impl ::protobuf::Message for ListEntitiesCoverResponse {
         self.icon.clear();
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.supports_stop = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -2593,6 +3001,7 @@ impl ::protobuf::Message for ListEntitiesCoverResponse {
             icon: ::std::string::String::new(),
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             supports_stop: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2630,6 +3039,8 @@ pub struct CoverStateResponse {
     pub tilt: f32,
     // @@protoc_insertion_point(field:CoverStateResponse.current_operation)
     pub current_operation: ::protobuf::EnumOrUnknown<CoverOperation>,
+    // @@protoc_insertion_point(field:CoverStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:CoverStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -2647,7 +3058,7 @@ impl CoverStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(5);
+        let mut fields = ::std::vec::Vec::with_capacity(6);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -2673,6 +3084,11 @@ impl CoverStateResponse {
             "current_operation",
             |m: &CoverStateResponse| { &m.current_operation },
             |m: &mut CoverStateResponse| { &mut m.current_operation },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &CoverStateResponse| { &m.device_id },
+            |m: &mut CoverStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<CoverStateResponse>(
             "CoverStateResponse",
@@ -2707,6 +3123,9 @@ impl ::protobuf::Message for CoverStateResponse {
                 40 => {
                     self.current_operation = is.read_enum_or_unknown()?;
                 },
+                48 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2734,6 +3153,9 @@ impl ::protobuf::Message for CoverStateResponse {
         if self.current_operation != ::protobuf::EnumOrUnknown::new(CoverOperation::COVER_OPERATION_IDLE) {
             my_size += ::protobuf::rt::int32_size(5, self.current_operation.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(6, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2754,6 +3176,9 @@ impl ::protobuf::Message for CoverStateResponse {
         }
         if self.current_operation != ::protobuf::EnumOrUnknown::new(CoverOperation::COVER_OPERATION_IDLE) {
             os.write_enum(5, ::protobuf::EnumOrUnknown::value(&self.current_operation))?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(6, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -2777,6 +3202,7 @@ impl ::protobuf::Message for CoverStateResponse {
         self.position = 0.;
         self.tilt = 0.;
         self.current_operation = ::protobuf::EnumOrUnknown::new(CoverOperation::COVER_OPERATION_IDLE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -2787,6 +3213,7 @@ impl ::protobuf::Message for CoverStateResponse {
             position: 0.,
             tilt: 0.,
             current_operation: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -2830,6 +3257,8 @@ pub struct CoverCommandRequest {
     pub tilt: f32,
     // @@protoc_insertion_point(field:CoverCommandRequest.stop)
     pub stop: bool,
+    // @@protoc_insertion_point(field:CoverCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:CoverCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -2847,7 +3276,7 @@ impl CoverCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -2888,6 +3317,11 @@ impl CoverCommandRequest {
             "stop",
             |m: &CoverCommandRequest| { &m.stop },
             |m: &mut CoverCommandRequest| { &mut m.stop },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &CoverCommandRequest| { &m.device_id },
+            |m: &mut CoverCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<CoverCommandRequest>(
             "CoverCommandRequest",
@@ -2931,6 +3365,9 @@ impl ::protobuf::Message for CoverCommandRequest {
                 64 => {
                     self.stop = is.read_bool()?;
                 },
+                72 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -2967,6 +3404,9 @@ impl ::protobuf::Message for CoverCommandRequest {
         if self.stop != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(9, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -2997,6 +3437,9 @@ impl ::protobuf::Message for CoverCommandRequest {
         if self.stop != false {
             os.write_bool(8, self.stop)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(9, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3022,6 +3465,7 @@ impl ::protobuf::Message for CoverCommandRequest {
         self.has_tilt = false;
         self.tilt = 0.;
         self.stop = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -3035,6 +3479,7 @@ impl ::protobuf::Message for CoverCommandRequest {
             has_tilt: false,
             tilt: 0.,
             stop: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3086,6 +3531,8 @@ pub struct ListEntitiesFanResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesFanResponse.supported_preset_modes)
     pub supported_preset_modes: ::std::vec::Vec<::std::string::String>,
+    // @@protoc_insertion_point(field:ListEntitiesFanResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesFanResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -3103,7 +3550,7 @@ impl ListEntitiesFanResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(12);
+        let mut fields = ::std::vec::Vec::with_capacity(13);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -3165,6 +3612,11 @@ impl ListEntitiesFanResponse {
             |m: &ListEntitiesFanResponse| { &m.supported_preset_modes },
             |m: &mut ListEntitiesFanResponse| { &mut m.supported_preset_modes },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesFanResponse| { &m.device_id },
+            |m: &mut ListEntitiesFanResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesFanResponse>(
             "ListEntitiesFanResponse",
             fields,
@@ -3219,6 +3671,9 @@ impl ::protobuf::Message for ListEntitiesFanResponse {
                 98 => {
                     self.supported_preset_modes.push(is.read_string()?);
                 },
+                104 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -3267,6 +3722,9 @@ impl ::protobuf::Message for ListEntitiesFanResponse {
         for value in &self.supported_preset_modes {
             my_size += ::protobuf::rt::string_size(12, &value);
         };
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(13, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3309,6 +3767,9 @@ impl ::protobuf::Message for ListEntitiesFanResponse {
         for v in &self.supported_preset_modes {
             os.write_string(12, &v)?;
         };
+        if self.device_id != 0 {
+            os.write_uint32(13, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3338,6 +3799,7 @@ impl ::protobuf::Message for ListEntitiesFanResponse {
         self.icon.clear();
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.supported_preset_modes.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -3355,6 +3817,7 @@ impl ::protobuf::Message for ListEntitiesFanResponse {
             icon: ::std::string::String::new(),
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             supported_preset_modes: ::std::vec::Vec::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3396,6 +3859,8 @@ pub struct FanStateResponse {
     pub speed_level: i32,
     // @@protoc_insertion_point(field:FanStateResponse.preset_mode)
     pub preset_mode: ::std::string::String,
+    // @@protoc_insertion_point(field:FanStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:FanStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -3413,7 +3878,7 @@ impl FanStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut fields = ::std::vec::Vec::with_capacity(8);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -3449,6 +3914,11 @@ impl FanStateResponse {
             "preset_mode",
             |m: &FanStateResponse| { &m.preset_mode },
             |m: &mut FanStateResponse| { &mut m.preset_mode },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &FanStateResponse| { &m.device_id },
+            |m: &mut FanStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<FanStateResponse>(
             "FanStateResponse",
@@ -3489,6 +3959,9 @@ impl ::protobuf::Message for FanStateResponse {
                 58 => {
                     self.preset_mode = is.read_string()?;
                 },
+                64 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -3522,6 +3995,9 @@ impl ::protobuf::Message for FanStateResponse {
         if !self.preset_mode.is_empty() {
             my_size += ::protobuf::rt::string_size(7, &self.preset_mode);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(8, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3549,6 +4025,9 @@ impl ::protobuf::Message for FanStateResponse {
         if !self.preset_mode.is_empty() {
             os.write_string(7, &self.preset_mode)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(8, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3573,6 +4052,7 @@ impl ::protobuf::Message for FanStateResponse {
         self.direction = ::protobuf::EnumOrUnknown::new(FanDirection::FAN_DIRECTION_FORWARD);
         self.speed_level = 0;
         self.preset_mode.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -3585,6 +4065,7 @@ impl ::protobuf::Message for FanStateResponse {
             direction: ::protobuf::EnumOrUnknown::from_i32(0),
             speed_level: 0,
             preset_mode: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3638,6 +4119,8 @@ pub struct FanCommandRequest {
     pub has_preset_mode: bool,
     // @@protoc_insertion_point(field:FanCommandRequest.preset_mode)
     pub preset_mode: ::std::string::String,
+    // @@protoc_insertion_point(field:FanCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:FanCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -3655,7 +4138,7 @@ impl FanCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(13);
+        let mut fields = ::std::vec::Vec::with_capacity(14);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -3722,6 +4205,11 @@ impl FanCommandRequest {
             |m: &FanCommandRequest| { &m.preset_mode },
             |m: &mut FanCommandRequest| { &mut m.preset_mode },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &FanCommandRequest| { &m.device_id },
+            |m: &mut FanCommandRequest| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<FanCommandRequest>(
             "FanCommandRequest",
             fields,
@@ -3779,6 +4267,9 @@ impl ::protobuf::Message for FanCommandRequest {
                 106 => {
                     self.preset_mode = is.read_string()?;
                 },
+                112 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -3830,6 +4321,9 @@ impl ::protobuf::Message for FanCommandRequest {
         if !self.preset_mode.is_empty() {
             my_size += ::protobuf::rt::string_size(13, &self.preset_mode);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(14, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -3875,6 +4369,9 @@ impl ::protobuf::Message for FanCommandRequest {
         if !self.preset_mode.is_empty() {
             os.write_string(13, &self.preset_mode)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(14, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -3905,6 +4402,7 @@ impl ::protobuf::Message for FanCommandRequest {
         self.speed_level = 0;
         self.has_preset_mode = false;
         self.preset_mode.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -3923,6 +4421,7 @@ impl ::protobuf::Message for FanCommandRequest {
             speed_level: 0,
             has_preset_mode: false,
             preset_mode: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -3980,6 +4479,8 @@ pub struct ListEntitiesLightResponse {
     pub icon: ::std::string::String,
     // @@protoc_insertion_point(field:ListEntitiesLightResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesLightResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesLightResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -3997,7 +4498,7 @@ impl ListEntitiesLightResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(15);
+        let mut fields = ::std::vec::Vec::with_capacity(16);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -4074,6 +4575,11 @@ impl ListEntitiesLightResponse {
             |m: &ListEntitiesLightResponse| { &m.entity_category },
             |m: &mut ListEntitiesLightResponse| { &mut m.entity_category },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesLightResponse| { &m.device_id },
+            |m: &mut ListEntitiesLightResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesLightResponse>(
             "ListEntitiesLightResponse",
             fields,
@@ -4140,6 +4646,9 @@ impl ::protobuf::Message for ListEntitiesLightResponse {
                 120 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                128 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -4195,6 +4704,9 @@ impl ::protobuf::Message for ListEntitiesLightResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(15, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(16, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -4244,6 +4756,9 @@ impl ::protobuf::Message for ListEntitiesLightResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(15, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(16, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -4276,6 +4791,7 @@ impl ::protobuf::Message for ListEntitiesLightResponse {
         self.disabled_by_default = false;
         self.icon.clear();
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -4296,6 +4812,7 @@ impl ::protobuf::Message for ListEntitiesLightResponse {
             disabled_by_default: false,
             icon: ::std::string::String::new(),
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4349,6 +4866,8 @@ pub struct LightStateResponse {
     pub warm_white: f32,
     // @@protoc_insertion_point(field:LightStateResponse.effect)
     pub effect: ::std::string::String,
+    // @@protoc_insertion_point(field:LightStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:LightStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -4366,7 +4885,7 @@ impl LightStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(13);
+        let mut fields = ::std::vec::Vec::with_capacity(14);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -4433,6 +4952,11 @@ impl LightStateResponse {
             |m: &LightStateResponse| { &m.effect },
             |m: &mut LightStateResponse| { &mut m.effect },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &LightStateResponse| { &m.device_id },
+            |m: &mut LightStateResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LightStateResponse>(
             "LightStateResponse",
             fields,
@@ -4490,6 +5014,9 @@ impl ::protobuf::Message for LightStateResponse {
                 74 => {
                     self.effect = is.read_string()?;
                 },
+                112 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -4541,6 +5068,9 @@ impl ::protobuf::Message for LightStateResponse {
         if !self.effect.is_empty() {
             my_size += ::protobuf::rt::string_size(9, &self.effect);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(14, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -4586,6 +5116,9 @@ impl ::protobuf::Message for LightStateResponse {
         if !self.effect.is_empty() {
             os.write_string(9, &self.effect)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(14, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -4616,6 +5149,7 @@ impl ::protobuf::Message for LightStateResponse {
         self.cold_white = 0.;
         self.warm_white = 0.;
         self.effect.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -4634,6 +5168,7 @@ impl ::protobuf::Message for LightStateResponse {
             cold_white: 0.,
             warm_white: 0.,
             effect: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -4715,6 +5250,8 @@ pub struct LightCommandRequest {
     pub has_effect: bool,
     // @@protoc_insertion_point(field:LightCommandRequest.effect)
     pub effect: ::std::string::String,
+    // @@protoc_insertion_point(field:LightCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:LightCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -4732,7 +5269,7 @@ impl LightCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(27);
+        let mut fields = ::std::vec::Vec::with_capacity(28);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -4869,6 +5406,11 @@ impl LightCommandRequest {
             |m: &LightCommandRequest| { &m.effect },
             |m: &mut LightCommandRequest| { &mut m.effect },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &LightCommandRequest| { &m.device_id },
+            |m: &mut LightCommandRequest| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LightCommandRequest>(
             "LightCommandRequest",
             fields,
@@ -4968,6 +5510,9 @@ impl ::protobuf::Message for LightCommandRequest {
                 154 => {
                     self.effect = is.read_string()?;
                 },
+                224 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -5061,6 +5606,9 @@ impl ::protobuf::Message for LightCommandRequest {
         if !self.effect.is_empty() {
             my_size += ::protobuf::rt::string_size(19, &self.effect);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(28, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5148,6 +5696,9 @@ impl ::protobuf::Message for LightCommandRequest {
         if !self.effect.is_empty() {
             os.write_string(19, &self.effect)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(28, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -5192,6 +5743,7 @@ impl ::protobuf::Message for LightCommandRequest {
         self.flash_length = 0;
         self.has_effect = false;
         self.effect.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -5224,6 +5776,7 @@ impl ::protobuf::Message for LightCommandRequest {
             flash_length: 0,
             has_effect: false,
             effect: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -5277,6 +5830,8 @@ pub struct ListEntitiesSensorResponse {
     pub disabled_by_default: bool,
     // @@protoc_insertion_point(field:ListEntitiesSensorResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesSensorResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesSensorResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -5294,7 +5849,7 @@ impl ListEntitiesSensorResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(13);
+        let mut fields = ::std::vec::Vec::with_capacity(14);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -5361,6 +5916,11 @@ impl ListEntitiesSensorResponse {
             |m: &ListEntitiesSensorResponse| { &m.entity_category },
             |m: &mut ListEntitiesSensorResponse| { &mut m.entity_category },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesSensorResponse| { &m.device_id },
+            |m: &mut ListEntitiesSensorResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesSensorResponse>(
             "ListEntitiesSensorResponse",
             fields,
@@ -5418,6 +5978,9 @@ impl ::protobuf::Message for ListEntitiesSensorResponse {
                 104 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                112 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -5469,6 +6032,9 @@ impl ::protobuf::Message for ListEntitiesSensorResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(13, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(14, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5514,6 +6080,9 @@ impl ::protobuf::Message for ListEntitiesSensorResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(13, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(14, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -5544,6 +6113,7 @@ impl ::protobuf::Message for ListEntitiesSensorResponse {
         self.legacy_last_reset_type = ::protobuf::EnumOrUnknown::new(SensorLastResetType::LAST_RESET_NONE);
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -5562,6 +6132,7 @@ impl ::protobuf::Message for ListEntitiesSensorResponse {
             legacy_last_reset_type: ::protobuf::EnumOrUnknown::from_i32(0),
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -5595,6 +6166,8 @@ pub struct SensorStateResponse {
     pub state: f32,
     // @@protoc_insertion_point(field:SensorStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:SensorStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SensorStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -5612,7 +6185,7 @@ impl SensorStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -5628,6 +6201,11 @@ impl SensorStateResponse {
             "missing_state",
             |m: &SensorStateResponse| { &m.missing_state },
             |m: &mut SensorStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SensorStateResponse| { &m.device_id },
+            |m: &mut SensorStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SensorStateResponse>(
             "SensorStateResponse",
@@ -5656,6 +6234,9 @@ impl ::protobuf::Message for SensorStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -5677,6 +6258,9 @@ impl ::protobuf::Message for SensorStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5691,6 +6275,9 @@ impl ::protobuf::Message for SensorStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -5712,6 +6299,7 @@ impl ::protobuf::Message for SensorStateResponse {
         self.key = 0;
         self.state = 0.;
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -5720,6 +6308,7 @@ impl ::protobuf::Message for SensorStateResponse {
             key: 0,
             state: 0.,
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -5765,6 +6354,8 @@ pub struct ListEntitiesSwitchResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesSwitchResponse.device_class)
     pub device_class: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesSwitchResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesSwitchResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -5782,7 +6373,7 @@ impl ListEntitiesSwitchResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -5829,6 +6420,11 @@ impl ListEntitiesSwitchResponse {
             |m: &ListEntitiesSwitchResponse| { &m.device_class },
             |m: &mut ListEntitiesSwitchResponse| { &mut m.device_class },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesSwitchResponse| { &m.device_id },
+            |m: &mut ListEntitiesSwitchResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesSwitchResponse>(
             "ListEntitiesSwitchResponse",
             fields,
@@ -5874,6 +6470,9 @@ impl ::protobuf::Message for ListEntitiesSwitchResponse {
                 74 => {
                     self.device_class = is.read_string()?;
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -5913,6 +6512,9 @@ impl ::protobuf::Message for ListEntitiesSwitchResponse {
         if !self.device_class.is_empty() {
             my_size += ::protobuf::rt::string_size(9, &self.device_class);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -5946,6 +6548,9 @@ impl ::protobuf::Message for ListEntitiesSwitchResponse {
         if !self.device_class.is_empty() {
             os.write_string(9, &self.device_class)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -5972,6 +6577,7 @@ impl ::protobuf::Message for ListEntitiesSwitchResponse {
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.device_class.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -5986,6 +6592,7 @@ impl ::protobuf::Message for ListEntitiesSwitchResponse {
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -6017,6 +6624,8 @@ pub struct SwitchStateResponse {
     pub key: u32,
     // @@protoc_insertion_point(field:SwitchStateResponse.state)
     pub state: bool,
+    // @@protoc_insertion_point(field:SwitchStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SwitchStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -6034,7 +6643,7 @@ impl SwitchStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -6045,6 +6654,11 @@ impl SwitchStateResponse {
             "state",
             |m: &SwitchStateResponse| { &m.state },
             |m: &mut SwitchStateResponse| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SwitchStateResponse| { &m.device_id },
+            |m: &mut SwitchStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SwitchStateResponse>(
             "SwitchStateResponse",
@@ -6070,6 +6684,9 @@ impl ::protobuf::Message for SwitchStateResponse {
                 16 => {
                     self.state = is.read_bool()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -6088,6 +6705,9 @@ impl ::protobuf::Message for SwitchStateResponse {
         if self.state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -6099,6 +6719,9 @@ impl ::protobuf::Message for SwitchStateResponse {
         }
         if self.state != false {
             os.write_bool(2, self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -6119,6 +6742,7 @@ impl ::protobuf::Message for SwitchStateResponse {
     fn clear(&mut self) {
         self.key = 0;
         self.state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -6126,6 +6750,7 @@ impl ::protobuf::Message for SwitchStateResponse {
         static instance: SwitchStateResponse = SwitchStateResponse {
             key: 0,
             state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -6157,6 +6782,8 @@ pub struct SwitchCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:SwitchCommandRequest.state)
     pub state: bool,
+    // @@protoc_insertion_point(field:SwitchCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SwitchCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -6174,7 +6801,7 @@ impl SwitchCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -6185,6 +6812,11 @@ impl SwitchCommandRequest {
             "state",
             |m: &SwitchCommandRequest| { &m.state },
             |m: &mut SwitchCommandRequest| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SwitchCommandRequest| { &m.device_id },
+            |m: &mut SwitchCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SwitchCommandRequest>(
             "SwitchCommandRequest",
@@ -6210,6 +6842,9 @@ impl ::protobuf::Message for SwitchCommandRequest {
                 16 => {
                     self.state = is.read_bool()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -6228,6 +6863,9 @@ impl ::protobuf::Message for SwitchCommandRequest {
         if self.state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -6239,6 +6877,9 @@ impl ::protobuf::Message for SwitchCommandRequest {
         }
         if self.state != false {
             os.write_bool(2, self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -6259,6 +6900,7 @@ impl ::protobuf::Message for SwitchCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -6266,6 +6908,7 @@ impl ::protobuf::Message for SwitchCommandRequest {
         static instance: SwitchCommandRequest = SwitchCommandRequest {
             key: 0,
             state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -6309,6 +6952,8 @@ pub struct ListEntitiesTextSensorResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesTextSensorResponse.device_class)
     pub device_class: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesTextSensorResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesTextSensorResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -6326,7 +6971,7 @@ impl ListEntitiesTextSensorResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -6367,6 +7012,11 @@ impl ListEntitiesTextSensorResponse {
             "device_class",
             |m: &ListEntitiesTextSensorResponse| { &m.device_class },
             |m: &mut ListEntitiesTextSensorResponse| { &mut m.device_class },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesTextSensorResponse| { &m.device_id },
+            |m: &mut ListEntitiesTextSensorResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesTextSensorResponse>(
             "ListEntitiesTextSensorResponse",
@@ -6410,6 +7060,9 @@ impl ::protobuf::Message for ListEntitiesTextSensorResponse {
                 66 => {
                     self.device_class = is.read_string()?;
                 },
+                72 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -6446,6 +7099,9 @@ impl ::protobuf::Message for ListEntitiesTextSensorResponse {
         if !self.device_class.is_empty() {
             my_size += ::protobuf::rt::string_size(8, &self.device_class);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(9, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -6476,6 +7132,9 @@ impl ::protobuf::Message for ListEntitiesTextSensorResponse {
         if !self.device_class.is_empty() {
             os.write_string(8, &self.device_class)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(9, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -6501,6 +7160,7 @@ impl ::protobuf::Message for ListEntitiesTextSensorResponse {
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.device_class.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -6514,6 +7174,7 @@ impl ::protobuf::Message for ListEntitiesTextSensorResponse {
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -6547,6 +7208,8 @@ pub struct TextSensorStateResponse {
     pub state: ::std::string::String,
     // @@protoc_insertion_point(field:TextSensorStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:TextSensorStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:TextSensorStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -6564,7 +7227,7 @@ impl TextSensorStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -6580,6 +7243,11 @@ impl TextSensorStateResponse {
             "missing_state",
             |m: &TextSensorStateResponse| { &m.missing_state },
             |m: &mut TextSensorStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &TextSensorStateResponse| { &m.device_id },
+            |m: &mut TextSensorStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TextSensorStateResponse>(
             "TextSensorStateResponse",
@@ -6608,6 +7276,9 @@ impl ::protobuf::Message for TextSensorStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -6629,6 +7300,9 @@ impl ::protobuf::Message for TextSensorStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -6643,6 +7317,9 @@ impl ::protobuf::Message for TextSensorStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -6664,6 +7341,7 @@ impl ::protobuf::Message for TextSensorStateResponse {
         self.key = 0;
         self.state.clear();
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -6672,6 +7350,7 @@ impl ::protobuf::Message for TextSensorStateResponse {
             key: 0,
             state: ::std::string::String::new(),
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -9050,6 +9729,8 @@ pub struct ListEntitiesCameraResponse {
     pub icon: ::std::string::String,
     // @@protoc_insertion_point(field:ListEntitiesCameraResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesCameraResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesCameraResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -9067,7 +9748,7 @@ impl ListEntitiesCameraResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut fields = ::std::vec::Vec::with_capacity(8);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -9103,6 +9784,11 @@ impl ListEntitiesCameraResponse {
             "entity_category",
             |m: &ListEntitiesCameraResponse| { &m.entity_category },
             |m: &mut ListEntitiesCameraResponse| { &mut m.entity_category },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesCameraResponse| { &m.device_id },
+            |m: &mut ListEntitiesCameraResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesCameraResponse>(
             "ListEntitiesCameraResponse",
@@ -9143,6 +9829,9 @@ impl ::protobuf::Message for ListEntitiesCameraResponse {
                 56 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                64 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -9176,6 +9865,9 @@ impl ::protobuf::Message for ListEntitiesCameraResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(7, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(8, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -9203,6 +9895,9 @@ impl ::protobuf::Message for ListEntitiesCameraResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(8, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -9227,6 +9922,7 @@ impl ::protobuf::Message for ListEntitiesCameraResponse {
         self.disabled_by_default = false;
         self.icon.clear();
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -9239,6 +9935,7 @@ impl ::protobuf::Message for ListEntitiesCameraResponse {
             disabled_by_default: false,
             icon: ::std::string::String::new(),
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -9272,6 +9969,8 @@ pub struct CameraImageResponse {
     pub data: ::std::vec::Vec<u8>,
     // @@protoc_insertion_point(field:CameraImageResponse.done)
     pub done: bool,
+    // @@protoc_insertion_point(field:CameraImageResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:CameraImageResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -9289,7 +9988,7 @@ impl CameraImageResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -9305,6 +10004,11 @@ impl CameraImageResponse {
             "done",
             |m: &CameraImageResponse| { &m.done },
             |m: &mut CameraImageResponse| { &mut m.done },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &CameraImageResponse| { &m.device_id },
+            |m: &mut CameraImageResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<CameraImageResponse>(
             "CameraImageResponse",
@@ -9333,6 +10037,9 @@ impl ::protobuf::Message for CameraImageResponse {
                 24 => {
                     self.done = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -9354,6 +10061,9 @@ impl ::protobuf::Message for CameraImageResponse {
         if self.done != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -9368,6 +10078,9 @@ impl ::protobuf::Message for CameraImageResponse {
         }
         if self.done != false {
             os.write_bool(3, self.done)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -9389,6 +10102,7 @@ impl ::protobuf::Message for CameraImageResponse {
         self.key = 0;
         self.data.clear();
         self.done = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -9397,6 +10111,7 @@ impl ::protobuf::Message for CameraImageResponse {
             key: 0,
             data: ::std::vec::Vec::new(),
             done: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -9614,6 +10329,8 @@ pub struct ListEntitiesClimateResponse {
     pub visual_min_humidity: f32,
     // @@protoc_insertion_point(field:ListEntitiesClimateResponse.visual_max_humidity)
     pub visual_max_humidity: f32,
+    // @@protoc_insertion_point(field:ListEntitiesClimateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesClimateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -9631,7 +10348,7 @@ impl ListEntitiesClimateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(25);
+        let mut fields = ::std::vec::Vec::with_capacity(26);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -9758,6 +10475,11 @@ impl ListEntitiesClimateResponse {
             |m: &ListEntitiesClimateResponse| { &m.visual_max_humidity },
             |m: &mut ListEntitiesClimateResponse| { &mut m.visual_max_humidity },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesClimateResponse| { &m.device_id },
+            |m: &mut ListEntitiesClimateResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesClimateResponse>(
             "ListEntitiesClimateResponse",
             fields,
@@ -9863,6 +10585,9 @@ impl ::protobuf::Message for ListEntitiesClimateResponse {
                 205 => {
                     self.visual_max_humidity = is.read_float()?;
                 },
+                208 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -9942,6 +10667,9 @@ impl ::protobuf::Message for ListEntitiesClimateResponse {
         if self.visual_max_humidity != 0. {
             my_size += 2 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(26, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -10015,6 +10743,9 @@ impl ::protobuf::Message for ListEntitiesClimateResponse {
         if self.visual_max_humidity != 0. {
             os.write_float(25, self.visual_max_humidity)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(26, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -10057,6 +10788,7 @@ impl ::protobuf::Message for ListEntitiesClimateResponse {
         self.supports_target_humidity = false;
         self.visual_min_humidity = 0.;
         self.visual_max_humidity = 0.;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -10087,6 +10819,7 @@ impl ::protobuf::Message for ListEntitiesClimateResponse {
             supports_target_humidity: false,
             visual_min_humidity: 0.,
             visual_max_humidity: 0.,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -10144,6 +10877,8 @@ pub struct ClimateStateResponse {
     pub current_humidity: f32,
     // @@protoc_insertion_point(field:ClimateStateResponse.target_humidity)
     pub target_humidity: f32,
+    // @@protoc_insertion_point(field:ClimateStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ClimateStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -10161,7 +10896,7 @@ impl ClimateStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(15);
+        let mut fields = ::std::vec::Vec::with_capacity(16);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -10238,6 +10973,11 @@ impl ClimateStateResponse {
             |m: &ClimateStateResponse| { &m.target_humidity },
             |m: &mut ClimateStateResponse| { &mut m.target_humidity },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ClimateStateResponse| { &m.device_id },
+            |m: &mut ClimateStateResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClimateStateResponse>(
             "ClimateStateResponse",
             fields,
@@ -10301,6 +11041,9 @@ impl ::protobuf::Message for ClimateStateResponse {
                 125 => {
                     self.target_humidity = is.read_float()?;
                 },
+                128 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -10358,6 +11101,9 @@ impl ::protobuf::Message for ClimateStateResponse {
         if self.target_humidity != 0. {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(16, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -10409,6 +11155,9 @@ impl ::protobuf::Message for ClimateStateResponse {
         if self.target_humidity != 0. {
             os.write_float(15, self.target_humidity)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(16, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -10441,6 +11190,7 @@ impl ::protobuf::Message for ClimateStateResponse {
         self.custom_preset.clear();
         self.current_humidity = 0.;
         self.target_humidity = 0.;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -10461,6 +11211,7 @@ impl ::protobuf::Message for ClimateStateResponse {
             custom_preset: ::std::string::String::new(),
             current_humidity: 0.,
             target_humidity: 0.,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -10534,6 +11285,8 @@ pub struct ClimateCommandRequest {
     pub has_target_humidity: bool,
     // @@protoc_insertion_point(field:ClimateCommandRequest.target_humidity)
     pub target_humidity: f32,
+    // @@protoc_insertion_point(field:ClimateCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ClimateCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -10551,7 +11304,7 @@ impl ClimateCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(23);
+        let mut fields = ::std::vec::Vec::with_capacity(24);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -10668,6 +11421,11 @@ impl ClimateCommandRequest {
             |m: &ClimateCommandRequest| { &m.target_humidity },
             |m: &mut ClimateCommandRequest| { &mut m.target_humidity },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ClimateCommandRequest| { &m.device_id },
+            |m: &mut ClimateCommandRequest| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ClimateCommandRequest>(
             "ClimateCommandRequest",
             fields,
@@ -10755,6 +11513,9 @@ impl ::protobuf::Message for ClimateCommandRequest {
                 189 => {
                     self.target_humidity = is.read_float()?;
                 },
+                192 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -10836,6 +11597,9 @@ impl ::protobuf::Message for ClimateCommandRequest {
         if self.target_humidity != 0. {
             my_size += 2 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(24, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -10911,6 +11675,9 @@ impl ::protobuf::Message for ClimateCommandRequest {
         if self.target_humidity != 0. {
             os.write_float(23, self.target_humidity)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(24, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -10951,6 +11718,7 @@ impl ::protobuf::Message for ClimateCommandRequest {
         self.custom_preset.clear();
         self.has_target_humidity = false;
         self.target_humidity = 0.;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -10979,6 +11747,7 @@ impl ::protobuf::Message for ClimateCommandRequest {
             custom_preset: ::std::string::String::new(),
             has_target_humidity: false,
             target_humidity: 0.,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11032,6 +11801,8 @@ pub struct ListEntitiesNumberResponse {
     pub mode: ::protobuf::EnumOrUnknown<NumberMode>,
     // @@protoc_insertion_point(field:ListEntitiesNumberResponse.device_class)
     pub device_class: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesNumberResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesNumberResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11049,7 +11820,7 @@ impl ListEntitiesNumberResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(13);
+        let mut fields = ::std::vec::Vec::with_capacity(14);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -11116,6 +11887,11 @@ impl ListEntitiesNumberResponse {
             |m: &ListEntitiesNumberResponse| { &m.device_class },
             |m: &mut ListEntitiesNumberResponse| { &mut m.device_class },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesNumberResponse| { &m.device_id },
+            |m: &mut ListEntitiesNumberResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesNumberResponse>(
             "ListEntitiesNumberResponse",
             fields,
@@ -11173,6 +11949,9 @@ impl ::protobuf::Message for ListEntitiesNumberResponse {
                 106 => {
                     self.device_class = is.read_string()?;
                 },
+                112 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -11224,6 +12003,9 @@ impl ::protobuf::Message for ListEntitiesNumberResponse {
         if !self.device_class.is_empty() {
             my_size += ::protobuf::rt::string_size(13, &self.device_class);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(14, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11269,6 +12051,9 @@ impl ::protobuf::Message for ListEntitiesNumberResponse {
         if !self.device_class.is_empty() {
             os.write_string(13, &self.device_class)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(14, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -11299,6 +12084,7 @@ impl ::protobuf::Message for ListEntitiesNumberResponse {
         self.unit_of_measurement.clear();
         self.mode = ::protobuf::EnumOrUnknown::new(NumberMode::NUMBER_MODE_AUTO);
         self.device_class.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -11317,6 +12103,7 @@ impl ::protobuf::Message for ListEntitiesNumberResponse {
             unit_of_measurement: ::std::string::String::new(),
             mode: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11350,6 +12137,8 @@ pub struct NumberStateResponse {
     pub state: f32,
     // @@protoc_insertion_point(field:NumberStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:NumberStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:NumberStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11367,7 +12156,7 @@ impl NumberStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -11383,6 +12172,11 @@ impl NumberStateResponse {
             "missing_state",
             |m: &NumberStateResponse| { &m.missing_state },
             |m: &mut NumberStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &NumberStateResponse| { &m.device_id },
+            |m: &mut NumberStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<NumberStateResponse>(
             "NumberStateResponse",
@@ -11411,6 +12205,9 @@ impl ::protobuf::Message for NumberStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -11432,6 +12229,9 @@ impl ::protobuf::Message for NumberStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11446,6 +12246,9 @@ impl ::protobuf::Message for NumberStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -11467,6 +12270,7 @@ impl ::protobuf::Message for NumberStateResponse {
         self.key = 0;
         self.state = 0.;
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -11475,6 +12279,7 @@ impl ::protobuf::Message for NumberStateResponse {
             key: 0,
             state: 0.,
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11506,6 +12311,8 @@ pub struct NumberCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:NumberCommandRequest.state)
     pub state: f32,
+    // @@protoc_insertion_point(field:NumberCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:NumberCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11523,7 +12330,7 @@ impl NumberCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -11534,6 +12341,11 @@ impl NumberCommandRequest {
             "state",
             |m: &NumberCommandRequest| { &m.state },
             |m: &mut NumberCommandRequest| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &NumberCommandRequest| { &m.device_id },
+            |m: &mut NumberCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<NumberCommandRequest>(
             "NumberCommandRequest",
@@ -11559,6 +12371,9 @@ impl ::protobuf::Message for NumberCommandRequest {
                 21 => {
                     self.state = is.read_float()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -11577,6 +12392,9 @@ impl ::protobuf::Message for NumberCommandRequest {
         if self.state != 0. {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11588,6 +12406,9 @@ impl ::protobuf::Message for NumberCommandRequest {
         }
         if self.state != 0. {
             os.write_float(2, self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -11608,6 +12429,7 @@ impl ::protobuf::Message for NumberCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.state = 0.;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -11615,6 +12437,7 @@ impl ::protobuf::Message for NumberCommandRequest {
         static instance: NumberCommandRequest = NumberCommandRequest {
             key: 0,
             state: 0.,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11658,6 +12481,8 @@ pub struct ListEntitiesSelectResponse {
     pub disabled_by_default: bool,
     // @@protoc_insertion_point(field:ListEntitiesSelectResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesSelectResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesSelectResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11675,7 +12500,7 @@ impl ListEntitiesSelectResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -11716,6 +12541,11 @@ impl ListEntitiesSelectResponse {
             "entity_category",
             |m: &ListEntitiesSelectResponse| { &m.entity_category },
             |m: &mut ListEntitiesSelectResponse| { &mut m.entity_category },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesSelectResponse| { &m.device_id },
+            |m: &mut ListEntitiesSelectResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesSelectResponse>(
             "ListEntitiesSelectResponse",
@@ -11759,6 +12589,9 @@ impl ::protobuf::Message for ListEntitiesSelectResponse {
                 64 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                72 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -11795,6 +12628,9 @@ impl ::protobuf::Message for ListEntitiesSelectResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(8, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(9, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11825,6 +12661,9 @@ impl ::protobuf::Message for ListEntitiesSelectResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(8, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(9, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -11850,6 +12689,7 @@ impl ::protobuf::Message for ListEntitiesSelectResponse {
         self.options.clear();
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -11863,6 +12703,7 @@ impl ::protobuf::Message for ListEntitiesSelectResponse {
             options: ::std::vec::Vec::new(),
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -11896,6 +12737,8 @@ pub struct SelectStateResponse {
     pub state: ::std::string::String,
     // @@protoc_insertion_point(field:SelectStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:SelectStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SelectStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -11913,7 +12756,7 @@ impl SelectStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -11929,6 +12772,11 @@ impl SelectStateResponse {
             "missing_state",
             |m: &SelectStateResponse| { &m.missing_state },
             |m: &mut SelectStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SelectStateResponse| { &m.device_id },
+            |m: &mut SelectStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SelectStateResponse>(
             "SelectStateResponse",
@@ -11957,6 +12805,9 @@ impl ::protobuf::Message for SelectStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -11978,6 +12829,9 @@ impl ::protobuf::Message for SelectStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -11992,6 +12846,9 @@ impl ::protobuf::Message for SelectStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -12013,6 +12870,7 @@ impl ::protobuf::Message for SelectStateResponse {
         self.key = 0;
         self.state.clear();
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -12021,6 +12879,7 @@ impl ::protobuf::Message for SelectStateResponse {
             key: 0,
             state: ::std::string::String::new(),
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -12052,6 +12911,8 @@ pub struct SelectCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:SelectCommandRequest.state)
     pub state: ::std::string::String,
+    // @@protoc_insertion_point(field:SelectCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SelectCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -12069,7 +12930,7 @@ impl SelectCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -12080,6 +12941,11 @@ impl SelectCommandRequest {
             "state",
             |m: &SelectCommandRequest| { &m.state },
             |m: &mut SelectCommandRequest| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SelectCommandRequest| { &m.device_id },
+            |m: &mut SelectCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SelectCommandRequest>(
             "SelectCommandRequest",
@@ -12105,6 +12971,9 @@ impl ::protobuf::Message for SelectCommandRequest {
                 18 => {
                     self.state = is.read_string()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -12123,6 +12992,9 @@ impl ::protobuf::Message for SelectCommandRequest {
         if !self.state.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.state);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -12134,6 +13006,9 @@ impl ::protobuf::Message for SelectCommandRequest {
         }
         if !self.state.is_empty() {
             os.write_string(2, &self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -12154,6 +13029,7 @@ impl ::protobuf::Message for SelectCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.state.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -12161,6 +13037,7 @@ impl ::protobuf::Message for SelectCommandRequest {
         static instance: SelectCommandRequest = SelectCommandRequest {
             key: 0,
             state: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -12208,6 +13085,8 @@ pub struct ListEntitiesSirenResponse {
     pub supports_volume: bool,
     // @@protoc_insertion_point(field:ListEntitiesSirenResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesSirenResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesSirenResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -12225,7 +13104,7 @@ impl ListEntitiesSirenResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(10);
+        let mut fields = ::std::vec::Vec::with_capacity(11);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -12277,6 +13156,11 @@ impl ListEntitiesSirenResponse {
             |m: &ListEntitiesSirenResponse| { &m.entity_category },
             |m: &mut ListEntitiesSirenResponse| { &mut m.entity_category },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesSirenResponse| { &m.device_id },
+            |m: &mut ListEntitiesSirenResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesSirenResponse>(
             "ListEntitiesSirenResponse",
             fields,
@@ -12325,6 +13209,9 @@ impl ::protobuf::Message for ListEntitiesSirenResponse {
                 80 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                88 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -12367,6 +13254,9 @@ impl ::protobuf::Message for ListEntitiesSirenResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(10, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(11, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -12403,6 +13293,9 @@ impl ::protobuf::Message for ListEntitiesSirenResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(10, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(11, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -12430,6 +13323,7 @@ impl ::protobuf::Message for ListEntitiesSirenResponse {
         self.supports_duration = false;
         self.supports_volume = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -12445,6 +13339,7 @@ impl ::protobuf::Message for ListEntitiesSirenResponse {
             supports_duration: false,
             supports_volume: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -12476,6 +13371,8 @@ pub struct SirenStateResponse {
     pub key: u32,
     // @@protoc_insertion_point(field:SirenStateResponse.state)
     pub state: bool,
+    // @@protoc_insertion_point(field:SirenStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SirenStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -12493,7 +13390,7 @@ impl SirenStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -12504,6 +13401,11 @@ impl SirenStateResponse {
             "state",
             |m: &SirenStateResponse| { &m.state },
             |m: &mut SirenStateResponse| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SirenStateResponse| { &m.device_id },
+            |m: &mut SirenStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SirenStateResponse>(
             "SirenStateResponse",
@@ -12529,6 +13431,9 @@ impl ::protobuf::Message for SirenStateResponse {
                 16 => {
                     self.state = is.read_bool()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -12547,6 +13452,9 @@ impl ::protobuf::Message for SirenStateResponse {
         if self.state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -12558,6 +13466,9 @@ impl ::protobuf::Message for SirenStateResponse {
         }
         if self.state != false {
             os.write_bool(2, self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -12578,6 +13489,7 @@ impl ::protobuf::Message for SirenStateResponse {
     fn clear(&mut self) {
         self.key = 0;
         self.state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -12585,6 +13497,7 @@ impl ::protobuf::Message for SirenStateResponse {
         static instance: SirenStateResponse = SirenStateResponse {
             key: 0,
             state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -12630,6 +13543,8 @@ pub struct SirenCommandRequest {
     pub has_volume: bool,
     // @@protoc_insertion_point(field:SirenCommandRequest.volume)
     pub volume: f32,
+    // @@protoc_insertion_point(field:SirenCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:SirenCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -12647,7 +13562,7 @@ impl SirenCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -12694,6 +13609,11 @@ impl SirenCommandRequest {
             |m: &SirenCommandRequest| { &m.volume },
             |m: &mut SirenCommandRequest| { &mut m.volume },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &SirenCommandRequest| { &m.device_id },
+            |m: &mut SirenCommandRequest| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<SirenCommandRequest>(
             "SirenCommandRequest",
             fields,
@@ -12739,6 +13659,9 @@ impl ::protobuf::Message for SirenCommandRequest {
                 77 => {
                     self.volume = is.read_float()?;
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -12778,6 +13701,9 @@ impl ::protobuf::Message for SirenCommandRequest {
         if self.volume != 0. {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -12811,6 +13737,9 @@ impl ::protobuf::Message for SirenCommandRequest {
         if self.volume != 0. {
             os.write_float(9, self.volume)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -12837,6 +13766,7 @@ impl ::protobuf::Message for SirenCommandRequest {
         self.duration = 0;
         self.has_volume = false;
         self.volume = 0.;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -12851,6 +13781,7 @@ impl ::protobuf::Message for SirenCommandRequest {
             duration: 0,
             has_volume: false,
             volume: 0.,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -12900,6 +13831,8 @@ pub struct ListEntitiesLockResponse {
     pub requires_code: bool,
     // @@protoc_insertion_point(field:ListEntitiesLockResponse.code_format)
     pub code_format: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesLockResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesLockResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -12917,7 +13850,7 @@ impl ListEntitiesLockResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(11);
+        let mut fields = ::std::vec::Vec::with_capacity(12);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -12974,6 +13907,11 @@ impl ListEntitiesLockResponse {
             |m: &ListEntitiesLockResponse| { &m.code_format },
             |m: &mut ListEntitiesLockResponse| { &mut m.code_format },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesLockResponse| { &m.device_id },
+            |m: &mut ListEntitiesLockResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesLockResponse>(
             "ListEntitiesLockResponse",
             fields,
@@ -13025,6 +13963,9 @@ impl ::protobuf::Message for ListEntitiesLockResponse {
                 90 => {
                     self.code_format = is.read_string()?;
                 },
+                96 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -13070,6 +14011,9 @@ impl ::protobuf::Message for ListEntitiesLockResponse {
         if !self.code_format.is_empty() {
             my_size += ::protobuf::rt::string_size(11, &self.code_format);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(12, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13109,6 +14053,9 @@ impl ::protobuf::Message for ListEntitiesLockResponse {
         if !self.code_format.is_empty() {
             os.write_string(11, &self.code_format)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(12, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -13137,6 +14084,7 @@ impl ::protobuf::Message for ListEntitiesLockResponse {
         self.supports_open = false;
         self.requires_code = false;
         self.code_format.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -13153,6 +14101,7 @@ impl ::protobuf::Message for ListEntitiesLockResponse {
             supports_open: false,
             requires_code: false,
             code_format: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -13184,6 +14133,8 @@ pub struct LockStateResponse {
     pub key: u32,
     // @@protoc_insertion_point(field:LockStateResponse.state)
     pub state: ::protobuf::EnumOrUnknown<LockState>,
+    // @@protoc_insertion_point(field:LockStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:LockStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -13201,7 +14152,7 @@ impl LockStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -13212,6 +14163,11 @@ impl LockStateResponse {
             "state",
             |m: &LockStateResponse| { &m.state },
             |m: &mut LockStateResponse| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &LockStateResponse| { &m.device_id },
+            |m: &mut LockStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LockStateResponse>(
             "LockStateResponse",
@@ -13237,6 +14193,9 @@ impl ::protobuf::Message for LockStateResponse {
                 16 => {
                     self.state = is.read_enum_or_unknown()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -13255,6 +14214,9 @@ impl ::protobuf::Message for LockStateResponse {
         if self.state != ::protobuf::EnumOrUnknown::new(LockState::LOCK_STATE_NONE) {
             my_size += ::protobuf::rt::int32_size(2, self.state.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13266,6 +14228,9 @@ impl ::protobuf::Message for LockStateResponse {
         }
         if self.state != ::protobuf::EnumOrUnknown::new(LockState::LOCK_STATE_NONE) {
             os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.state))?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -13286,6 +14251,7 @@ impl ::protobuf::Message for LockStateResponse {
     fn clear(&mut self) {
         self.key = 0;
         self.state = ::protobuf::EnumOrUnknown::new(LockState::LOCK_STATE_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -13293,6 +14259,7 @@ impl ::protobuf::Message for LockStateResponse {
         static instance: LockStateResponse = LockStateResponse {
             key: 0,
             state: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -13328,6 +14295,8 @@ pub struct LockCommandRequest {
     pub has_code: bool,
     // @@protoc_insertion_point(field:LockCommandRequest.code)
     pub code: ::std::string::String,
+    // @@protoc_insertion_point(field:LockCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:LockCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -13345,7 +14314,7 @@ impl LockCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut fields = ::std::vec::Vec::with_capacity(5);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -13366,6 +14335,11 @@ impl LockCommandRequest {
             "code",
             |m: &LockCommandRequest| { &m.code },
             |m: &mut LockCommandRequest| { &mut m.code },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &LockCommandRequest| { &m.device_id },
+            |m: &mut LockCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<LockCommandRequest>(
             "LockCommandRequest",
@@ -13397,6 +14371,9 @@ impl ::protobuf::Message for LockCommandRequest {
                 34 => {
                     self.code = is.read_string()?;
                 },
+                40 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -13421,6 +14398,9 @@ impl ::protobuf::Message for LockCommandRequest {
         if !self.code.is_empty() {
             my_size += ::protobuf::rt::string_size(4, &self.code);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(5, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13438,6 +14418,9 @@ impl ::protobuf::Message for LockCommandRequest {
         }
         if !self.code.is_empty() {
             os.write_string(4, &self.code)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(5, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -13460,6 +14443,7 @@ impl ::protobuf::Message for LockCommandRequest {
         self.command = ::protobuf::EnumOrUnknown::new(LockCommand::LOCK_UNLOCK);
         self.has_code = false;
         self.code.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -13469,6 +14453,7 @@ impl ::protobuf::Message for LockCommandRequest {
             command: ::protobuf::EnumOrUnknown::from_i32(0),
             has_code: false,
             code: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -13512,6 +14497,8 @@ pub struct ListEntitiesButtonResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesButtonResponse.device_class)
     pub device_class: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesButtonResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesButtonResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -13529,7 +14516,7 @@ impl ListEntitiesButtonResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -13570,6 +14557,11 @@ impl ListEntitiesButtonResponse {
             "device_class",
             |m: &ListEntitiesButtonResponse| { &m.device_class },
             |m: &mut ListEntitiesButtonResponse| { &mut m.device_class },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesButtonResponse| { &m.device_id },
+            |m: &mut ListEntitiesButtonResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesButtonResponse>(
             "ListEntitiesButtonResponse",
@@ -13613,6 +14605,9 @@ impl ::protobuf::Message for ListEntitiesButtonResponse {
                 66 => {
                     self.device_class = is.read_string()?;
                 },
+                72 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -13649,6 +14644,9 @@ impl ::protobuf::Message for ListEntitiesButtonResponse {
         if !self.device_class.is_empty() {
             my_size += ::protobuf::rt::string_size(8, &self.device_class);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(9, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13679,6 +14677,9 @@ impl ::protobuf::Message for ListEntitiesButtonResponse {
         if !self.device_class.is_empty() {
             os.write_string(8, &self.device_class)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(9, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -13704,6 +14705,7 @@ impl ::protobuf::Message for ListEntitiesButtonResponse {
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.device_class.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -13717,6 +14719,7 @@ impl ::protobuf::Message for ListEntitiesButtonResponse {
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -13746,6 +14749,8 @@ pub struct ButtonCommandRequest {
     // message fields
     // @@protoc_insertion_point(field:ButtonCommandRequest.key)
     pub key: u32,
+    // @@protoc_insertion_point(field:ButtonCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ButtonCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -13763,12 +14768,17 @@ impl ButtonCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(1);
+        let mut fields = ::std::vec::Vec::with_capacity(2);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
             |m: &ButtonCommandRequest| { &m.key },
             |m: &mut ButtonCommandRequest| { &mut m.key },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ButtonCommandRequest| { &m.device_id },
+            |m: &mut ButtonCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ButtonCommandRequest>(
             "ButtonCommandRequest",
@@ -13791,6 +14801,9 @@ impl ::protobuf::Message for ButtonCommandRequest {
                 13 => {
                     self.key = is.read_fixed32()?;
                 },
+                16 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -13806,6 +14819,9 @@ impl ::protobuf::Message for ButtonCommandRequest {
         if self.key != 0 {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(2, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -13814,6 +14830,9 @@ impl ::protobuf::Message for ButtonCommandRequest {
     fn write_to_with_cached_sizes(&self, os: &mut ::protobuf::CodedOutputStream<'_>) -> ::protobuf::Result<()> {
         if self.key != 0 {
             os.write_fixed32(1, self.key)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(2, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -13833,12 +14852,14 @@ impl ::protobuf::Message for ButtonCommandRequest {
 
     fn clear(&mut self) {
         self.key = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
     fn default_instance() -> &'static ButtonCommandRequest {
         static instance: ButtonCommandRequest = ButtonCommandRequest {
             key: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -14078,6 +15099,8 @@ pub struct ListEntitiesMediaPlayerResponse {
     pub supports_pause: bool,
     // @@protoc_insertion_point(field:ListEntitiesMediaPlayerResponse.supported_formats)
     pub supported_formats: ::std::vec::Vec<MediaPlayerSupportedFormat>,
+    // @@protoc_insertion_point(field:ListEntitiesMediaPlayerResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesMediaPlayerResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -14095,7 +15118,7 @@ impl ListEntitiesMediaPlayerResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -14142,6 +15165,11 @@ impl ListEntitiesMediaPlayerResponse {
             |m: &ListEntitiesMediaPlayerResponse| { &m.supported_formats },
             |m: &mut ListEntitiesMediaPlayerResponse| { &mut m.supported_formats },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesMediaPlayerResponse| { &m.device_id },
+            |m: &mut ListEntitiesMediaPlayerResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesMediaPlayerResponse>(
             "ListEntitiesMediaPlayerResponse",
             fields,
@@ -14187,6 +15215,9 @@ impl ::protobuf::Message for ListEntitiesMediaPlayerResponse {
                 74 => {
                     self.supported_formats.push(is.read_message()?);
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -14227,6 +15258,9 @@ impl ::protobuf::Message for ListEntitiesMediaPlayerResponse {
             let len = value.compute_size();
             my_size += 1 + ::protobuf::rt::compute_raw_varint64_size(len) + len;
         };
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -14260,6 +15294,9 @@ impl ::protobuf::Message for ListEntitiesMediaPlayerResponse {
         for v in &self.supported_formats {
             ::protobuf::rt::write_message_field_with_cached_size(9, v, os)?;
         };
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -14286,6 +15323,7 @@ impl ::protobuf::Message for ListEntitiesMediaPlayerResponse {
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.supports_pause = false;
         self.supported_formats.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -14300,6 +15338,7 @@ impl ::protobuf::Message for ListEntitiesMediaPlayerResponse {
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             supports_pause: false,
             supported_formats: ::std::vec::Vec::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -14335,6 +15374,8 @@ pub struct MediaPlayerStateResponse {
     pub volume: f32,
     // @@protoc_insertion_point(field:MediaPlayerStateResponse.muted)
     pub muted: bool,
+    // @@protoc_insertion_point(field:MediaPlayerStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:MediaPlayerStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -14352,7 +15393,7 @@ impl MediaPlayerStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut fields = ::std::vec::Vec::with_capacity(5);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -14373,6 +15414,11 @@ impl MediaPlayerStateResponse {
             "muted",
             |m: &MediaPlayerStateResponse| { &m.muted },
             |m: &mut MediaPlayerStateResponse| { &mut m.muted },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &MediaPlayerStateResponse| { &m.device_id },
+            |m: &mut MediaPlayerStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<MediaPlayerStateResponse>(
             "MediaPlayerStateResponse",
@@ -14404,6 +15450,9 @@ impl ::protobuf::Message for MediaPlayerStateResponse {
                 32 => {
                     self.muted = is.read_bool()?;
                 },
+                40 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -14428,6 +15477,9 @@ impl ::protobuf::Message for MediaPlayerStateResponse {
         if self.muted != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(5, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -14445,6 +15497,9 @@ impl ::protobuf::Message for MediaPlayerStateResponse {
         }
         if self.muted != false {
             os.write_bool(4, self.muted)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(5, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -14467,6 +15522,7 @@ impl ::protobuf::Message for MediaPlayerStateResponse {
         self.state = ::protobuf::EnumOrUnknown::new(MediaPlayerState::MEDIA_PLAYER_STATE_NONE);
         self.volume = 0.;
         self.muted = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -14476,6 +15532,7 @@ impl ::protobuf::Message for MediaPlayerStateResponse {
             state: ::protobuf::EnumOrUnknown::from_i32(0),
             volume: 0.,
             muted: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -14521,6 +15578,8 @@ pub struct MediaPlayerCommandRequest {
     pub has_announcement: bool,
     // @@protoc_insertion_point(field:MediaPlayerCommandRequest.announcement)
     pub announcement: bool,
+    // @@protoc_insertion_point(field:MediaPlayerCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:MediaPlayerCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -14538,7 +15597,7 @@ impl MediaPlayerCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -14585,6 +15644,11 @@ impl MediaPlayerCommandRequest {
             |m: &MediaPlayerCommandRequest| { &m.announcement },
             |m: &mut MediaPlayerCommandRequest| { &mut m.announcement },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &MediaPlayerCommandRequest| { &m.device_id },
+            |m: &mut MediaPlayerCommandRequest| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<MediaPlayerCommandRequest>(
             "MediaPlayerCommandRequest",
             fields,
@@ -14630,6 +15694,9 @@ impl ::protobuf::Message for MediaPlayerCommandRequest {
                 72 => {
                     self.announcement = is.read_bool()?;
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -14669,6 +15736,9 @@ impl ::protobuf::Message for MediaPlayerCommandRequest {
         if self.announcement != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -14702,6 +15772,9 @@ impl ::protobuf::Message for MediaPlayerCommandRequest {
         if self.announcement != false {
             os.write_bool(9, self.announcement)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -14728,6 +15801,7 @@ impl ::protobuf::Message for MediaPlayerCommandRequest {
         self.media_url.clear();
         self.has_announcement = false;
         self.announcement = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -14742,6 +15816,7 @@ impl ::protobuf::Message for MediaPlayerCommandRequest {
             media_url: ::std::string::String::new(),
             has_announcement: false,
             announcement: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -21540,6 +22615,8 @@ pub struct ListEntitiesAlarmControlPanelResponse {
     pub requires_code: bool,
     // @@protoc_insertion_point(field:ListEntitiesAlarmControlPanelResponse.requires_code_to_arm)
     pub requires_code_to_arm: bool,
+    // @@protoc_insertion_point(field:ListEntitiesAlarmControlPanelResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesAlarmControlPanelResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -21557,7 +22634,7 @@ impl ListEntitiesAlarmControlPanelResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(10);
+        let mut fields = ::std::vec::Vec::with_capacity(11);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -21609,6 +22686,11 @@ impl ListEntitiesAlarmControlPanelResponse {
             |m: &ListEntitiesAlarmControlPanelResponse| { &m.requires_code_to_arm },
             |m: &mut ListEntitiesAlarmControlPanelResponse| { &mut m.requires_code_to_arm },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesAlarmControlPanelResponse| { &m.device_id },
+            |m: &mut ListEntitiesAlarmControlPanelResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesAlarmControlPanelResponse>(
             "ListEntitiesAlarmControlPanelResponse",
             fields,
@@ -21657,6 +22739,9 @@ impl ::protobuf::Message for ListEntitiesAlarmControlPanelResponse {
                 80 => {
                     self.requires_code_to_arm = is.read_bool()?;
                 },
+                88 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -21699,6 +22784,9 @@ impl ::protobuf::Message for ListEntitiesAlarmControlPanelResponse {
         if self.requires_code_to_arm != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(11, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -21735,6 +22823,9 @@ impl ::protobuf::Message for ListEntitiesAlarmControlPanelResponse {
         if self.requires_code_to_arm != false {
             os.write_bool(10, self.requires_code_to_arm)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(11, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -21762,6 +22853,7 @@ impl ::protobuf::Message for ListEntitiesAlarmControlPanelResponse {
         self.supported_features = 0;
         self.requires_code = false;
         self.requires_code_to_arm = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -21777,6 +22869,7 @@ impl ::protobuf::Message for ListEntitiesAlarmControlPanelResponse {
             supported_features: 0,
             requires_code: false,
             requires_code_to_arm: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -21808,6 +22901,8 @@ pub struct AlarmControlPanelStateResponse {
     pub key: u32,
     // @@protoc_insertion_point(field:AlarmControlPanelStateResponse.state)
     pub state: ::protobuf::EnumOrUnknown<AlarmControlPanelState>,
+    // @@protoc_insertion_point(field:AlarmControlPanelStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:AlarmControlPanelStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -21825,7 +22920,7 @@ impl AlarmControlPanelStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -21836,6 +22931,11 @@ impl AlarmControlPanelStateResponse {
             "state",
             |m: &AlarmControlPanelStateResponse| { &m.state },
             |m: &mut AlarmControlPanelStateResponse| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &AlarmControlPanelStateResponse| { &m.device_id },
+            |m: &mut AlarmControlPanelStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<AlarmControlPanelStateResponse>(
             "AlarmControlPanelStateResponse",
@@ -21861,6 +22961,9 @@ impl ::protobuf::Message for AlarmControlPanelStateResponse {
                 16 => {
                     self.state = is.read_enum_or_unknown()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -21879,6 +22982,9 @@ impl ::protobuf::Message for AlarmControlPanelStateResponse {
         if self.state != ::protobuf::EnumOrUnknown::new(AlarmControlPanelState::ALARM_STATE_DISARMED) {
             my_size += ::protobuf::rt::int32_size(2, self.state.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -21890,6 +22996,9 @@ impl ::protobuf::Message for AlarmControlPanelStateResponse {
         }
         if self.state != ::protobuf::EnumOrUnknown::new(AlarmControlPanelState::ALARM_STATE_DISARMED) {
             os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.state))?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -21910,6 +23019,7 @@ impl ::protobuf::Message for AlarmControlPanelStateResponse {
     fn clear(&mut self) {
         self.key = 0;
         self.state = ::protobuf::EnumOrUnknown::new(AlarmControlPanelState::ALARM_STATE_DISARMED);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -21917,6 +23027,7 @@ impl ::protobuf::Message for AlarmControlPanelStateResponse {
         static instance: AlarmControlPanelStateResponse = AlarmControlPanelStateResponse {
             key: 0,
             state: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -21950,6 +23061,8 @@ pub struct AlarmControlPanelCommandRequest {
     pub command: ::protobuf::EnumOrUnknown<AlarmControlPanelStateCommand>,
     // @@protoc_insertion_point(field:AlarmControlPanelCommandRequest.code)
     pub code: ::std::string::String,
+    // @@protoc_insertion_point(field:AlarmControlPanelCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:AlarmControlPanelCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -21967,7 +23080,7 @@ impl AlarmControlPanelCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -21983,6 +23096,11 @@ impl AlarmControlPanelCommandRequest {
             "code",
             |m: &AlarmControlPanelCommandRequest| { &m.code },
             |m: &mut AlarmControlPanelCommandRequest| { &mut m.code },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &AlarmControlPanelCommandRequest| { &m.device_id },
+            |m: &mut AlarmControlPanelCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<AlarmControlPanelCommandRequest>(
             "AlarmControlPanelCommandRequest",
@@ -22011,6 +23129,9 @@ impl ::protobuf::Message for AlarmControlPanelCommandRequest {
                 26 => {
                     self.code = is.read_string()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -22032,6 +23153,9 @@ impl ::protobuf::Message for AlarmControlPanelCommandRequest {
         if !self.code.is_empty() {
             my_size += ::protobuf::rt::string_size(3, &self.code);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -22046,6 +23170,9 @@ impl ::protobuf::Message for AlarmControlPanelCommandRequest {
         }
         if !self.code.is_empty() {
             os.write_string(3, &self.code)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -22067,6 +23194,7 @@ impl ::protobuf::Message for AlarmControlPanelCommandRequest {
         self.key = 0;
         self.command = ::protobuf::EnumOrUnknown::new(AlarmControlPanelStateCommand::ALARM_CONTROL_PANEL_DISARM);
         self.code.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -22075,6 +23203,7 @@ impl ::protobuf::Message for AlarmControlPanelCommandRequest {
             key: 0,
             command: ::protobuf::EnumOrUnknown::from_i32(0),
             code: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -22124,6 +23253,8 @@ pub struct ListEntitiesTextResponse {
     pub pattern: ::std::string::String,
     // @@protoc_insertion_point(field:ListEntitiesTextResponse.mode)
     pub mode: ::protobuf::EnumOrUnknown<TextMode>,
+    // @@protoc_insertion_point(field:ListEntitiesTextResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesTextResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -22141,7 +23272,7 @@ impl ListEntitiesTextResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(11);
+        let mut fields = ::std::vec::Vec::with_capacity(12);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -22198,6 +23329,11 @@ impl ListEntitiesTextResponse {
             |m: &ListEntitiesTextResponse| { &m.mode },
             |m: &mut ListEntitiesTextResponse| { &mut m.mode },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesTextResponse| { &m.device_id },
+            |m: &mut ListEntitiesTextResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesTextResponse>(
             "ListEntitiesTextResponse",
             fields,
@@ -22249,6 +23385,9 @@ impl ::protobuf::Message for ListEntitiesTextResponse {
                 88 => {
                     self.mode = is.read_enum_or_unknown()?;
                 },
+                96 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -22294,6 +23433,9 @@ impl ::protobuf::Message for ListEntitiesTextResponse {
         if self.mode != ::protobuf::EnumOrUnknown::new(TextMode::TEXT_MODE_TEXT) {
             my_size += ::protobuf::rt::int32_size(11, self.mode.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(12, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -22333,6 +23475,9 @@ impl ::protobuf::Message for ListEntitiesTextResponse {
         if self.mode != ::protobuf::EnumOrUnknown::new(TextMode::TEXT_MODE_TEXT) {
             os.write_enum(11, ::protobuf::EnumOrUnknown::value(&self.mode))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(12, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -22361,6 +23506,7 @@ impl ::protobuf::Message for ListEntitiesTextResponse {
         self.max_length = 0;
         self.pattern.clear();
         self.mode = ::protobuf::EnumOrUnknown::new(TextMode::TEXT_MODE_TEXT);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -22377,6 +23523,7 @@ impl ::protobuf::Message for ListEntitiesTextResponse {
             max_length: 0,
             pattern: ::std::string::String::new(),
             mode: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -22410,6 +23557,8 @@ pub struct TextStateResponse {
     pub state: ::std::string::String,
     // @@protoc_insertion_point(field:TextStateResponse.missing_state)
     pub missing_state: bool,
+    // @@protoc_insertion_point(field:TextStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:TextStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -22427,7 +23576,7 @@ impl TextStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -22443,6 +23592,11 @@ impl TextStateResponse {
             "missing_state",
             |m: &TextStateResponse| { &m.missing_state },
             |m: &mut TextStateResponse| { &mut m.missing_state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &TextStateResponse| { &m.device_id },
+            |m: &mut TextStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TextStateResponse>(
             "TextStateResponse",
@@ -22471,6 +23625,9 @@ impl ::protobuf::Message for TextStateResponse {
                 24 => {
                     self.missing_state = is.read_bool()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -22492,6 +23649,9 @@ impl ::protobuf::Message for TextStateResponse {
         if self.missing_state != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -22506,6 +23666,9 @@ impl ::protobuf::Message for TextStateResponse {
         }
         if self.missing_state != false {
             os.write_bool(3, self.missing_state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -22527,6 +23690,7 @@ impl ::protobuf::Message for TextStateResponse {
         self.key = 0;
         self.state.clear();
         self.missing_state = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -22535,6 +23699,7 @@ impl ::protobuf::Message for TextStateResponse {
             key: 0,
             state: ::std::string::String::new(),
             missing_state: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -22566,6 +23731,8 @@ pub struct TextCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:TextCommandRequest.state)
     pub state: ::std::string::String,
+    // @@protoc_insertion_point(field:TextCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:TextCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -22583,7 +23750,7 @@ impl TextCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -22594,6 +23761,11 @@ impl TextCommandRequest {
             "state",
             |m: &TextCommandRequest| { &m.state },
             |m: &mut TextCommandRequest| { &mut m.state },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &TextCommandRequest| { &m.device_id },
+            |m: &mut TextCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TextCommandRequest>(
             "TextCommandRequest",
@@ -22619,6 +23791,9 @@ impl ::protobuf::Message for TextCommandRequest {
                 18 => {
                     self.state = is.read_string()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -22637,6 +23812,9 @@ impl ::protobuf::Message for TextCommandRequest {
         if !self.state.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.state);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -22648,6 +23826,9 @@ impl ::protobuf::Message for TextCommandRequest {
         }
         if !self.state.is_empty() {
             os.write_string(2, &self.state)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -22668,6 +23849,7 @@ impl ::protobuf::Message for TextCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.state.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -22675,6 +23857,7 @@ impl ::protobuf::Message for TextCommandRequest {
         static instance: TextCommandRequest = TextCommandRequest {
             key: 0,
             state: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -22716,6 +23899,8 @@ pub struct ListEntitiesDateResponse {
     pub disabled_by_default: bool,
     // @@protoc_insertion_point(field:ListEntitiesDateResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesDateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesDateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -22733,7 +23918,7 @@ impl ListEntitiesDateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut fields = ::std::vec::Vec::with_capacity(8);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -22769,6 +23954,11 @@ impl ListEntitiesDateResponse {
             "entity_category",
             |m: &ListEntitiesDateResponse| { &m.entity_category },
             |m: &mut ListEntitiesDateResponse| { &mut m.entity_category },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesDateResponse| { &m.device_id },
+            |m: &mut ListEntitiesDateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesDateResponse>(
             "ListEntitiesDateResponse",
@@ -22809,6 +23999,9 @@ impl ::protobuf::Message for ListEntitiesDateResponse {
                 56 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                64 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -22842,6 +24035,9 @@ impl ::protobuf::Message for ListEntitiesDateResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(7, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(8, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -22869,6 +24065,9 @@ impl ::protobuf::Message for ListEntitiesDateResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(8, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -22893,6 +24092,7 @@ impl ::protobuf::Message for ListEntitiesDateResponse {
         self.icon.clear();
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -22905,6 +24105,7 @@ impl ::protobuf::Message for ListEntitiesDateResponse {
             icon: ::std::string::String::new(),
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -22942,6 +24143,8 @@ pub struct DateStateResponse {
     pub month: u32,
     // @@protoc_insertion_point(field:DateStateResponse.day)
     pub day: u32,
+    // @@protoc_insertion_point(field:DateStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:DateStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -22959,7 +24162,7 @@ impl DateStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(5);
+        let mut fields = ::std::vec::Vec::with_capacity(6);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -22985,6 +24188,11 @@ impl DateStateResponse {
             "day",
             |m: &DateStateResponse| { &m.day },
             |m: &mut DateStateResponse| { &mut m.day },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &DateStateResponse| { &m.device_id },
+            |m: &mut DateStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DateStateResponse>(
             "DateStateResponse",
@@ -23019,6 +24227,9 @@ impl ::protobuf::Message for DateStateResponse {
                 40 => {
                     self.day = is.read_uint32()?;
                 },
+                48 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -23046,6 +24257,9 @@ impl ::protobuf::Message for DateStateResponse {
         if self.day != 0 {
             my_size += ::protobuf::rt::uint32_size(5, self.day);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(6, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -23066,6 +24280,9 @@ impl ::protobuf::Message for DateStateResponse {
         }
         if self.day != 0 {
             os.write_uint32(5, self.day)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(6, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -23089,6 +24306,7 @@ impl ::protobuf::Message for DateStateResponse {
         self.year = 0;
         self.month = 0;
         self.day = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -23099,6 +24317,7 @@ impl ::protobuf::Message for DateStateResponse {
             year: 0,
             month: 0,
             day: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -23134,6 +24353,8 @@ pub struct DateCommandRequest {
     pub month: u32,
     // @@protoc_insertion_point(field:DateCommandRequest.day)
     pub day: u32,
+    // @@protoc_insertion_point(field:DateCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:DateCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -23151,7 +24372,7 @@ impl DateCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut fields = ::std::vec::Vec::with_capacity(5);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -23172,6 +24393,11 @@ impl DateCommandRequest {
             "day",
             |m: &DateCommandRequest| { &m.day },
             |m: &mut DateCommandRequest| { &mut m.day },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &DateCommandRequest| { &m.device_id },
+            |m: &mut DateCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DateCommandRequest>(
             "DateCommandRequest",
@@ -23203,6 +24429,9 @@ impl ::protobuf::Message for DateCommandRequest {
                 32 => {
                     self.day = is.read_uint32()?;
                 },
+                40 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -23227,6 +24456,9 @@ impl ::protobuf::Message for DateCommandRequest {
         if self.day != 0 {
             my_size += ::protobuf::rt::uint32_size(4, self.day);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(5, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -23244,6 +24476,9 @@ impl ::protobuf::Message for DateCommandRequest {
         }
         if self.day != 0 {
             os.write_uint32(4, self.day)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(5, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -23266,6 +24501,7 @@ impl ::protobuf::Message for DateCommandRequest {
         self.year = 0;
         self.month = 0;
         self.day = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -23275,6 +24511,7 @@ impl ::protobuf::Message for DateCommandRequest {
             year: 0,
             month: 0,
             day: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -23316,6 +24553,8 @@ pub struct ListEntitiesTimeResponse {
     pub disabled_by_default: bool,
     // @@protoc_insertion_point(field:ListEntitiesTimeResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesTimeResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesTimeResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -23333,7 +24572,7 @@ impl ListEntitiesTimeResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut fields = ::std::vec::Vec::with_capacity(8);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -23369,6 +24608,11 @@ impl ListEntitiesTimeResponse {
             "entity_category",
             |m: &ListEntitiesTimeResponse| { &m.entity_category },
             |m: &mut ListEntitiesTimeResponse| { &mut m.entity_category },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesTimeResponse| { &m.device_id },
+            |m: &mut ListEntitiesTimeResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesTimeResponse>(
             "ListEntitiesTimeResponse",
@@ -23409,6 +24653,9 @@ impl ::protobuf::Message for ListEntitiesTimeResponse {
                 56 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                64 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -23442,6 +24689,9 @@ impl ::protobuf::Message for ListEntitiesTimeResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(7, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(8, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -23469,6 +24719,9 @@ impl ::protobuf::Message for ListEntitiesTimeResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(8, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -23493,6 +24746,7 @@ impl ::protobuf::Message for ListEntitiesTimeResponse {
         self.icon.clear();
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -23505,6 +24759,7 @@ impl ::protobuf::Message for ListEntitiesTimeResponse {
             icon: ::std::string::String::new(),
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -23542,6 +24797,8 @@ pub struct TimeStateResponse {
     pub minute: u32,
     // @@protoc_insertion_point(field:TimeStateResponse.second)
     pub second: u32,
+    // @@protoc_insertion_point(field:TimeStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:TimeStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -23559,7 +24816,7 @@ impl TimeStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(5);
+        let mut fields = ::std::vec::Vec::with_capacity(6);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -23585,6 +24842,11 @@ impl TimeStateResponse {
             "second",
             |m: &TimeStateResponse| { &m.second },
             |m: &mut TimeStateResponse| { &mut m.second },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &TimeStateResponse| { &m.device_id },
+            |m: &mut TimeStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TimeStateResponse>(
             "TimeStateResponse",
@@ -23619,6 +24881,9 @@ impl ::protobuf::Message for TimeStateResponse {
                 40 => {
                     self.second = is.read_uint32()?;
                 },
+                48 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -23646,6 +24911,9 @@ impl ::protobuf::Message for TimeStateResponse {
         if self.second != 0 {
             my_size += ::protobuf::rt::uint32_size(5, self.second);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(6, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -23666,6 +24934,9 @@ impl ::protobuf::Message for TimeStateResponse {
         }
         if self.second != 0 {
             os.write_uint32(5, self.second)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(6, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -23689,6 +24960,7 @@ impl ::protobuf::Message for TimeStateResponse {
         self.hour = 0;
         self.minute = 0;
         self.second = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -23699,6 +24971,7 @@ impl ::protobuf::Message for TimeStateResponse {
             hour: 0,
             minute: 0,
             second: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -23734,6 +25007,8 @@ pub struct TimeCommandRequest {
     pub minute: u32,
     // @@protoc_insertion_point(field:TimeCommandRequest.second)
     pub second: u32,
+    // @@protoc_insertion_point(field:TimeCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:TimeCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -23751,7 +25026,7 @@ impl TimeCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut fields = ::std::vec::Vec::with_capacity(5);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -23772,6 +25047,11 @@ impl TimeCommandRequest {
             "second",
             |m: &TimeCommandRequest| { &m.second },
             |m: &mut TimeCommandRequest| { &mut m.second },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &TimeCommandRequest| { &m.device_id },
+            |m: &mut TimeCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<TimeCommandRequest>(
             "TimeCommandRequest",
@@ -23803,6 +25083,9 @@ impl ::protobuf::Message for TimeCommandRequest {
                 32 => {
                     self.second = is.read_uint32()?;
                 },
+                40 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -23827,6 +25110,9 @@ impl ::protobuf::Message for TimeCommandRequest {
         if self.second != 0 {
             my_size += ::protobuf::rt::uint32_size(4, self.second);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(5, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -23844,6 +25130,9 @@ impl ::protobuf::Message for TimeCommandRequest {
         }
         if self.second != 0 {
             os.write_uint32(4, self.second)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(5, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -23866,6 +25155,7 @@ impl ::protobuf::Message for TimeCommandRequest {
         self.hour = 0;
         self.minute = 0;
         self.second = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -23875,6 +25165,7 @@ impl ::protobuf::Message for TimeCommandRequest {
             hour: 0,
             minute: 0,
             second: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -23920,6 +25211,8 @@ pub struct ListEntitiesEventResponse {
     pub device_class: ::std::string::String,
     // @@protoc_insertion_point(field:ListEntitiesEventResponse.event_types)
     pub event_types: ::std::vec::Vec<::std::string::String>,
+    // @@protoc_insertion_point(field:ListEntitiesEventResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesEventResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -23937,7 +25230,7 @@ impl ListEntitiesEventResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(9);
+        let mut fields = ::std::vec::Vec::with_capacity(10);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -23984,6 +25277,11 @@ impl ListEntitiesEventResponse {
             |m: &ListEntitiesEventResponse| { &m.event_types },
             |m: &mut ListEntitiesEventResponse| { &mut m.event_types },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesEventResponse| { &m.device_id },
+            |m: &mut ListEntitiesEventResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesEventResponse>(
             "ListEntitiesEventResponse",
             fields,
@@ -24029,6 +25327,9 @@ impl ::protobuf::Message for ListEntitiesEventResponse {
                 74 => {
                     self.event_types.push(is.read_string()?);
                 },
+                80 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -24068,6 +25369,9 @@ impl ::protobuf::Message for ListEntitiesEventResponse {
         for value in &self.event_types {
             my_size += ::protobuf::rt::string_size(9, &value);
         };
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(10, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -24101,6 +25405,9 @@ impl ::protobuf::Message for ListEntitiesEventResponse {
         for v in &self.event_types {
             os.write_string(9, &v)?;
         };
+        if self.device_id != 0 {
+            os.write_uint32(10, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -24127,6 +25434,7 @@ impl ::protobuf::Message for ListEntitiesEventResponse {
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.device_class.clear();
         self.event_types.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -24141,6 +25449,7 @@ impl ::protobuf::Message for ListEntitiesEventResponse {
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
             event_types: ::std::vec::Vec::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -24172,6 +25481,8 @@ pub struct EventResponse {
     pub key: u32,
     // @@protoc_insertion_point(field:EventResponse.event_type)
     pub event_type: ::std::string::String,
+    // @@protoc_insertion_point(field:EventResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:EventResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -24189,7 +25500,7 @@ impl EventResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -24200,6 +25511,11 @@ impl EventResponse {
             "event_type",
             |m: &EventResponse| { &m.event_type },
             |m: &mut EventResponse| { &mut m.event_type },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &EventResponse| { &m.device_id },
+            |m: &mut EventResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<EventResponse>(
             "EventResponse",
@@ -24225,6 +25541,9 @@ impl ::protobuf::Message for EventResponse {
                 18 => {
                     self.event_type = is.read_string()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -24243,6 +25562,9 @@ impl ::protobuf::Message for EventResponse {
         if !self.event_type.is_empty() {
             my_size += ::protobuf::rt::string_size(2, &self.event_type);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -24254,6 +25576,9 @@ impl ::protobuf::Message for EventResponse {
         }
         if !self.event_type.is_empty() {
             os.write_string(2, &self.event_type)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -24274,6 +25599,7 @@ impl ::protobuf::Message for EventResponse {
     fn clear(&mut self) {
         self.key = 0;
         self.event_type.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -24281,6 +25607,7 @@ impl ::protobuf::Message for EventResponse {
         static instance: EventResponse = EventResponse {
             key: 0,
             event_type: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -24330,6 +25657,8 @@ pub struct ListEntitiesValveResponse {
     pub supports_position: bool,
     // @@protoc_insertion_point(field:ListEntitiesValveResponse.supports_stop)
     pub supports_stop: bool,
+    // @@protoc_insertion_point(field:ListEntitiesValveResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesValveResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -24347,7 +25676,7 @@ impl ListEntitiesValveResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(11);
+        let mut fields = ::std::vec::Vec::with_capacity(12);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -24404,6 +25733,11 @@ impl ListEntitiesValveResponse {
             |m: &ListEntitiesValveResponse| { &m.supports_stop },
             |m: &mut ListEntitiesValveResponse| { &mut m.supports_stop },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesValveResponse| { &m.device_id },
+            |m: &mut ListEntitiesValveResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesValveResponse>(
             "ListEntitiesValveResponse",
             fields,
@@ -24455,6 +25789,9 @@ impl ::protobuf::Message for ListEntitiesValveResponse {
                 88 => {
                     self.supports_stop = is.read_bool()?;
                 },
+                96 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -24500,6 +25837,9 @@ impl ::protobuf::Message for ListEntitiesValveResponse {
         if self.supports_stop != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(12, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -24539,6 +25879,9 @@ impl ::protobuf::Message for ListEntitiesValveResponse {
         if self.supports_stop != false {
             os.write_bool(11, self.supports_stop)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(12, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -24567,6 +25910,7 @@ impl ::protobuf::Message for ListEntitiesValveResponse {
         self.assumed_state = false;
         self.supports_position = false;
         self.supports_stop = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -24583,6 +25927,7 @@ impl ::protobuf::Message for ListEntitiesValveResponse {
             assumed_state: false,
             supports_position: false,
             supports_stop: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -24616,6 +25961,8 @@ pub struct ValveStateResponse {
     pub position: f32,
     // @@protoc_insertion_point(field:ValveStateResponse.current_operation)
     pub current_operation: ::protobuf::EnumOrUnknown<ValveOperation>,
+    // @@protoc_insertion_point(field:ValveStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ValveStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -24633,7 +25980,7 @@ impl ValveStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -24649,6 +25996,11 @@ impl ValveStateResponse {
             "current_operation",
             |m: &ValveStateResponse| { &m.current_operation },
             |m: &mut ValveStateResponse| { &mut m.current_operation },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ValveStateResponse| { &m.device_id },
+            |m: &mut ValveStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ValveStateResponse>(
             "ValveStateResponse",
@@ -24677,6 +26029,9 @@ impl ::protobuf::Message for ValveStateResponse {
                 24 => {
                     self.current_operation = is.read_enum_or_unknown()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -24698,6 +26053,9 @@ impl ::protobuf::Message for ValveStateResponse {
         if self.current_operation != ::protobuf::EnumOrUnknown::new(ValveOperation::VALVE_OPERATION_IDLE) {
             my_size += ::protobuf::rt::int32_size(3, self.current_operation.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -24712,6 +26070,9 @@ impl ::protobuf::Message for ValveStateResponse {
         }
         if self.current_operation != ::protobuf::EnumOrUnknown::new(ValveOperation::VALVE_OPERATION_IDLE) {
             os.write_enum(3, ::protobuf::EnumOrUnknown::value(&self.current_operation))?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -24733,6 +26094,7 @@ impl ::protobuf::Message for ValveStateResponse {
         self.key = 0;
         self.position = 0.;
         self.current_operation = ::protobuf::EnumOrUnknown::new(ValveOperation::VALVE_OPERATION_IDLE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -24741,6 +26103,7 @@ impl ::protobuf::Message for ValveStateResponse {
             key: 0,
             position: 0.,
             current_operation: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -24776,6 +26139,8 @@ pub struct ValveCommandRequest {
     pub position: f32,
     // @@protoc_insertion_point(field:ValveCommandRequest.stop)
     pub stop: bool,
+    // @@protoc_insertion_point(field:ValveCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ValveCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -24793,7 +26158,7 @@ impl ValveCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(4);
+        let mut fields = ::std::vec::Vec::with_capacity(5);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -24814,6 +26179,11 @@ impl ValveCommandRequest {
             "stop",
             |m: &ValveCommandRequest| { &m.stop },
             |m: &mut ValveCommandRequest| { &mut m.stop },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ValveCommandRequest| { &m.device_id },
+            |m: &mut ValveCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ValveCommandRequest>(
             "ValveCommandRequest",
@@ -24845,6 +26215,9 @@ impl ::protobuf::Message for ValveCommandRequest {
                 32 => {
                     self.stop = is.read_bool()?;
                 },
+                40 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -24869,6 +26242,9 @@ impl ::protobuf::Message for ValveCommandRequest {
         if self.stop != false {
             my_size += 1 + 1;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(5, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -24886,6 +26262,9 @@ impl ::protobuf::Message for ValveCommandRequest {
         }
         if self.stop != false {
             os.write_bool(4, self.stop)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(5, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -24908,6 +26287,7 @@ impl ::protobuf::Message for ValveCommandRequest {
         self.has_position = false;
         self.position = 0.;
         self.stop = false;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -24917,6 +26297,7 @@ impl ::protobuf::Message for ValveCommandRequest {
             has_position: false,
             position: 0.,
             stop: false,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -24958,6 +26339,8 @@ pub struct ListEntitiesDateTimeResponse {
     pub disabled_by_default: bool,
     // @@protoc_insertion_point(field:ListEntitiesDateTimeResponse.entity_category)
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
+    // @@protoc_insertion_point(field:ListEntitiesDateTimeResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesDateTimeResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -24975,7 +26358,7 @@ impl ListEntitiesDateTimeResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(7);
+        let mut fields = ::std::vec::Vec::with_capacity(8);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -25011,6 +26394,11 @@ impl ListEntitiesDateTimeResponse {
             "entity_category",
             |m: &ListEntitiesDateTimeResponse| { &m.entity_category },
             |m: &mut ListEntitiesDateTimeResponse| { &mut m.entity_category },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesDateTimeResponse| { &m.device_id },
+            |m: &mut ListEntitiesDateTimeResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesDateTimeResponse>(
             "ListEntitiesDateTimeResponse",
@@ -25051,6 +26439,9 @@ impl ::protobuf::Message for ListEntitiesDateTimeResponse {
                 56 => {
                     self.entity_category = is.read_enum_or_unknown()?;
                 },
+                64 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -25084,6 +26475,9 @@ impl ::protobuf::Message for ListEntitiesDateTimeResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             my_size += ::protobuf::rt::int32_size(7, self.entity_category.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(8, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -25111,6 +26505,9 @@ impl ::protobuf::Message for ListEntitiesDateTimeResponse {
         if self.entity_category != ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE) {
             os.write_enum(7, ::protobuf::EnumOrUnknown::value(&self.entity_category))?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(8, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -25135,6 +26532,7 @@ impl ::protobuf::Message for ListEntitiesDateTimeResponse {
         self.icon.clear();
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -25147,6 +26545,7 @@ impl ::protobuf::Message for ListEntitiesDateTimeResponse {
             icon: ::std::string::String::new(),
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -25180,6 +26579,8 @@ pub struct DateTimeStateResponse {
     pub missing_state: bool,
     // @@protoc_insertion_point(field:DateTimeStateResponse.epoch_seconds)
     pub epoch_seconds: u32,
+    // @@protoc_insertion_point(field:DateTimeStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:DateTimeStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -25197,7 +26598,7 @@ impl DateTimeStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(3);
+        let mut fields = ::std::vec::Vec::with_capacity(4);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -25213,6 +26614,11 @@ impl DateTimeStateResponse {
             "epoch_seconds",
             |m: &DateTimeStateResponse| { &m.epoch_seconds },
             |m: &mut DateTimeStateResponse| { &mut m.epoch_seconds },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &DateTimeStateResponse| { &m.device_id },
+            |m: &mut DateTimeStateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DateTimeStateResponse>(
             "DateTimeStateResponse",
@@ -25241,6 +26647,9 @@ impl ::protobuf::Message for DateTimeStateResponse {
                 29 => {
                     self.epoch_seconds = is.read_fixed32()?;
                 },
+                32 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -25262,6 +26671,9 @@ impl ::protobuf::Message for DateTimeStateResponse {
         if self.epoch_seconds != 0 {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(4, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -25276,6 +26688,9 @@ impl ::protobuf::Message for DateTimeStateResponse {
         }
         if self.epoch_seconds != 0 {
             os.write_fixed32(3, self.epoch_seconds)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(4, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -25297,6 +26712,7 @@ impl ::protobuf::Message for DateTimeStateResponse {
         self.key = 0;
         self.missing_state = false;
         self.epoch_seconds = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -25305,6 +26721,7 @@ impl ::protobuf::Message for DateTimeStateResponse {
             key: 0,
             missing_state: false,
             epoch_seconds: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -25336,6 +26753,8 @@ pub struct DateTimeCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:DateTimeCommandRequest.epoch_seconds)
     pub epoch_seconds: u32,
+    // @@protoc_insertion_point(field:DateTimeCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:DateTimeCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -25353,7 +26772,7 @@ impl DateTimeCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -25364,6 +26783,11 @@ impl DateTimeCommandRequest {
             "epoch_seconds",
             |m: &DateTimeCommandRequest| { &m.epoch_seconds },
             |m: &mut DateTimeCommandRequest| { &mut m.epoch_seconds },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &DateTimeCommandRequest| { &m.device_id },
+            |m: &mut DateTimeCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<DateTimeCommandRequest>(
             "DateTimeCommandRequest",
@@ -25389,6 +26813,9 @@ impl ::protobuf::Message for DateTimeCommandRequest {
                 21 => {
                     self.epoch_seconds = is.read_fixed32()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -25407,6 +26834,9 @@ impl ::protobuf::Message for DateTimeCommandRequest {
         if self.epoch_seconds != 0 {
             my_size += 1 + 4;
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -25418,6 +26848,9 @@ impl ::protobuf::Message for DateTimeCommandRequest {
         }
         if self.epoch_seconds != 0 {
             os.write_fixed32(2, self.epoch_seconds)?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -25438,6 +26871,7 @@ impl ::protobuf::Message for DateTimeCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.epoch_seconds = 0;
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -25445,6 +26879,7 @@ impl ::protobuf::Message for DateTimeCommandRequest {
         static instance: DateTimeCommandRequest = DateTimeCommandRequest {
             key: 0,
             epoch_seconds: 0,
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -25488,6 +26923,8 @@ pub struct ListEntitiesUpdateResponse {
     pub entity_category: ::protobuf::EnumOrUnknown<EntityCategory>,
     // @@protoc_insertion_point(field:ListEntitiesUpdateResponse.device_class)
     pub device_class: ::std::string::String,
+    // @@protoc_insertion_point(field:ListEntitiesUpdateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:ListEntitiesUpdateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -25505,7 +26942,7 @@ impl ListEntitiesUpdateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(8);
+        let mut fields = ::std::vec::Vec::with_capacity(9);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "object_id",
@@ -25546,6 +26983,11 @@ impl ListEntitiesUpdateResponse {
             "device_class",
             |m: &ListEntitiesUpdateResponse| { &m.device_class },
             |m: &mut ListEntitiesUpdateResponse| { &mut m.device_class },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &ListEntitiesUpdateResponse| { &m.device_id },
+            |m: &mut ListEntitiesUpdateResponse| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<ListEntitiesUpdateResponse>(
             "ListEntitiesUpdateResponse",
@@ -25589,6 +27031,9 @@ impl ::protobuf::Message for ListEntitiesUpdateResponse {
                 66 => {
                     self.device_class = is.read_string()?;
                 },
+                72 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -25625,6 +27070,9 @@ impl ::protobuf::Message for ListEntitiesUpdateResponse {
         if !self.device_class.is_empty() {
             my_size += ::protobuf::rt::string_size(8, &self.device_class);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(9, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -25655,6 +27103,9 @@ impl ::protobuf::Message for ListEntitiesUpdateResponse {
         if !self.device_class.is_empty() {
             os.write_string(8, &self.device_class)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(9, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -25680,6 +27131,7 @@ impl ::protobuf::Message for ListEntitiesUpdateResponse {
         self.disabled_by_default = false;
         self.entity_category = ::protobuf::EnumOrUnknown::new(EntityCategory::ENTITY_CATEGORY_NONE);
         self.device_class.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -25693,6 +27145,7 @@ impl ::protobuf::Message for ListEntitiesUpdateResponse {
             disabled_by_default: false,
             entity_category: ::protobuf::EnumOrUnknown::from_i32(0),
             device_class: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -25740,6 +27193,8 @@ pub struct UpdateStateResponse {
     pub release_summary: ::std::string::String,
     // @@protoc_insertion_point(field:UpdateStateResponse.release_url)
     pub release_url: ::std::string::String,
+    // @@protoc_insertion_point(field:UpdateStateResponse.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:UpdateStateResponse.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -25757,7 +27212,7 @@ impl UpdateStateResponse {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(10);
+        let mut fields = ::std::vec::Vec::with_capacity(11);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -25809,6 +27264,11 @@ impl UpdateStateResponse {
             |m: &UpdateStateResponse| { &m.release_url },
             |m: &mut UpdateStateResponse| { &mut m.release_url },
         ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &UpdateStateResponse| { &m.device_id },
+            |m: &mut UpdateStateResponse| { &mut m.device_id },
+        ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<UpdateStateResponse>(
             "UpdateStateResponse",
             fields,
@@ -25857,6 +27317,9 @@ impl ::protobuf::Message for UpdateStateResponse {
                 82 => {
                     self.release_url = is.read_string()?;
                 },
+                88 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -25899,6 +27362,9 @@ impl ::protobuf::Message for UpdateStateResponse {
         if !self.release_url.is_empty() {
             my_size += ::protobuf::rt::string_size(10, &self.release_url);
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(11, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -25935,6 +27401,9 @@ impl ::protobuf::Message for UpdateStateResponse {
         if !self.release_url.is_empty() {
             os.write_string(10, &self.release_url)?;
         }
+        if self.device_id != 0 {
+            os.write_uint32(11, self.device_id)?;
+        }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
     }
@@ -25962,6 +27431,7 @@ impl ::protobuf::Message for UpdateStateResponse {
         self.title.clear();
         self.release_summary.clear();
         self.release_url.clear();
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -25977,6 +27447,7 @@ impl ::protobuf::Message for UpdateStateResponse {
             title: ::std::string::String::new(),
             release_summary: ::std::string::String::new(),
             release_url: ::std::string::String::new(),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -26008,6 +27479,8 @@ pub struct UpdateCommandRequest {
     pub key: u32,
     // @@protoc_insertion_point(field:UpdateCommandRequest.command)
     pub command: ::protobuf::EnumOrUnknown<UpdateCommand>,
+    // @@protoc_insertion_point(field:UpdateCommandRequest.device_id)
+    pub device_id: u32,
     // special fields
     // @@protoc_insertion_point(special_field:UpdateCommandRequest.special_fields)
     pub special_fields: ::protobuf::SpecialFields,
@@ -26025,7 +27498,7 @@ impl UpdateCommandRequest {
     }
 
     fn generated_message_descriptor_data() -> ::protobuf::reflect::GeneratedMessageDescriptorData {
-        let mut fields = ::std::vec::Vec::with_capacity(2);
+        let mut fields = ::std::vec::Vec::with_capacity(3);
         let mut oneofs = ::std::vec::Vec::with_capacity(0);
         fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
             "key",
@@ -26036,6 +27509,11 @@ impl UpdateCommandRequest {
             "command",
             |m: &UpdateCommandRequest| { &m.command },
             |m: &mut UpdateCommandRequest| { &mut m.command },
+        ));
+        fields.push(::protobuf::reflect::rt::v2::make_simpler_field_accessor::<_, _>(
+            "device_id",
+            |m: &UpdateCommandRequest| { &m.device_id },
+            |m: &mut UpdateCommandRequest| { &mut m.device_id },
         ));
         ::protobuf::reflect::GeneratedMessageDescriptorData::new_2::<UpdateCommandRequest>(
             "UpdateCommandRequest",
@@ -26061,6 +27539,9 @@ impl ::protobuf::Message for UpdateCommandRequest {
                 16 => {
                     self.command = is.read_enum_or_unknown()?;
                 },
+                24 => {
+                    self.device_id = is.read_uint32()?;
+                },
                 tag => {
                     ::protobuf::rt::read_unknown_or_skip_group(tag, is, self.special_fields.mut_unknown_fields())?;
                 },
@@ -26079,6 +27560,9 @@ impl ::protobuf::Message for UpdateCommandRequest {
         if self.command != ::protobuf::EnumOrUnknown::new(UpdateCommand::UPDATE_COMMAND_NONE) {
             my_size += ::protobuf::rt::int32_size(2, self.command.value());
         }
+        if self.device_id != 0 {
+            my_size += ::protobuf::rt::uint32_size(3, self.device_id);
+        }
         my_size += ::protobuf::rt::unknown_fields_size(self.special_fields.unknown_fields());
         self.special_fields.cached_size().set(my_size as u32);
         my_size
@@ -26090,6 +27574,9 @@ impl ::protobuf::Message for UpdateCommandRequest {
         }
         if self.command != ::protobuf::EnumOrUnknown::new(UpdateCommand::UPDATE_COMMAND_NONE) {
             os.write_enum(2, ::protobuf::EnumOrUnknown::value(&self.command))?;
+        }
+        if self.device_id != 0 {
+            os.write_uint32(3, self.device_id)?;
         }
         os.write_unknown_fields(self.special_fields.unknown_fields())?;
         ::std::result::Result::Ok(())
@@ -26110,6 +27597,7 @@ impl ::protobuf::Message for UpdateCommandRequest {
     fn clear(&mut self) {
         self.key = 0;
         self.command = ::protobuf::EnumOrUnknown::new(UpdateCommand::UPDATE_COMMAND_NONE);
+        self.device_id = 0;
         self.special_fields.clear();
     }
 
@@ -26117,6 +27605,7 @@ impl ::protobuf::Message for UpdateCommandRequest {
         static instance: UpdateCommandRequest = UpdateCommandRequest {
             key: 0,
             command: ::protobuf::EnumOrUnknown::from_i32(0),
+            device_id: 0,
             special_fields: ::protobuf::SpecialFields::new(),
         };
         &instance
@@ -28825,7 +30314,11 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \xe0@\x05\xe8@\0\"\x1f\n\x12DisconnectResponse:\t\x80A\x01\xe0@\x06\xe8@\
     \0\"\x15\n\x0bPingRequest:\x06\xe0@\x07\xe8@\0\"\x16\n\x0cPingResponse:\
     \x06\xe0@\x08\xe8@\0\"\x1b\n\x11DeviceInfoRequest:\x06\xe0@\t\xe8@\x02\"\
-    \xe7\x06\n\x12DeviceInfoResponse\x12#\n\ruses_password\x18\x01\x20\x01(\
+    7\n\x08AreaInfo\x12\x17\n\x07area_id\x18\x01\x20\x01(\rR\x06areaId\x12\
+    \x12\n\x04name\x18\x02\x20\x01(\tR\x04name\"V\n\nDeviceInfo\x12\x1b\n\td\
+    evice_id\x18\x01\x20\x01(\rR\x08deviceId\x12\x12\n\x04name\x18\x02\x20\
+    \x01(\tR\x04name\x12\x17\n\x07area_id\x18\x03\x20\x01(\rR\x06areaId\"\
+    \xce\x07\n\x12DeviceInfoResponse\x12#\n\ruses_password\x18\x01\x20\x01(\
     \x08R\x0cusesPassword\x12\x12\n\x04name\x18\x02\x20\x01(\tR\x04name\x12\
     \x1f\n\x0bmac_address\x18\x03\x20\x01(\tR\nmacAddress\x12'\n\x0fesphome_\
     version\x18\x04\x20\x01(\tR\x0eesphomeVersion\x12)\n\x10compilation_time\
@@ -28843,23 +30336,27 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     eAssistantFeatureFlags\x12%\n\x0esuggested_area\x18\x10\x20\x01(\tR\rsug\
     gestedArea\x122\n\x15bluetooth_mac_address\x18\x12\x20\x01(\tR\x13blueto\
     othMacAddress\x128\n\x18api_encryption_supported\x18\x13\x20\x01(\x08R\
-    \x16apiEncryptionSupported:\x06\xe0@\n\xe8@\x01\"\x1d\n\x13ListEntitiesR\
-    equest:\x06\xe0@\x0b\xe8@\x02\"%\n\x18ListEntitiesDoneResponse:\t\x80A\
-    \x01\xe0@\x13\xe8@\x01\"\x20\n\x16SubscribeStatesRequest:\x06\xe0@\x14\
-    \xe8@\x02\"\x91\x03\n\x20ListEntitiesBinarySensorResponse\x12\x1b\n\tobj\
-    ect_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\
-    \x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tun\
-    ique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12!\n\x0cdevice_class\x18\x05\
-    \x20\x01(\tR\x0bdeviceClass\x125\n\x17is_status_binary_sensor\x18\x06\
-    \x20\x01(\x08R\x14isStatusBinarySensor\x12.\n\x13disabled_by_default\x18\
-    \x07\x20\x01(\x08R\x11disabledByDefault\x12\x12\n\x04icon\x18\x08\x20\
-    \x01(\tR\x04icon\x128\n\x0fentity_category\x18\t\x20\x01(\x0e2\x0f.Entit\
-    yCategoryR\x0eentityCategory:5\x8aA\x18InfoResponseProtoMessage\xf2@\x11\
-    USE_BINARY_SENSOR\xe0@\x0c\xe8@\x01\"\xa3\x01\n\x19BinarySensorStateResp\
-    onse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\
-    \x18\x02\x20\x01(\x08R\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\
-    \x08R\x0cmissingState:9\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\
-    \x11USE_BINARY_SENSOR\xe0@\x15\xe8@\x01\"\xe7\x03\n\x19ListEntitiesCover\
+    \x16apiEncryptionSupported\x12%\n\x07devices\x18\x14\x20\x03(\x0b2\x0b.D\
+    eviceInfoR\x07devices\x12\x1f\n\x05areas\x18\x15\x20\x03(\x0b2\t.AreaInf\
+    oR\x05areas\x12\x1d\n\x04area\x18\x16\x20\x01(\x0b2\t.AreaInfoR\x04area:\
+    \x06\xe0@\n\xe8@\x01\"\x1d\n\x13ListEntitiesRequest:\x06\xe0@\x0b\xe8@\
+    \x02\"%\n\x18ListEntitiesDoneResponse:\t\x80A\x01\xe0@\x13\xe8@\x01\"\
+    \x20\n\x16SubscribeStatesRequest:\x06\xe0@\x14\xe8@\x02\"\xae\x03\n\x20L\
+    istEntitiesBinarySensorResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
+    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
+    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
+    R\x08uniqueId\x12!\n\x0cdevice_class\x18\x05\x20\x01(\tR\x0bdeviceClass\
+    \x125\n\x17is_status_binary_sensor\x18\x06\x20\x01(\x08R\x14isStatusBina\
+    rySensor\x12.\n\x13disabled_by_default\x18\x07\x20\x01(\x08R\x11disabled\
+    ByDefault\x12\x12\n\x04icon\x18\x08\x20\x01(\tR\x04icon\x128\n\x0fentity\
+    _category\x18\t\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12\
+    \x1b\n\tdevice_id\x18\n\x20\x01(\rR\x08deviceId:5\x8aA\x18InfoResponsePr\
+    otoMessage\xf2@\x11USE_BINARY_SENSOR\xe0@\x0c\xe8@\x01\"\xc0\x01\n\x19Bi\
+    narySensorStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\
+    \x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05state\x12#\n\rmissing_state\
+    \x18\x03\x20\x01(\x08R\x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\x20\
+    \x01(\rR\x08deviceId:9\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\
+    \x11USE_BINARY_SENSOR\xe0@\x15\xe8@\x01\"\x84\x04\n\x19ListEntitiesCover\
     Response\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\
     \x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\
     \tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12#\n\
@@ -28870,204 +30367,219 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x08R\x11disabledByDefault\x12\x12\n\x04icon\x18\n\x20\x01(\tR\x04icon\
     \x128\n\x0fentity_category\x18\x0b\x20\x01(\x0e2\x0f.EntityCategoryR\x0e\
     entityCategory\x12#\n\rsupports_stop\x18\x0c\x20\x01(\x08R\x0csupportsSt\
-    op:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_COVER\xe0@\r\xe8@\x01\"\
-    \xfd\x01\n\x12CoverStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
-    \x03key\x124\n\x0clegacy_state\x18\x02\x20\x01(\x0e2\x11.LegacyCoverStat\
-    eR\x0blegacyState\x12\x1a\n\x08position\x18\x03\x20\x01(\x02R\x08positio\
-    n\x12\x12\n\x04tilt\x18\x04\x20\x01(\x02R\x04tilt\x12<\n\x11current_oper\
-    ation\x18\x05\x20\x01(\x0e2\x0f.CoverOperationR\x10currentOperation:1\
-    \x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\tUSE_COVER\xe0@\x16\xe8\
-    @\x01\"\xaa\x02\n\x13CoverCommandRequest\x12\x10\n\x03key\x18\x01\x20\
-    \x01(\x07R\x03key\x12,\n\x12has_legacy_command\x18\x02\x20\x01(\x08R\x10\
-    hasLegacyCommand\x12:\n\x0elegacy_command\x18\x03\x20\x01(\x0e2\x13.Lega\
-    cyCoverCommandR\rlegacyCommand\x12!\n\x0chas_position\x18\x04\x20\x01(\
-    \x08R\x0bhasPosition\x12\x1a\n\x08position\x18\x05\x20\x01(\x02R\x08posi\
-    tion\x12\x19\n\x08has_tilt\x18\x06\x20\x01(\x08R\x07hasTilt\x12\x12\n\
-    \x04tilt\x18\x07\x20\x01(\x02R\x04tilt\x12\x12\n\x04stop\x18\x08\x20\x01\
-    (\x08R\x04stop:\x15\x80A\x01\xf2@\tUSE_COVER\xe0@\x1e\xe8@\x02\"\x97\x04\
-    \n\x17ListEntitiesFanResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
-    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
-    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
-    R\x08uniqueId\x121\n\x14supports_oscillation\x18\x05\x20\x01(\x08R\x13su\
-    pportsOscillation\x12%\n\x0esupports_speed\x18\x06\x20\x01(\x08R\rsuppor\
-    tsSpeed\x12-\n\x12supports_direction\x18\x07\x20\x01(\x08R\x11supportsDi\
-    rection\x122\n\x15supported_speed_count\x18\x08\x20\x01(\x05R\x13support\
-    edSpeedCount\x12.\n\x13disabled_by_default\x18\t\x20\x01(\x08R\x11disabl\
-    edByDefault\x12\x12\n\x04icon\x18\n\x20\x01(\tR\x04icon\x128\n\x0fentity\
-    _category\x18\x0b\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\
-    \x124\n\x16supported_preset_modes\x18\x0c\x20\x03(\tR\x14supportedPreset\
-    Modes:+\x8aA\x18InfoResponseProtoMessage\xf2@\x07USE_FAN\xe0@\x0e\xe8@\
-    \x01\"\xa1\x02\n\x10FanStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05state\x12\x20\n\
-    \x0boscillating\x18\x03\x20\x01(\x08R\x0boscillating\x12#\n\x05speed\x18\
-    \x04\x20\x01(\x0e2\t.FanSpeedR\x05speedB\x02\x18\x01\x12+\n\tdirection\
-    \x18\x05\x20\x01(\x0e2\r.FanDirectionR\tdirection\x12\x1f\n\x0bspeed_lev\
-    el\x18\x06\x20\x01(\x05R\nspeedLevel\x12\x1f\n\x0bpreset_mode\x18\x07\
-    \x20\x01(\tR\npresetMode:/\x8aA\x19StateResponseProtoMessage\x80A\x01\
-    \xf2@\x07USE_FAN\xe0@\x17\xe8@\x01\"\xe2\x03\n\x11FanCommandRequest\x12\
-    \x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x1b\n\thas_state\x18\x02\
-    \x20\x01(\x08R\x08hasState\x12\x14\n\x05state\x18\x03\x20\x01(\x08R\x05s\
-    tate\x12\x1f\n\thas_speed\x18\x04\x20\x01(\x08R\x08hasSpeedB\x02\x18\x01\
-    \x12#\n\x05speed\x18\x05\x20\x01(\x0e2\t.FanSpeedR\x05speedB\x02\x18\x01\
-    \x12'\n\x0fhas_oscillating\x18\x06\x20\x01(\x08R\x0ehasOscillating\x12\
-    \x20\n\x0boscillating\x18\x07\x20\x01(\x08R\x0boscillating\x12#\n\rhas_d\
-    irection\x18\x08\x20\x01(\x08R\x0chasDirection\x12+\n\tdirection\x18\t\
-    \x20\x01(\x0e2\r.FanDirectionR\tdirection\x12&\n\x0fhas_speed_level\x18\
-    \n\x20\x01(\x08R\rhasSpeedLevel\x12\x1f\n\x0bspeed_level\x18\x0b\x20\x01\
-    (\x05R\nspeedLevel\x12&\n\x0fhas_preset_mode\x18\x0c\x20\x01(\x08R\rhasP\
-    resetMode\x12\x1f\n\x0bpreset_mode\x18\r\x20\x01(\tR\npresetMode:\x13\
-    \x80A\x01\xf2@\x07USE_FAN\xe0@\x1f\xe8@\x02\"\xc8\x05\n\x19ListEntitiesL\
-    ightResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\
-    \x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\
-    \x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\
-    \x12>\n\x15supported_color_modes\x18\x0c\x20\x03(\x0e2\n.ColorModeR\x13s\
-    upportedColorModes\x12@\n\x1alegacy_supports_brightness\x18\x05\x20\x01(\
-    \x08R\x18legacySupportsBrightnessB\x02\x18\x01\x122\n\x13legacy_supports\
-    _rgb\x18\x06\x20\x01(\x08R\x11legacySupportsRgbB\x02\x18\x01\x12A\n\x1bl\
-    egacy_supports_white_value\x18\x07\x20\x01(\x08R\x18legacySupportsWhiteV\
-    alueB\x02\x18\x01\x12M\n!legacy_supports_color_temperature\x18\x08\x20\
-    \x01(\x08R\x1elegacySupportsColorTemperatureB\x02\x18\x01\x12\x1d\n\nmin\
-    _mireds\x18\t\x20\x01(\x02R\tminMireds\x12\x1d\n\nmax_mireds\x18\n\x20\
-    \x01(\x02R\tmaxMireds\x12\x18\n\x07effects\x18\x0b\x20\x03(\tR\x07effect\
-    s\x12.\n\x13disabled_by_default\x18\r\x20\x01(\x08R\x11disabledByDefault\
-    \x12\x12\n\x04icon\x18\x0e\x20\x01(\tR\x04icon\x128\n\x0fentity_category\
-    \x18\x0f\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory:-\x8aA\x18I\
-    nfoResponseProtoMessage\xf2@\tUSE_LIGHT\xe0@\x0f\xe8@\x01\"\xba\x03\n\
-    \x12LightStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\
-    \x14\n\x05state\x18\x02\x20\x01(\x08R\x05state\x12\x1e\n\nbrightness\x18\
-    \x03\x20\x01(\x02R\nbrightness\x12)\n\ncolor_mode\x18\x0b\x20\x01(\x0e2\
-    \n.ColorModeR\tcolorMode\x12)\n\x10color_brightness\x18\n\x20\x01(\x02R\
-    \x0fcolorBrightness\x12\x10\n\x03red\x18\x04\x20\x01(\x02R\x03red\x12\
-    \x14\n\x05green\x18\x05\x20\x01(\x02R\x05green\x12\x12\n\x04blue\x18\x06\
-    \x20\x01(\x02R\x04blue\x12\x14\n\x05white\x18\x07\x20\x01(\x02R\x05white\
-    \x12+\n\x11color_temperature\x18\x08\x20\x01(\x02R\x10colorTemperature\
-    \x12\x1d\n\ncold_white\x18\x0c\x20\x01(\x02R\tcoldWhite\x12\x1d\n\nwarm_\
-    white\x18\r\x20\x01(\x02R\twarmWhite\x12\x16\n\x06effect\x18\t\x20\x01(\
-    \tR\x06effect:1\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\tUSE_LIG\
-    HT\xe0@\x18\xe8@\x01\"\xbe\x07\n\x13LightCommandRequest\x12\x10\n\x03key\
+    op\x12\x1b\n\tdevice_id\x18\r\x20\x01(\rR\x08deviceId:-\x8aA\x18InfoResp\
+    onseProtoMessage\xf2@\tUSE_COVER\xe0@\r\xe8@\x01\"\x9a\x02\n\x12CoverSta\
+    teResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x124\n\x0clegac\
+    y_state\x18\x02\x20\x01(\x0e2\x11.LegacyCoverStateR\x0blegacyState\x12\
+    \x1a\n\x08position\x18\x03\x20\x01(\x02R\x08position\x12\x12\n\x04tilt\
+    \x18\x04\x20\x01(\x02R\x04tilt\x12<\n\x11current_operation\x18\x05\x20\
+    \x01(\x0e2\x0f.CoverOperationR\x10currentOperation\x12\x1b\n\tdevice_id\
+    \x18\x06\x20\x01(\rR\x08deviceId:1\x8aA\x19StateResponseProtoMessage\x80\
+    A\x01\xf2@\tUSE_COVER\xe0@\x16\xe8@\x01\"\xdd\x02\n\x13CoverCommandReque\
+    st\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12,\n\x12has_legacy_co\
+    mmand\x18\x02\x20\x01(\x08R\x10hasLegacyCommand\x12:\n\x0elegacy_command\
+    \x18\x03\x20\x01(\x0e2\x13.LegacyCoverCommandR\rlegacyCommand\x12!\n\x0c\
+    has_position\x18\x04\x20\x01(\x08R\x0bhasPosition\x12\x1a\n\x08position\
+    \x18\x05\x20\x01(\x02R\x08position\x12\x19\n\x08has_tilt\x18\x06\x20\x01\
+    (\x08R\x07hasTilt\x12\x12\n\x04tilt\x18\x07\x20\x01(\x02R\x04tilt\x12\
+    \x12\n\x04stop\x18\x08\x20\x01(\x08R\x04stop\x12\x1b\n\tdevice_id\x18\t\
+    \x20\x01(\rR\x08deviceId:+\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\tUS\
+    E_COVER\xe0@\x1e\xe8@\x02\"\xb4\x04\n\x17ListEntitiesFanResponse\x12\x1b\
+    \n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\
+    \x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\
+    \x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x121\n\x14supports_osc\
+    illation\x18\x05\x20\x01(\x08R\x13supportsOscillation\x12%\n\x0esupports\
+    _speed\x18\x06\x20\x01(\x08R\rsupportsSpeed\x12-\n\x12supports_direction\
+    \x18\x07\x20\x01(\x08R\x11supportsDirection\x122\n\x15supported_speed_co\
+    unt\x18\x08\x20\x01(\x05R\x13supportedSpeedCount\x12.\n\x13disabled_by_d\
+    efault\x18\t\x20\x01(\x08R\x11disabledByDefault\x12\x12\n\x04icon\x18\n\
+    \x20\x01(\tR\x04icon\x128\n\x0fentity_category\x18\x0b\x20\x01(\x0e2\x0f\
+    .EntityCategoryR\x0eentityCategory\x124\n\x16supported_preset_modes\x18\
+    \x0c\x20\x03(\tR\x14supportedPresetModes\x12\x1b\n\tdevice_id\x18\r\x20\
+    \x01(\rR\x08deviceId:+\x8aA\x18InfoResponseProtoMessage\xf2@\x07USE_FAN\
+    \xe0@\x0e\xe8@\x01\"\xbe\x02\n\x10FanStateResponse\x12\x10\n\x03key\x18\
+    \x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05st\
+    ate\x12\x20\n\x0boscillating\x18\x03\x20\x01(\x08R\x0boscillating\x12#\n\
+    \x05speed\x18\x04\x20\x01(\x0e2\t.FanSpeedR\x05speedB\x02\x18\x01\x12+\n\
+    \tdirection\x18\x05\x20\x01(\x0e2\r.FanDirectionR\tdirection\x12\x1f\n\
+    \x0bspeed_level\x18\x06\x20\x01(\x05R\nspeedLevel\x12\x1f\n\x0bpreset_mo\
+    de\x18\x07\x20\x01(\tR\npresetMode\x12\x1b\n\tdevice_id\x18\x08\x20\x01(\
+    \rR\x08deviceId:/\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x07USE\
+    _FAN\xe0@\x17\xe8@\x01\"\x95\x04\n\x11FanCommandRequest\x12\x10\n\x03key\
     \x18\x01\x20\x01(\x07R\x03key\x12\x1b\n\thas_state\x18\x02\x20\x01(\x08R\
-    \x08hasState\x12\x14\n\x05state\x18\x03\x20\x01(\x08R\x05state\x12%\n\
-    \x0ehas_brightness\x18\x04\x20\x01(\x08R\rhasBrightness\x12\x1e\n\nbrigh\
-    tness\x18\x05\x20\x01(\x02R\nbrightness\x12$\n\x0ehas_color_mode\x18\x16\
-    \x20\x01(\x08R\x0chasColorMode\x12)\n\ncolor_mode\x18\x17\x20\x01(\x0e2\
-    \n.ColorModeR\tcolorMode\x120\n\x14has_color_brightness\x18\x14\x20\x01(\
-    \x08R\x12hasColorBrightness\x12)\n\x10color_brightness\x18\x15\x20\x01(\
-    \x02R\x0fcolorBrightness\x12\x17\n\x07has_rgb\x18\x06\x20\x01(\x08R\x06h\
-    asRgb\x12\x10\n\x03red\x18\x07\x20\x01(\x02R\x03red\x12\x14\n\x05green\
-    \x18\x08\x20\x01(\x02R\x05green\x12\x12\n\x04blue\x18\t\x20\x01(\x02R\
-    \x04blue\x12\x1b\n\thas_white\x18\n\x20\x01(\x08R\x08hasWhite\x12\x14\n\
-    \x05white\x18\x0b\x20\x01(\x02R\x05white\x122\n\x15has_color_temperature\
-    \x18\x0c\x20\x01(\x08R\x13hasColorTemperature\x12+\n\x11color_temperatur\
-    e\x18\r\x20\x01(\x02R\x10colorTemperature\x12$\n\x0ehas_cold_white\x18\
-    \x18\x20\x01(\x08R\x0chasColdWhite\x12\x1d\n\ncold_white\x18\x19\x20\x01\
-    (\x02R\tcoldWhite\x12$\n\x0ehas_warm_white\x18\x1a\x20\x01(\x08R\x0chasW\
-    armWhite\x12\x1d\n\nwarm_white\x18\x1b\x20\x01(\x02R\twarmWhite\x122\n\
-    \x15has_transition_length\x18\x0e\x20\x01(\x08R\x13hasTransitionLength\
-    \x12+\n\x11transition_length\x18\x0f\x20\x01(\rR\x10transitionLength\x12\
-    (\n\x10has_flash_length\x18\x10\x20\x01(\x08R\x0ehasFlashLength\x12!\n\
-    \x0cflash_length\x18\x11\x20\x01(\rR\x0bflashLength\x12\x1d\n\nhas_effec\
-    t\x18\x12\x20\x01(\x08R\thasEffect\x12\x16\n\x06effect\x18\x13\x20\x01(\
-    \tR\x06effect:\x15\x80A\x01\xf2@\tUSE_LIGHT\xe0@\x20\xe8@\x02\"\xcc\x04\
-    \n\x1aListEntitiesSensorResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\t\
-    R\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\
-    \x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\
-    \x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\
-    \n\x13unit_of_measurement\x18\x06\x20\x01(\tR\x11unitOfMeasurement\x12+\
-    \n\x11accuracy_decimals\x18\x07\x20\x01(\x05R\x10accuracyDecimals\x12!\n\
-    \x0cforce_update\x18\x08\x20\x01(\x08R\x0bforceUpdate\x12!\n\x0cdevice_c\
-    lass\x18\t\x20\x01(\tR\x0bdeviceClass\x122\n\x0bstate_class\x18\n\x20\
-    \x01(\x0e2\x11.SensorStateClassR\nstateClass\x12I\n\x16legacy_last_reset\
-    _type\x18\x0b\x20\x01(\x0e2\x14.SensorLastResetTypeR\x13legacyLastResetT\
-    ype\x12.\n\x13disabled_by_default\x18\x0c\x20\x01(\x08R\x11disabledByDef\
-    ault\x128\n\x0fentity_category\x18\r\x20\x01(\x0e2\x0f.EntityCategoryR\
-    \x0eentityCategory:.\x8aA\x18InfoResponseProtoMessage\xf2@\nUSE_SENSOR\
-    \xe0@\x10\xe8@\x01\"\x96\x01\n\x13SensorStateResponse\x12\x10\n\x03key\
-    \x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x02R\
-    \x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08R\x0cmissingState:2\
+    \x08hasState\x12\x14\n\x05state\x18\x03\x20\x01(\x08R\x05state\x12\x1f\n\
+    \thas_speed\x18\x04\x20\x01(\x08R\x08hasSpeedB\x02\x18\x01\x12#\n\x05spe\
+    ed\x18\x05\x20\x01(\x0e2\t.FanSpeedR\x05speedB\x02\x18\x01\x12'\n\x0fhas\
+    _oscillating\x18\x06\x20\x01(\x08R\x0ehasOscillating\x12\x20\n\x0boscill\
+    ating\x18\x07\x20\x01(\x08R\x0boscillating\x12#\n\rhas_direction\x18\x08\
+    \x20\x01(\x08R\x0chasDirection\x12+\n\tdirection\x18\t\x20\x01(\x0e2\r.F\
+    anDirectionR\tdirection\x12&\n\x0fhas_speed_level\x18\n\x20\x01(\x08R\rh\
+    asSpeedLevel\x12\x1f\n\x0bspeed_level\x18\x0b\x20\x01(\x05R\nspeedLevel\
+    \x12&\n\x0fhas_preset_mode\x18\x0c\x20\x01(\x08R\rhasPresetMode\x12\x1f\
+    \n\x0bpreset_mode\x18\r\x20\x01(\tR\npresetMode\x12\x1b\n\tdevice_id\x18\
+    \x0e\x20\x01(\rR\x08deviceId:)\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\
+    \x07USE_FAN\xe0@\x1f\xe8@\x02\"\xe5\x05\n\x19ListEntitiesLightResponse\
+    \x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\
+    \x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04n\
+    ame\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12>\n\x15suppo\
+    rted_color_modes\x18\x0c\x20\x03(\x0e2\n.ColorModeR\x13supportedColorMod\
+    es\x12@\n\x1alegacy_supports_brightness\x18\x05\x20\x01(\x08R\x18legacyS\
+    upportsBrightnessB\x02\x18\x01\x122\n\x13legacy_supports_rgb\x18\x06\x20\
+    \x01(\x08R\x11legacySupportsRgbB\x02\x18\x01\x12A\n\x1blegacy_supports_w\
+    hite_value\x18\x07\x20\x01(\x08R\x18legacySupportsWhiteValueB\x02\x18\
+    \x01\x12M\n!legacy_supports_color_temperature\x18\x08\x20\x01(\x08R\x1el\
+    egacySupportsColorTemperatureB\x02\x18\x01\x12\x1d\n\nmin_mireds\x18\t\
+    \x20\x01(\x02R\tminMireds\x12\x1d\n\nmax_mireds\x18\n\x20\x01(\x02R\tmax\
+    Mireds\x12\x18\n\x07effects\x18\x0b\x20\x03(\tR\x07effects\x12.\n\x13dis\
+    abled_by_default\x18\r\x20\x01(\x08R\x11disabledByDefault\x12\x12\n\x04i\
+    con\x18\x0e\x20\x01(\tR\x04icon\x128\n\x0fentity_category\x18\x0f\x20\
+    \x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12\x1b\n\tdevice_id\
+    \x18\x10\x20\x01(\rR\x08deviceId:-\x8aA\x18InfoResponseProtoMessage\xf2@\
+    \tUSE_LIGHT\xe0@\x0f\xe8@\x01\"\xd7\x03\n\x12LightStateResponse\x12\x10\
+    \n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\
+    \x01(\x08R\x05state\x12\x1e\n\nbrightness\x18\x03\x20\x01(\x02R\nbrightn\
+    ess\x12)\n\ncolor_mode\x18\x0b\x20\x01(\x0e2\n.ColorModeR\tcolorMode\x12\
+    )\n\x10color_brightness\x18\n\x20\x01(\x02R\x0fcolorBrightness\x12\x10\n\
+    \x03red\x18\x04\x20\x01(\x02R\x03red\x12\x14\n\x05green\x18\x05\x20\x01(\
+    \x02R\x05green\x12\x12\n\x04blue\x18\x06\x20\x01(\x02R\x04blue\x12\x14\n\
+    \x05white\x18\x07\x20\x01(\x02R\x05white\x12+\n\x11color_temperature\x18\
+    \x08\x20\x01(\x02R\x10colorTemperature\x12\x1d\n\ncold_white\x18\x0c\x20\
+    \x01(\x02R\tcoldWhite\x12\x1d\n\nwarm_white\x18\r\x20\x01(\x02R\twarmWhi\
+    te\x12\x16\n\x06effect\x18\t\x20\x01(\tR\x06effect\x12\x1b\n\tdevice_id\
+    \x18\x0e\x20\x01(\rR\x08deviceId:1\x8aA\x19StateResponseProtoMessage\x80\
+    A\x01\xf2@\tUSE_LIGHT\xe0@\x18\xe8@\x01\"\xf1\x07\n\x13LightCommandReque\
+    st\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x1b\n\thas_state\
+    \x18\x02\x20\x01(\x08R\x08hasState\x12\x14\n\x05state\x18\x03\x20\x01(\
+    \x08R\x05state\x12%\n\x0ehas_brightness\x18\x04\x20\x01(\x08R\rhasBright\
+    ness\x12\x1e\n\nbrightness\x18\x05\x20\x01(\x02R\nbrightness\x12$\n\x0eh\
+    as_color_mode\x18\x16\x20\x01(\x08R\x0chasColorMode\x12)\n\ncolor_mode\
+    \x18\x17\x20\x01(\x0e2\n.ColorModeR\tcolorMode\x120\n\x14has_color_brigh\
+    tness\x18\x14\x20\x01(\x08R\x12hasColorBrightness\x12)\n\x10color_bright\
+    ness\x18\x15\x20\x01(\x02R\x0fcolorBrightness\x12\x17\n\x07has_rgb\x18\
+    \x06\x20\x01(\x08R\x06hasRgb\x12\x10\n\x03red\x18\x07\x20\x01(\x02R\x03r\
+    ed\x12\x14\n\x05green\x18\x08\x20\x01(\x02R\x05green\x12\x12\n\x04blue\
+    \x18\t\x20\x01(\x02R\x04blue\x12\x1b\n\thas_white\x18\n\x20\x01(\x08R\
+    \x08hasWhite\x12\x14\n\x05white\x18\x0b\x20\x01(\x02R\x05white\x122\n\
+    \x15has_color_temperature\x18\x0c\x20\x01(\x08R\x13hasColorTemperature\
+    \x12+\n\x11color_temperature\x18\r\x20\x01(\x02R\x10colorTemperature\x12\
+    $\n\x0ehas_cold_white\x18\x18\x20\x01(\x08R\x0chasColdWhite\x12\x1d\n\nc\
+    old_white\x18\x19\x20\x01(\x02R\tcoldWhite\x12$\n\x0ehas_warm_white\x18\
+    \x1a\x20\x01(\x08R\x0chasWarmWhite\x12\x1d\n\nwarm_white\x18\x1b\x20\x01\
+    (\x02R\twarmWhite\x122\n\x15has_transition_length\x18\x0e\x20\x01(\x08R\
+    \x13hasTransitionLength\x12+\n\x11transition_length\x18\x0f\x20\x01(\rR\
+    \x10transitionLength\x12(\n\x10has_flash_length\x18\x10\x20\x01(\x08R\
+    \x0ehasFlashLength\x12!\n\x0cflash_length\x18\x11\x20\x01(\rR\x0bflashLe\
+    ngth\x12\x1d\n\nhas_effect\x18\x12\x20\x01(\x08R\thasEffect\x12\x16\n\
+    \x06effect\x18\x13\x20\x01(\tR\x06effect\x12\x1b\n\tdevice_id\x18\x1c\
+    \x20\x01(\rR\x08deviceId:+\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\tUS\
+    E_LIGHT\xe0@\x20\xe8@\x02\"\xe9\x04\n\x1aListEntitiesSensorResponse\x12\
+    \x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\
+    \x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\
+    \x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\
+    \x18\x05\x20\x01(\tR\x04icon\x12.\n\x13unit_of_measurement\x18\x06\x20\
+    \x01(\tR\x11unitOfMeasurement\x12+\n\x11accuracy_decimals\x18\x07\x20\
+    \x01(\x05R\x10accuracyDecimals\x12!\n\x0cforce_update\x18\x08\x20\x01(\
+    \x08R\x0bforceUpdate\x12!\n\x0cdevice_class\x18\t\x20\x01(\tR\x0bdeviceC\
+    lass\x122\n\x0bstate_class\x18\n\x20\x01(\x0e2\x11.SensorStateClassR\nst\
+    ateClass\x12I\n\x16legacy_last_reset_type\x18\x0b\x20\x01(\x0e2\x14.Sens\
+    orLastResetTypeR\x13legacyLastResetType\x12.\n\x13disabled_by_default\
+    \x18\x0c\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\
+    \x18\r\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12\x1b\n\tde\
+    vice_id\x18\x0e\x20\x01(\rR\x08deviceId:.\x8aA\x18InfoResponseProtoMessa\
+    ge\xf2@\nUSE_SENSOR\xe0@\x10\xe8@\x01\"\xb3\x01\n\x13SensorStateResponse\
+    \x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\
+    \x02\x20\x01(\x02R\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08R\
+    \x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\x08deviceId:2\
     \x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE_SENSOR\xe0@\x19\
-    \xe8@\x01\"\xf2\x02\n\x1aListEntitiesSwitchResponse\x12\x1b\n\tobject_id\
+    \xe8@\x01\"\x8f\x03\n\x1aListEntitiesSwitchResponse\x12\x1b\n\tobject_id\
     \x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\
     \x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_\
     id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\
     \x04icon\x12#\n\rassumed_state\x18\x06\x20\x01(\x08R\x0cassumedState\x12\
     .\n\x13disabled_by_default\x18\x07\x20\x01(\x08R\x11disabledByDefault\
     \x128\n\x0fentity_category\x18\x08\x20\x01(\x0e2\x0f.EntityCategoryR\x0e\
-    entityCategory\x12!\n\x0cdevice_class\x18\t\x20\x01(\tR\x0bdeviceClass:.\
-    \x8aA\x18InfoResponseProtoMessage\xf2@\nUSE_SWITCH\xe0@\x11\xe8@\x01\"q\
-    \n\x13SwitchStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\
-    \x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05state:2\x8aA\x19StateRespon\
-    seProtoMessage\x80A\x01\xf2@\nUSE_SWITCH\xe0@\x1a\xe8@\x01\"V\n\x14Switc\
-    hCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\
-    \x05state\x18\x02\x20\x01(\x08R\x05state:\x16\x80A\x01\xf2@\nUSE_SWITCH\
-    \xe0@!\xe8@\x02\"\xd6\x02\n\x1eListEntitiesTextSensorResponse\x12\x1b\n\
-    \tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\
-    \x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\
-    \n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\
-    \x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\
-    \x11disabledByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\
-    \x0f.EntityCategoryR\x0eentityCategory\x12!\n\x0cdevice_class\x18\x08\
-    \x20\x01(\tR\x0bdeviceClass:3\x8aA\x18InfoResponseProtoMessage\xf2@\x0fU\
-    SE_TEXT_SENSOR\xe0@\x12\xe8@\x01\"\x9f\x01\n\x17TextSensorStateResponse\
-    \x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\
-    \x02\x20\x01(\tR\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08R\
-    \x0cmissingState:7\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x0fUS\
-    E_TEXT_SENSOR\xe0@\x1b\xe8@\x01\"`\n\x14SubscribeLogsRequest\x12\x1f\n\
-    \x05level\x18\x01\x20\x01(\x0e2\t.LogLevelR\x05level\x12\x1f\n\x0bdump_c\
-    onfig\x18\x02\x20\x01(\x08R\ndumpConfig:\x06\xe0@\x1c\xe8@\x02\"\x81\x01\
-    \n\x15SubscribeLogsResponse\x12\x1f\n\x05level\x18\x01\x20\x01(\x0e2\t.L\
-    ogLevelR\x05level\x12\x18\n\x07message\x18\x03\x20\x01(\x0cR\x07message\
-    \x12\x1f\n\x0bsend_failed\x18\x04\x20\x01(\x08R\nsendFailed:\x0c\xf8@\0\
-    \x80A\0\xe0@\x1d\xe8@\x01\"H\n\x1cNoiseEncryptionSetKeyRequest\x12\x10\n\
-    \x03key\x18\x01\x20\x01(\x0cR\x03key:\x16\xf2@\rUSE_API_NOISE\xe0@|\xe8@\
-    \x02\"Q\n\x1dNoiseEncryptionSetKeyResponse\x12\x18\n\x07success\x18\x01\
-    \x20\x01(\x08R\x07success:\x16\xf2@\rUSE_API_NOISE\xe0@}\xe8@\x01\"/\n%S\
-    ubscribeHomeassistantServicesRequest:\x06\xe0@\"\xe8@\x02\"A\n\x17Homeas\
-    sistantServiceMap\x12\x10\n\x03key\x18\x01\x20\x01(\tR\x03key\x12\x14\n\
-    \x05value\x18\x02\x20\x01(\tR\x05value\"\x83\x02\n\x1cHomeassistantServi\
-    ceResponse\x12\x18\n\x07service\x18\x01\x20\x01(\tR\x07service\x12,\n\
-    \x04data\x18\x02\x20\x03(\x0b2\x18.HomeassistantServiceMapR\x04data\x12=\
-    \n\rdata_template\x18\x03\x20\x03(\x0b2\x18.HomeassistantServiceMapR\x0c\
-    dataTemplate\x126\n\tvariables\x18\x04\x20\x03(\x0b2\x18.HomeassistantSe\
-    rviceMapR\tvariables\x12\x19\n\x08is_event\x18\x05\x20\x01(\x08R\x07isEv\
-    ent:\t\x80A\x01\xe0@#\xe8@\x01\"-\n#SubscribeHomeAssistantStatesRequest:\
-    \x06\xe0@&\xe8@\x02\"|\n#SubscribeHomeAssistantStateResponse\x12\x1b\n\t\
-    entity_id\x18\x01\x20\x01(\tR\x08entityId\x12\x1c\n\tattribute\x18\x02\
-    \x20\x01(\tR\tattribute\x12\x12\n\x04once\x18\x03\x20\x01(\x08R\x04once:\
-    \x06\xe0@'\xe8@\x01\"x\n\x1aHomeAssistantStateResponse\x12\x1b\n\tentity\
-    _id\x18\x01\x20\x01(\tR\x08entityId\x12\x14\n\x05state\x18\x02\x20\x01(\
-    \tR\x05state\x12\x1c\n\tattribute\x18\x03\x20\x01(\tR\tattribute:\t\x80A\
-    \x01\xe0@(\xe8@\x02\"\x18\n\x0eGetTimeRequest:\x06\xe0@$\xe8@\0\"A\n\x0f\
-    GetTimeResponse\x12#\n\repoch_seconds\x18\x01\x20\x01(\x07R\x0cepochSeco\
-    nds:\t\x80A\x01\xe0@%\xe8@\0\"W\n\x1cListEntitiesServicesArgument\x12\
-    \x12\n\x04name\x18\x01\x20\x01(\tR\x04name\x12#\n\x04type\x18\x02\x20\
-    \x01(\x0e2\x0f.ServiceArgTypeR\x04type\"\x7f\n\x1cListEntitiesServicesRe\
-    sponse\x12\x12\n\x04name\x18\x01\x20\x01(\tR\x04name\x12\x10\n\x03key\
-    \x18\x02\x20\x01(\x07R\x03key\x121\n\x04args\x18\x03\x20\x03(\x0b2\x1d.L\
-    istEntitiesServicesArgumentR\x04args:\x06\xe0@)\xe8@\x01\"\x9b\x02\n\x16\
-    ExecuteServiceArgument\x12\x13\n\x05bool_\x18\x01\x20\x01(\x08R\x04bool\
-    \x12\x1d\n\nlegacy_int\x18\x02\x20\x01(\x05R\tlegacyInt\x12\x15\n\x06flo\
-    at_\x18\x03\x20\x01(\x02R\x05float\x12\x17\n\x07string_\x18\x04\x20\x01(\
-    \tR\x06string\x12\x11\n\x04int_\x18\x05\x20\x01(\x11R\x03int\x12!\n\nboo\
-    l_array\x18\x06\x20\x03(\x08R\tboolArrayB\x02\x10\0\x12\x1f\n\tint_array\
-    \x18\x07\x20\x03(\x11R\x08intArrayB\x02\x10\0\x12#\n\x0bfloat_array\x18\
-    \x08\x20\x03(\x02R\nfloatArrayB\x02\x10\0\x12!\n\x0cstring_array\x18\t\
-    \x20\x03(\tR\x0bstringArray\"a\n\x15ExecuteServiceRequest\x12\x10\n\x03k\
-    ey\x18\x01\x20\x01(\x07R\x03key\x12+\n\x04args\x18\x02\x20\x03(\x0b2\x17\
-    .ExecuteServiceArgumentR\x04args:\t\x80A\x01\xe0@*\xe8@\x02\"\xb0\x02\n\
-    \x1aListEntitiesCameraResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
-    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
-    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
-    R\x08uniqueId\x12.\n\x13disabled_by_default\x18\x05\x20\x01(\x08R\x11dis\
-    abledByDefault\x12\x12\n\x04icon\x18\x06\x20\x01(\tR\x04icon\x128\n\x0fe\
-    ntity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCatego\
-    ry:4\x8aA\x18InfoResponseProtoMessage\xf2@\x10USE_ESP32_CAMERA\xe0@+\xe8\
-    @\x01\"j\n\x13CameraImageResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
-    \x03key\x12\x12\n\x04data\x18\x02\x20\x01(\x0cR\x04data\x12\x12\n\x04don\
-    e\x18\x03\x20\x01(\x08R\x04done:\x19\xf2@\x10USE_ESP32_CAMERA\xe0@,\xe8@\
-    \x01\"b\n\x12CameraImageRequest\x12\x16\n\x06single\x18\x01\x20\x01(\x08\
-    R\x06single\x12\x16\n\x06stream\x18\x02\x20\x01(\x08R\x06stream:\x1c\x80\
-    A\x01\xf2@\x10USE_ESP32_CAMERA\xe0@-\xe8@\x02\"\xdc\n\n\x1bListEntitiesC\
-    limateResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\
+    entityCategory\x12!\n\x0cdevice_class\x18\t\x20\x01(\tR\x0bdeviceClass\
+    \x12\x1b\n\tdevice_id\x18\n\x20\x01(\rR\x08deviceId:.\x8aA\x18InfoRespon\
+    seProtoMessage\xf2@\nUSE_SWITCH\xe0@\x11\xe8@\x01\"\x8e\x01\n\x13SwitchS\
+    tateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05\
+    state\x18\x02\x20\x01(\x08R\x05state\x12\x1b\n\tdevice_id\x18\x03\x20\
+    \x01(\rR\x08deviceId:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\n\
+    USE_SWITCH\xe0@\x1a\xe8@\x01\"\x89\x01\n\x14SwitchCommandRequest\x12\x10\
+    \n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\
+    \x01(\x08R\x05state\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId\
+    :,\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\nUSE_SWITCH\xe0@!\xe8@\x02\
+    \"\xf3\x02\n\x1eListEntitiesTextSensorResponse\x12\x1b\n\tobject_id\x18\
+    \x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03k\
+    ey\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\
+    \x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\
+    \x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\x11disabled\
+    ByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCate\
+    goryR\x0eentityCategory\x12!\n\x0cdevice_class\x18\x08\x20\x01(\tR\x0bde\
+    viceClass\x12\x1b\n\tdevice_id\x18\t\x20\x01(\rR\x08deviceId:3\x8aA\x18I\
+    nfoResponseProtoMessage\xf2@\x0fUSE_TEXT_SENSOR\xe0@\x12\xe8@\x01\"\xbc\
+    \x01\n\x17TextSensorStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
+    \x03key\x12\x14\n\x05state\x18\x02\x20\x01(\tR\x05state\x12#\n\rmissing_\
+    state\x18\x03\x20\x01(\x08R\x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\
+    \x20\x01(\rR\x08deviceId:7\x8aA\x19StateResponseProtoMessage\x80A\x01\
+    \xf2@\x0fUSE_TEXT_SENSOR\xe0@\x1b\xe8@\x01\"`\n\x14SubscribeLogsRequest\
+    \x12\x1f\n\x05level\x18\x01\x20\x01(\x0e2\t.LogLevelR\x05level\x12\x1f\n\
+    \x0bdump_config\x18\x02\x20\x01(\x08R\ndumpConfig:\x06\xe0@\x1c\xe8@\x02\
+    \"\x81\x01\n\x15SubscribeLogsResponse\x12\x1f\n\x05level\x18\x01\x20\x01\
+    (\x0e2\t.LogLevelR\x05level\x12\x18\n\x07message\x18\x03\x20\x01(\x0cR\
+    \x07message\x12\x1f\n\x0bsend_failed\x18\x04\x20\x01(\x08R\nsendFailed:\
+    \x0c\xf8@\0\x80A\0\xe0@\x1d\xe8@\x01\"H\n\x1cNoiseEncryptionSetKeyReques\
+    t\x12\x10\n\x03key\x18\x01\x20\x01(\x0cR\x03key:\x16\xf2@\rUSE_API_NOISE\
+    \xe0@|\xe8@\x02\"Q\n\x1dNoiseEncryptionSetKeyResponse\x12\x18\n\x07succe\
+    ss\x18\x01\x20\x01(\x08R\x07success:\x16\xf2@\rUSE_API_NOISE\xe0@}\xe8@\
+    \x01\"/\n%SubscribeHomeassistantServicesRequest:\x06\xe0@\"\xe8@\x02\"A\
+    \n\x17HomeassistantServiceMap\x12\x10\n\x03key\x18\x01\x20\x01(\tR\x03ke\
+    y\x12\x14\n\x05value\x18\x02\x20\x01(\tR\x05value\"\x83\x02\n\x1cHomeass\
+    istantServiceResponse\x12\x18\n\x07service\x18\x01\x20\x01(\tR\x07servic\
+    e\x12,\n\x04data\x18\x02\x20\x03(\x0b2\x18.HomeassistantServiceMapR\x04d\
+    ata\x12=\n\rdata_template\x18\x03\x20\x03(\x0b2\x18.HomeassistantService\
+    MapR\x0cdataTemplate\x126\n\tvariables\x18\x04\x20\x03(\x0b2\x18.Homeass\
+    istantServiceMapR\tvariables\x12\x19\n\x08is_event\x18\x05\x20\x01(\x08R\
+    \x07isEvent:\t\x80A\x01\xe0@#\xe8@\x01\"-\n#SubscribeHomeAssistantStates\
+    Request:\x06\xe0@&\xe8@\x02\"|\n#SubscribeHomeAssistantStateResponse\x12\
+    \x1b\n\tentity_id\x18\x01\x20\x01(\tR\x08entityId\x12\x1c\n\tattribute\
+    \x18\x02\x20\x01(\tR\tattribute\x12\x12\n\x04once\x18\x03\x20\x01(\x08R\
+    \x04once:\x06\xe0@'\xe8@\x01\"x\n\x1aHomeAssistantStateResponse\x12\x1b\
+    \n\tentity_id\x18\x01\x20\x01(\tR\x08entityId\x12\x14\n\x05state\x18\x02\
+    \x20\x01(\tR\x05state\x12\x1c\n\tattribute\x18\x03\x20\x01(\tR\tattribut\
+    e:\t\x80A\x01\xe0@(\xe8@\x02\"\x18\n\x0eGetTimeRequest:\x06\xe0@$\xe8@\0\
+    \"A\n\x0fGetTimeResponse\x12#\n\repoch_seconds\x18\x01\x20\x01(\x07R\x0c\
+    epochSeconds:\t\x80A\x01\xe0@%\xe8@\0\"W\n\x1cListEntitiesServicesArgume\
+    nt\x12\x12\n\x04name\x18\x01\x20\x01(\tR\x04name\x12#\n\x04type\x18\x02\
+    \x20\x01(\x0e2\x0f.ServiceArgTypeR\x04type\"\x7f\n\x1cListEntitiesServic\
+    esResponse\x12\x12\n\x04name\x18\x01\x20\x01(\tR\x04name\x12\x10\n\x03ke\
+    y\x18\x02\x20\x01(\x07R\x03key\x121\n\x04args\x18\x03\x20\x03(\x0b2\x1d.\
+    ListEntitiesServicesArgumentR\x04args:\x06\xe0@)\xe8@\x01\"\x9b\x02\n\
+    \x16ExecuteServiceArgument\x12\x13\n\x05bool_\x18\x01\x20\x01(\x08R\x04b\
+    ool\x12\x1d\n\nlegacy_int\x18\x02\x20\x01(\x05R\tlegacyInt\x12\x15\n\x06\
+    float_\x18\x03\x20\x01(\x02R\x05float\x12\x17\n\x07string_\x18\x04\x20\
+    \x01(\tR\x06string\x12\x11\n\x04int_\x18\x05\x20\x01(\x11R\x03int\x12!\n\
+    \nbool_array\x18\x06\x20\x03(\x08R\tboolArrayB\x02\x10\0\x12\x1f\n\tint_\
+    array\x18\x07\x20\x03(\x11R\x08intArrayB\x02\x10\0\x12#\n\x0bfloat_array\
+    \x18\x08\x20\x03(\x02R\nfloatArrayB\x02\x10\0\x12!\n\x0cstring_array\x18\
+    \t\x20\x03(\tR\x0bstringArray\"a\n\x15ExecuteServiceRequest\x12\x10\n\
+    \x03key\x18\x01\x20\x01(\x07R\x03key\x12+\n\x04args\x18\x02\x20\x03(\x0b\
+    2\x17.ExecuteServiceArgumentR\x04args:\t\x80A\x01\xe0@*\xe8@\x02\"\xc7\
+    \x02\n\x1aListEntitiesCameraResponse\x12\x1b\n\tobject_id\x18\x01\x20\
+    \x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\
+    \x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\
+    \x20\x01(\tR\x08uniqueId\x12.\n\x13disabled_by_default\x18\x05\x20\x01(\
+    \x08R\x11disabledByDefault\x12\x12\n\x04icon\x18\x06\x20\x01(\tR\x04icon\
+    \x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0e\
+    entityCategory\x12\x1b\n\tdevice_id\x18\x08\x20\x01(\rR\x08deviceId:.\
+    \x8aA\x18InfoResponseProtoMessage\xf2@\nUSE_CAMERA\xe0@+\xe8@\x01\"\x9d\
+    \x01\n\x13CameraImageResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03\
+    key\x12\x12\n\x04data\x18\x02\x20\x01(\x0cR\x04data\x12\x12\n\x04done\
+    \x18\x03\x20\x01(\x08R\x04done\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\
+    \x08deviceId:/\x8aA\x19StateResponseProtoMessage\xf2@\nUSE_CAMERA\xe0@,\
+    \xe8@\x01\"\\\n\x12CameraImageRequest\x12\x16\n\x06single\x18\x01\x20\
+    \x01(\x08R\x06single\x12\x16\n\x06stream\x18\x02\x20\x01(\x08R\x06stream\
+    :\x16\x80A\x01\xf2@\nUSE_CAMERA\xe0@-\xe8@\x02\"\xf9\n\n\x1bListEntities\
+    ClimateResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\
     \x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\
     \x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\
     \x12@\n\x1csupports_current_temperature\x18\x05\x20\x01(\x08R\x1asupport\
@@ -29094,80 +30606,88 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x18supports_target_humidity\x18\x17\x20\x01(\x08R\x16supportsTargetHumi\
     dity\x12.\n\x13visual_min_humidity\x18\x18\x20\x01(\x02R\x11visualMinHum\
     idity\x12.\n\x13visual_max_humidity\x18\x19\x20\x01(\x02R\x11visualMaxHu\
-    midity:/\x8aA\x18InfoResponseProtoMessage\xf2@\x0bUSE_CLIMATE\xe0@.\xe8@\
-    \x01\"\xca\x05\n\x14ClimateStateResponse\x12\x10\n\x03key\x18\x01\x20\
-    \x01(\x07R\x03key\x12\x20\n\x04mode\x18\x02\x20\x01(\x0e2\x0c.ClimateMod\
-    eR\x04mode\x12/\n\x13current_temperature\x18\x03\x20\x01(\x02R\x12curren\
-    tTemperature\x12-\n\x12target_temperature\x18\x04\x20\x01(\x02R\x11targe\
-    tTemperature\x124\n\x16target_temperature_low\x18\x05\x20\x01(\x02R\x14t\
-    argetTemperatureLow\x126\n\x17target_temperature_high\x18\x06\x20\x01(\
-    \x02R\x15targetTemperatureHigh\x12,\n\x12unused_legacy_away\x18\x07\x20\
-    \x01(\x08R\x10unusedLegacyAway\x12&\n\x06action\x18\x08\x20\x01(\x0e2\
-    \x0e.ClimateActionR\x06action\x12*\n\x08fan_mode\x18\t\x20\x01(\x0e2\x0f\
-    .ClimateFanModeR\x07fanMode\x120\n\nswing_mode\x18\n\x20\x01(\x0e2\x11.C\
-    limateSwingModeR\tswingMode\x12&\n\x0fcustom_fan_mode\x18\x0b\x20\x01(\t\
-    R\rcustomFanMode\x12&\n\x06preset\x18\x0c\x20\x01(\x0e2\x0e.ClimatePrese\
-    tR\x06preset\x12#\n\rcustom_preset\x18\r\x20\x01(\tR\x0ccustomPreset\x12\
-    )\n\x10current_humidity\x18\x0e\x20\x01(\x02R\x0fcurrentHumidity\x12'\n\
-    \x0ftarget_humidity\x18\x0f\x20\x01(\x02R\x0etargetHumidity:3\x8aA\x19St\
-    ateResponseProtoMessage\x80A\x01\xf2@\x0bUSE_CLIMATE\xe0@/\xe8@\x01\"\
-    \x9f\x08\n\x15ClimateCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12\x19\n\x08has_mode\x18\x02\x20\x01(\x08R\x07hasMode\x12\
-    \x20\n\x04mode\x18\x03\x20\x01(\x0e2\x0c.ClimateModeR\x04mode\x124\n\x16\
-    has_target_temperature\x18\x04\x20\x01(\x08R\x14hasTargetTemperature\x12\
-    -\n\x12target_temperature\x18\x05\x20\x01(\x02R\x11targetTemperature\x12\
-    ;\n\x1ahas_target_temperature_low\x18\x06\x20\x01(\x08R\x17hasTargetTemp\
-    eratureLow\x124\n\x16target_temperature_low\x18\x07\x20\x01(\x02R\x14tar\
-    getTemperatureLow\x12=\n\x1bhas_target_temperature_high\x18\x08\x20\x01(\
-    \x08R\x18hasTargetTemperatureHigh\x126\n\x17target_temperature_high\x18\
-    \t\x20\x01(\x02R\x15targetTemperatureHigh\x123\n\x16unused_has_legacy_aw\
-    ay\x18\n\x20\x01(\x08R\x13unusedHasLegacyAway\x12,\n\x12unused_legacy_aw\
-    ay\x18\x0b\x20\x01(\x08R\x10unusedLegacyAway\x12\x20\n\x0chas_fan_mode\
-    \x18\x0c\x20\x01(\x08R\nhasFanMode\x12*\n\x08fan_mode\x18\r\x20\x01(\x0e\
-    2\x0f.ClimateFanModeR\x07fanMode\x12$\n\x0ehas_swing_mode\x18\x0e\x20\
-    \x01(\x08R\x0chasSwingMode\x120\n\nswing_mode\x18\x0f\x20\x01(\x0e2\x11.\
-    ClimateSwingModeR\tswingMode\x12-\n\x13has_custom_fan_mode\x18\x10\x20\
-    \x01(\x08R\x10hasCustomFanMode\x12&\n\x0fcustom_fan_mode\x18\x11\x20\x01\
-    (\tR\rcustomFanMode\x12\x1d\n\nhas_preset\x18\x12\x20\x01(\x08R\thasPres\
-    et\x12&\n\x06preset\x18\x13\x20\x01(\x0e2\x0e.ClimatePresetR\x06preset\
-    \x12*\n\x11has_custom_preset\x18\x14\x20\x01(\x08R\x0fhasCustomPreset\
-    \x12#\n\rcustom_preset\x18\x15\x20\x01(\tR\x0ccustomPreset\x12.\n\x13has\
-    _target_humidity\x18\x16\x20\x01(\x08R\x11hasTargetHumidity\x12'\n\x0fta\
-    rget_humidity\x18\x17\x20\x01(\x02R\x0etargetHumidity:\x17\x80A\x01\xf2@\
-    \x0bUSE_CLIMATE\xe0@0\xe8@\x02\"\xec\x03\n\x1aListEntitiesNumberResponse\
-    \x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\
-    \x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04n\
-    ame\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04ic\
-    on\x18\x05\x20\x01(\tR\x04icon\x12\x1b\n\tmin_value\x18\x06\x20\x01(\x02\
-    R\x08minValue\x12\x1b\n\tmax_value\x18\x07\x20\x01(\x02R\x08maxValue\x12\
-    \x12\n\x04step\x18\x08\x20\x01(\x02R\x04step\x12.\n\x13disabled_by_defau\
-    lt\x18\t\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\
-    \x18\n\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12.\n\x13uni\
-    t_of_measurement\x18\x0b\x20\x01(\tR\x11unitOfMeasurement\x12\x1f\n\x04m\
-    ode\x18\x0c\x20\x01(\x0e2\x0b.NumberModeR\x04mode\x12!\n\x0cdevice_class\
-    \x18\r\x20\x01(\tR\x0bdeviceClass:.\x8aA\x18InfoResponseProtoMessage\xf2\
-    @\nUSE_NUMBER\xe0@1\xe8@\x01\"\x96\x01\n\x13NumberStateResponse\x12\x10\
-    \n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\
-    \x01(\x02R\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08R\x0cmissi\
-    ngState:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE_NUMBER\
-    \xe0@2\xe8@\x01\"V\n\x14NumberCommandRequest\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x02R\x05state:\
-    \x16\x80A\x01\xf2@\nUSE_NUMBER\xe0@3\xe8@\x02\"\xc4\x02\n\x1aListEntitie\
-    sSelectResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\
-    \x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\
-    \x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\
-    \x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12\x18\n\x07options\x18\
-    \x06\x20\x03(\tR\x07options\x12.\n\x13disabled_by_default\x18\x07\x20\
-    \x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\x08\x20\
-    \x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory:.\x8aA\x18InfoResponseP\
-    rotoMessage\xf2@\nUSE_SELECT\xe0@4\xe8@\x01\"\x96\x01\n\x13SelectStateRe\
-    sponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\
+    midity\x12\x1b\n\tdevice_id\x18\x1a\x20\x01(\rR\x08deviceId:/\x8aA\x18In\
+    foResponseProtoMessage\xf2@\x0bUSE_CLIMATE\xe0@.\xe8@\x01\"\xe7\x05\n\
+    \x14ClimateStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\
+    \x12\x20\n\x04mode\x18\x02\x20\x01(\x0e2\x0c.ClimateModeR\x04mode\x12/\n\
+    \x13current_temperature\x18\x03\x20\x01(\x02R\x12currentTemperature\x12-\
+    \n\x12target_temperature\x18\x04\x20\x01(\x02R\x11targetTemperature\x124\
+    \n\x16target_temperature_low\x18\x05\x20\x01(\x02R\x14targetTemperatureL\
+    ow\x126\n\x17target_temperature_high\x18\x06\x20\x01(\x02R\x15targetTemp\
+    eratureHigh\x12,\n\x12unused_legacy_away\x18\x07\x20\x01(\x08R\x10unused\
+    LegacyAway\x12&\n\x06action\x18\x08\x20\x01(\x0e2\x0e.ClimateActionR\x06\
+    action\x12*\n\x08fan_mode\x18\t\x20\x01(\x0e2\x0f.ClimateFanModeR\x07fan\
+    Mode\x120\n\nswing_mode\x18\n\x20\x01(\x0e2\x11.ClimateSwingModeR\tswing\
+    Mode\x12&\n\x0fcustom_fan_mode\x18\x0b\x20\x01(\tR\rcustomFanMode\x12&\n\
+    \x06preset\x18\x0c\x20\x01(\x0e2\x0e.ClimatePresetR\x06preset\x12#\n\rcu\
+    stom_preset\x18\r\x20\x01(\tR\x0ccustomPreset\x12)\n\x10current_humidity\
+    \x18\x0e\x20\x01(\x02R\x0fcurrentHumidity\x12'\n\x0ftarget_humidity\x18\
+    \x0f\x20\x01(\x02R\x0etargetHumidity\x12\x1b\n\tdevice_id\x18\x10\x20\
+    \x01(\rR\x08deviceId:3\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\
+    \x0bUSE_CLIMATE\xe0@/\xe8@\x01\"\xd2\x08\n\x15ClimateCommandRequest\x12\
+    \x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x19\n\x08has_mode\x18\x02\
+    \x20\x01(\x08R\x07hasMode\x12\x20\n\x04mode\x18\x03\x20\x01(\x0e2\x0c.Cl\
+    imateModeR\x04mode\x124\n\x16has_target_temperature\x18\x04\x20\x01(\x08\
+    R\x14hasTargetTemperature\x12-\n\x12target_temperature\x18\x05\x20\x01(\
+    \x02R\x11targetTemperature\x12;\n\x1ahas_target_temperature_low\x18\x06\
+    \x20\x01(\x08R\x17hasTargetTemperatureLow\x124\n\x16target_temperature_l\
+    ow\x18\x07\x20\x01(\x02R\x14targetTemperatureLow\x12=\n\x1bhas_target_te\
+    mperature_high\x18\x08\x20\x01(\x08R\x18hasTargetTemperatureHigh\x126\n\
+    \x17target_temperature_high\x18\t\x20\x01(\x02R\x15targetTemperatureHigh\
+    \x123\n\x16unused_has_legacy_away\x18\n\x20\x01(\x08R\x13unusedHasLegacy\
+    Away\x12,\n\x12unused_legacy_away\x18\x0b\x20\x01(\x08R\x10unusedLegacyA\
+    way\x12\x20\n\x0chas_fan_mode\x18\x0c\x20\x01(\x08R\nhasFanMode\x12*\n\
+    \x08fan_mode\x18\r\x20\x01(\x0e2\x0f.ClimateFanModeR\x07fanMode\x12$\n\
+    \x0ehas_swing_mode\x18\x0e\x20\x01(\x08R\x0chasSwingMode\x120\n\nswing_m\
+    ode\x18\x0f\x20\x01(\x0e2\x11.ClimateSwingModeR\tswingMode\x12-\n\x13has\
+    _custom_fan_mode\x18\x10\x20\x01(\x08R\x10hasCustomFanMode\x12&\n\x0fcus\
+    tom_fan_mode\x18\x11\x20\x01(\tR\rcustomFanMode\x12\x1d\n\nhas_preset\
+    \x18\x12\x20\x01(\x08R\thasPreset\x12&\n\x06preset\x18\x13\x20\x01(\x0e2\
+    \x0e.ClimatePresetR\x06preset\x12*\n\x11has_custom_preset\x18\x14\x20\
+    \x01(\x08R\x0fhasCustomPreset\x12#\n\rcustom_preset\x18\x15\x20\x01(\tR\
+    \x0ccustomPreset\x12.\n\x13has_target_humidity\x18\x16\x20\x01(\x08R\x11\
+    hasTargetHumidity\x12'\n\x0ftarget_humidity\x18\x17\x20\x01(\x02R\x0etar\
+    getHumidity\x12\x1b\n\tdevice_id\x18\x18\x20\x01(\rR\x08deviceId:-\x8aA\
+    \x13CommandProtoMessage\x80A\x01\xf2@\x0bUSE_CLIMATE\xe0@0\xe8@\x02\"\
+    \x89\x04\n\x1aListEntitiesNumberResponse\x12\x1b\n\tobject_id\x18\x01\
+    \x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\
+    \x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\
+    \x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04ic\
+    on\x12\x1b\n\tmin_value\x18\x06\x20\x01(\x02R\x08minValue\x12\x1b\n\tmax\
+    _value\x18\x07\x20\x01(\x02R\x08maxValue\x12\x12\n\x04step\x18\x08\x20\
+    \x01(\x02R\x04step\x12.\n\x13disabled_by_default\x18\t\x20\x01(\x08R\x11\
+    disabledByDefault\x128\n\x0fentity_category\x18\n\x20\x01(\x0e2\x0f.Enti\
+    tyCategoryR\x0eentityCategory\x12.\n\x13unit_of_measurement\x18\x0b\x20\
+    \x01(\tR\x11unitOfMeasurement\x12\x1f\n\x04mode\x18\x0c\x20\x01(\x0e2\
+    \x0b.NumberModeR\x04mode\x12!\n\x0cdevice_class\x18\r\x20\x01(\tR\x0bdev\
+    iceClass\x12\x1b\n\tdevice_id\x18\x0e\x20\x01(\rR\x08deviceId:.\x8aA\x18\
+    InfoResponseProtoMessage\xf2@\nUSE_NUMBER\xe0@1\xe8@\x01\"\xb3\x01\n\x13\
+    NumberStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\
+    \x14\n\x05state\x18\x02\x20\x01(\x02R\x05state\x12#\n\rmissing_state\x18\
+    \x03\x20\x01(\x08R\x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\
+    \rR\x08deviceId:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE_N\
+    UMBER\xe0@2\xe8@\x01\"\x89\x01\n\x14NumberCommandRequest\x12\x10\n\x03ke\
+    y\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x02R\
+    \x05state\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:,\x8aA\
+    \x13CommandProtoMessage\x80A\x01\xf2@\nUSE_NUMBER\xe0@3\xe8@\x02\"\xe1\
+    \x02\n\x1aListEntitiesSelectResponse\x12\x1b\n\tobject_id\x18\x01\x20\
+    \x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\
+    \x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\
+    \x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\
+    \x12\x18\n\x07options\x18\x06\x20\x03(\tR\x07options\x12.\n\x13disabled_\
+    by_default\x18\x07\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_c\
+    ategory\x18\x08\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12\
+    \x1b\n\tdevice_id\x18\t\x20\x01(\rR\x08deviceId:.\x8aA\x18InfoResponsePr\
+    otoMessage\xf2@\nUSE_SELECT\xe0@4\xe8@\x01\"\xb3\x01\n\x13SelectStateRes\
+    ponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\
     \x18\x02\x20\x01(\tR\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08\
-    R\x0cmissingState:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE\
-    _SELECT\xe0@5\xe8@\x01\"V\n\x14SelectCommandRequest\x12\x10\n\x03key\x18\
-    \x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\tR\x05stat\
-    e:\x16\x80A\x01\xf2@\nUSE_SELECT\xe0@6\xe8@\x02\"\x94\x03\n\x19ListEntit\
-    iesSirenResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\
+    R\x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\x08deviceId:2\
+    \x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE_SELECT\xe0@5\xe8@\
+    \x01\"\x89\x01\n\x14SelectCommandRequest\x12\x10\n\x03key\x18\x01\x20\
+    \x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\tR\x05state\x12\
+    \x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:,\x8aA\x13CommandProto\
+    Message\x80A\x01\xf2@\nUSE_SELECT\xe0@6\xe8@\x02\"\xb1\x03\n\x19ListEnti\
+    tiesSirenResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\
     \x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\
     \x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueI\
     d\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_de\
@@ -29175,51 +30695,58 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x07\x20\x03(\tR\x05tones\x12+\n\x11supports_duration\x18\x08\x20\x01(\
     \x08R\x10supportsDuration\x12'\n\x0fsupports_volume\x18\t\x20\x01(\x08R\
     \x0esupportsVolume\x128\n\x0fentity_category\x18\n\x20\x01(\x0e2\x0f.Ent\
-    ityCategoryR\x0eentityCategory:-\x8aA\x18InfoResponseProtoMessage\xf2@\t\
-    USE_SIREN\xe0@7\xe8@\x01\"o\n\x12SirenStateResponse\x12\x10\n\x03key\x18\
-    \x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05st\
-    ate:1\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\tUSE_SIREN\xe0@8\
-    \xe8@\x01\"\x96\x02\n\x13SirenCommandRequest\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\x07R\x03key\x12\x1b\n\thas_state\x18\x02\x20\x01(\x08R\x08hasS\
-    tate\x12\x14\n\x05state\x18\x03\x20\x01(\x08R\x05state\x12\x19\n\x08has_\
-    tone\x18\x04\x20\x01(\x08R\x07hasTone\x12\x12\n\x04tone\x18\x05\x20\x01(\
-    \tR\x04tone\x12!\n\x0chas_duration\x18\x06\x20\x01(\x08R\x0bhasDuration\
-    \x12\x1a\n\x08duration\x18\x07\x20\x01(\rR\x08duration\x12\x1d\n\nhas_vo\
-    lume\x18\x08\x20\x01(\x08R\thasVolume\x12\x16\n\x06volume\x18\t\x20\x01(\
-    \x02R\x06volume:\x15\x80A\x01\xf2@\tUSE_SIREN\xe0@9\xe8@\x02\"\xb6\x03\n\
-    \x18ListEntitiesLockResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
-    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
-    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
-    R\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13di\
-    sabled_by_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fe\
-    ntity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCatego\
-    ry\x12#\n\rassumed_state\x18\x08\x20\x01(\x08R\x0cassumedState\x12#\n\rs\
-    upports_open\x18\t\x20\x01(\x08R\x0csupportsOpen\x12#\n\rrequires_code\
-    \x18\n\x20\x01(\x08R\x0crequiresCode\x12\x1f\n\x0bcode_format\x18\x0b\
-    \x20\x01(\tR\ncodeFormat:,\x8aA\x18InfoResponseProtoMessage\xf2@\x08USE_\
-    LOCK\xe0@:\xe8@\x01\"y\n\x11LockStateResponse\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\x07R\x03key\x12\x20\n\x05state\x18\x02\x20\x01(\x0e2\n.LockSta\
-    teR\x05state:0\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x08USE_LO\
-    CK\xe0@;\xe8@\x01\"\x93\x01\n\x12LockCommandRequest\x12\x10\n\x03key\x18\
-    \x01\x20\x01(\x07R\x03key\x12&\n\x07command\x18\x02\x20\x01(\x0e2\x0c.Lo\
-    ckCommandR\x07command\x12\x19\n\x08has_code\x18\x03\x20\x01(\x08R\x07has\
-    Code\x12\x12\n\x04code\x18\x04\x20\x01(\tR\x04code:\x14\x80A\x01\xf2@\
-    \x08USE_LOCK\xe0@<\xe8@\x02\"\xcd\x02\n\x1aListEntitiesButtonResponse\
-    \x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\
-    \x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04n\
-    ame\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04ic\
-    on\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\
-    \x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\x07\x20\
-    \x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12!\n\x0cdevice_class\
-    \x18\x08\x20\x01(\tR\x0bdeviceClass:.\x8aA\x18InfoResponseProtoMessage\
-    \xf2@\nUSE_BUTTON\xe0@=\xe8@\x01\"@\n\x14ButtonCommandRequest\x12\x10\n\
-    \x03key\x18\x01\x20\x01(\x07R\x03key:\x16\x80A\x01\xf2@\nUSE_BUTTON\xe0@\
-    >\xe8@\x02\"\xe5\x01\n\x1aMediaPlayerSupportedFormat\x12\x16\n\x06format\
-    \x18\x01\x20\x01(\tR\x06format\x12\x1f\n\x0bsample_rate\x18\x02\x20\x01(\
-    \rR\nsampleRate\x12!\n\x0cnum_channels\x18\x03\x20\x01(\rR\x0bnumChannel\
-    s\x123\n\x07purpose\x18\x04\x20\x01(\x0e2\x19.MediaPlayerFormatPurposeR\
+    ityCategoryR\x0eentityCategory\x12\x1b\n\tdevice_id\x18\x0b\x20\x01(\rR\
+    \x08deviceId:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_SIREN\xe0@7\
+    \xe8@\x01\"\x8c\x01\n\x12SirenStateResponse\x12\x10\n\x03key\x18\x01\x20\
+    \x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\x08R\x05state\x12\
+    \x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:1\x8aA\x19StateRespons\
+    eProtoMessage\x80A\x01\xf2@\tUSE_SIREN\xe0@8\xe8@\x01\"\xc9\x02\n\x13Sir\
+    enCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x1b\n\
+    \thas_state\x18\x02\x20\x01(\x08R\x08hasState\x12\x14\n\x05state\x18\x03\
+    \x20\x01(\x08R\x05state\x12\x19\n\x08has_tone\x18\x04\x20\x01(\x08R\x07h\
+    asTone\x12\x12\n\x04tone\x18\x05\x20\x01(\tR\x04tone\x12!\n\x0chas_durat\
+    ion\x18\x06\x20\x01(\x08R\x0bhasDuration\x12\x1a\n\x08duration\x18\x07\
+    \x20\x01(\rR\x08duration\x12\x1d\n\nhas_volume\x18\x08\x20\x01(\x08R\tha\
+    sVolume\x12\x16\n\x06volume\x18\t\x20\x01(\x02R\x06volume\x12\x1b\n\tdev\
+    ice_id\x18\n\x20\x01(\rR\x08deviceId:+\x8aA\x13CommandProtoMessage\x80A\
+    \x01\xf2@\tUSE_SIREN\xe0@9\xe8@\x02\"\xd3\x03\n\x18ListEntitiesLockRespo\
+    nse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03ke\
+    y\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04\
+    name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04i\
+    con\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\x06\
+    \x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\x07\
+    \x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12#\n\rassumed_sta\
+    te\x18\x08\x20\x01(\x08R\x0cassumedState\x12#\n\rsupports_open\x18\t\x20\
+    \x01(\x08R\x0csupportsOpen\x12#\n\rrequires_code\x18\n\x20\x01(\x08R\x0c\
+    requiresCode\x12\x1f\n\x0bcode_format\x18\x0b\x20\x01(\tR\ncodeFormat\
+    \x12\x1b\n\tdevice_id\x18\x0c\x20\x01(\rR\x08deviceId:,\x8aA\x18InfoResp\
+    onseProtoMessage\xf2@\x08USE_LOCK\xe0@:\xe8@\x01\"\x96\x01\n\x11LockStat\
+    eResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x20\n\x05sta\
+    te\x18\x02\x20\x01(\x0e2\n.LockStateR\x05state\x12\x1b\n\tdevice_id\x18\
+    \x03\x20\x01(\rR\x08deviceId:0\x8aA\x19StateResponseProtoMessage\x80A\
+    \x01\xf2@\x08USE_LOCK\xe0@;\xe8@\x01\"\xc6\x01\n\x12LockCommandRequest\
+    \x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12&\n\x07command\x18\x02\
+    \x20\x01(\x0e2\x0c.LockCommandR\x07command\x12\x19\n\x08has_code\x18\x03\
+    \x20\x01(\x08R\x07hasCode\x12\x12\n\x04code\x18\x04\x20\x01(\tR\x04code\
+    \x12\x1b\n\tdevice_id\x18\x05\x20\x01(\rR\x08deviceId:*\x8aA\x13CommandP\
+    rotoMessage\x80A\x01\xf2@\x08USE_LOCK\xe0@<\xe8@\x02\"\xea\x02\n\x1aList\
+    EntitiesButtonResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objec\
+    tId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\
+    \x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uni\
+    queId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_b\
+    y_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_ca\
+    tegory\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12!\
+    \n\x0cdevice_class\x18\x08\x20\x01(\tR\x0bdeviceClass\x12\x1b\n\tdevice_\
+    id\x18\t\x20\x01(\rR\x08deviceId:.\x8aA\x18InfoResponseProtoMessage\xf2@\
+    \nUSE_BUTTON\xe0@=\xe8@\x01\"s\n\x14ButtonCommandRequest\x12\x10\n\x03ke\
+    y\x18\x01\x20\x01(\x07R\x03key\x12\x1b\n\tdevice_id\x18\x02\x20\x01(\rR\
+    \x08deviceId:,\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\nUSE_BUTTON\xe0\
+    @>\xe8@\x02\"\xe5\x01\n\x1aMediaPlayerSupportedFormat\x12\x16\n\x06forma\
+    t\x18\x01\x20\x01(\tR\x06format\x12\x1f\n\x0bsample_rate\x18\x02\x20\x01\
+    (\rR\nsampleRate\x12!\n\x0cnum_channels\x18\x03\x20\x01(\rR\x0bnumChanne\
+    ls\x123\n\x07purpose\x18\x04\x20\x01(\x0e2\x19.MediaPlayerFormatPurposeR\
     \x07purpose\x12!\n\x0csample_bytes\x18\x05\x20\x01(\rR\x0bsampleBytes:\
-    \x13\xf2@\x10USE_MEDIA_PLAYER\"\xa6\x03\n\x1fListEntitiesMediaPlayerResp\
+    \x13\xf2@\x10USE_MEDIA_PLAYER\"\xc3\x03\n\x1fListEntitiesMediaPlayerResp\
     onse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03k\
     ey\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\
     \x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\
@@ -29228,470 +30755,493 @@ static file_descriptor_proto_data: &'static [u8] = b"\
     \x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12%\n\x0esuppo\
     rts_pause\x18\x08\x20\x01(\x08R\rsupportsPause\x12H\n\x11supported_forma\
     ts\x18\t\x20\x03(\x0b2\x1b.MediaPlayerSupportedFormatR\x10supportedForma\
-    ts:4\x8aA\x18InfoResponseProtoMessage\xf2@\x10USE_MEDIA_PLAYER\xe0@?\xe8\
-    @\x01\"\xbd\x01\n\x18MediaPlayerStateResponse\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\x07R\x03key\x12'\n\x05state\x18\x02\x20\x01(\x0e2\x11.MediaPla\
-    yerStateR\x05state\x12\x16\n\x06volume\x18\x03\x20\x01(\x02R\x06volume\
-    \x12\x14\n\x05muted\x18\x04\x20\x01(\x08R\x05muted:8\x8aA\x19StateRespon\
-    seProtoMessage\x80A\x01\xf2@\x10USE_MEDIA_PLAYER\xe0@@\xe8@\x01\"\xe2\
-    \x02\n\x19MediaPlayerCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12\x1f\n\x0bhas_command\x18\x02\x20\x01(\x08R\nhasCommand\
-    \x12-\n\x07command\x18\x03\x20\x01(\x0e2\x13.MediaPlayerCommandR\x07comm\
-    and\x12\x1d\n\nhas_volume\x18\x04\x20\x01(\x08R\thasVolume\x12\x16\n\x06\
-    volume\x18\x05\x20\x01(\x02R\x06volume\x12\"\n\rhas_media_url\x18\x06\
-    \x20\x01(\x08R\x0bhasMediaUrl\x12\x1b\n\tmedia_url\x18\x07\x20\x01(\tR\
-    \x08mediaUrl\x12)\n\x10has_announcement\x18\x08\x20\x01(\x08R\x0fhasAnno\
-    uncement\x12\"\n\x0cannouncement\x18\t\x20\x01(\x08R\x0cannouncement:\
-    \x1c\x80A\x01\xf2@\x10USE_MEDIA_PLAYER\xe0@A\xe8@\x02\"_\n)SubscribeBlue\
-    toothLEAdvertisementsRequest\x12\x14\n\x05flags\x18\x01\x20\x01(\rR\x05f\
-    lags:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@B\xe8@\x02\"c\n\x14BluetoothSe\
-    rviceData\x12\x12\n\x04uuid\x18\x01\x20\x01(\tR\x04uuid\x12#\n\x0blegacy\
-    _data\x18\x02\x20\x03(\rR\nlegacyDataB\x02\x18\x01\x12\x12\n\x04data\x18\
-    \x03\x20\x01(\x0cR\x04data\"\xcb\x02\n\x20BluetoothLEAdvertisementRespon\
-    se\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x12\n\x04na\
-    me\x18\x02\x20\x01(\x0cR\x04name\x12\x12\n\x04rssi\x18\x03\x20\x01(\x11R\
-    \x04rssi\x12#\n\rservice_uuids\x18\x04\x20\x03(\tR\x0cserviceUuids\x128\
-    \n\x0cservice_data\x18\x05\x20\x03(\x0b2\x15.BluetoothServiceDataR\x0bse\
-    rviceData\x12B\n\x11manufacturer_data\x18\x06\x20\x03(\x0b2\x15.Bluetoot\
-    hServiceDataR\x10manufacturerData\x12!\n\x0caddress_type\x18\x07\x20\x01\
-    (\rR\x0baddressType:\x1f\x80A\x01\xf2@\x13USE_BLUETOOTH_PROXY\xe0@C\xe8@\
-    \x01\"\x82\x01\n\x1bBluetoothLERawAdvertisement\x12\x18\n\x07address\x18\
-    \x01\x20\x01(\x04R\x07address\x12\x12\n\x04rssi\x18\x02\x20\x01(\x11R\
-    \x04rssi\x12!\n\x0caddress_type\x18\x03\x20\x01(\rR\x0baddressType\x12\
-    \x12\n\x04data\x18\x04\x20\x01(\x0cR\x04data\"\x8d\x01\n$BluetoothLERawA\
-    dvertisementsResponse\x12D\n\x0eadvertisements\x18\x01\x20\x03(\x0b2\x1c\
-    .BluetoothLERawAdvertisementR\x0eadvertisements:\x1f\x80A\x01\xf2@\x13US\
-    E_BLUETOOTH_PROXY\xe0@]\xe8@\x01\"\xdd\x01\n\x16BluetoothDeviceRequest\
-    \x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12>\n\x0crequest\
-    _type\x18\x02\x20\x01(\x0e2\x1b.BluetoothDeviceRequestTypeR\x0brequestTy\
-    pe\x12(\n\x10has_address_type\x18\x03\x20\x01(\x08R\x0ehasAddressType\
-    \x12!\n\x0caddress_type\x18\x04\x20\x01(\rR\x0baddressType:\x1c\xf2@\x13\
-    USE_BLUETOOTH_PROXY\xe0@D\xe8@\x02\"\xa1\x01\n!BluetoothDeviceConnection\
-    Response\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x1c\n\
-    \tconnected\x18\x02\x20\x01(\x08R\tconnected\x12\x10\n\x03mtu\x18\x03\
-    \x20\x01(\rR\x03mtu\x12\x14\n\x05error\x18\x04\x20\x01(\x05R\x05error:\
-    \x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@E\xe8@\x01\"Y\n\x1fBluetoothGATTGet\
-    ServicesRequest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address:\
-    \x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@F\xe8@\x02\"E\n\x17BluetoothGATTDes\
-    criptor\x12\x12\n\x04uuid\x18\x01\x20\x03(\x04R\x04uuid\x12\x16\n\x06han\
-    dle\x18\x02\x20\x01(\rR\x06handle\"\xa5\x01\n\x1bBluetoothGATTCharacteri\
-    stic\x12\x12\n\x04uuid\x18\x01\x20\x03(\x04R\x04uuid\x12\x16\n\x06handle\
-    \x18\x02\x20\x01(\rR\x06handle\x12\x1e\n\nproperties\x18\x03\x20\x01(\rR\
-    \nproperties\x12:\n\x0bdescriptors\x18\x04\x20\x03(\x0b2\x18.BluetoothGA\
-    TTDescriptorR\x0bdescriptors\"\x8a\x01\n\x14BluetoothGATTService\x12\x12\
-    \n\x04uuid\x18\x01\x20\x03(\x04R\x04uuid\x12\x16\n\x06handle\x18\x02\x20\
-    \x01(\rR\x06handle\x12F\n\x0fcharacteristics\x18\x03\x20\x03(\x0b2\x1c.B\
-    luetoothGATTCharacteristicR\x0fcharacteristics\"\x8d\x01\n\x20BluetoothG\
-    ATTGetServicesResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07add\
-    ress\x121\n\x08services\x18\x02\x20\x03(\x0b2\x15.BluetoothGATTServiceR\
-    \x08services:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@G\xe8@\x01\"^\n$Blueto\
-    othGATTGetServicesDoneResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04\
-    R\x07address:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@H\xe8@\x01\"j\n\x18Blu\
-    etoothGATTReadRequest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07addr\
-    ess\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle:\x1c\xf2@\x13USE_B\
-    LUETOOTH_PROXY\xe0@I\xe8@\x02\"\x7f\n\x19BluetoothGATTReadResponse\x12\
-    \x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06handle\
-    \x18\x02\x20\x01(\rR\x06handle\x12\x12\n\x04data\x18\x03\x20\x01(\x0cR\
-    \x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@J\xe8@\x01\"\x9b\x01\n\x19\
-    BluetoothGATTWriteRequest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07\
-    address\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x1a\n\x08r\
-    esponse\x18\x03\x20\x01(\x08R\x08response\x12\x12\n\x04data\x18\x04\x20\
-    \x01(\x0cR\x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@K\xe8@\x02\"t\n\
-    \"BluetoothGATTReadDescriptorRequest\x12\x18\n\x07address\x18\x01\x20\
-    \x01(\x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle:\
-    \x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@L\xe8@\x02\"\x89\x01\n#BluetoothGAT\
-    TWriteDescriptorRequest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07ad\
-    dress\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x12\n\x04dat\
-    a\x18\x03\x20\x01(\x0cR\x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@M\
-    \xe8@\x02\"\x84\x01\n\x1aBluetoothGATTNotifyRequest\x12\x18\n\x07address\
-    \x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\r\
-    R\x06handle\x12\x16\n\x06enable\x18\x03\x20\x01(\x08R\x06enable:\x1c\xf2\
-    @\x13USE_BLUETOOTH_PROXY\xe0@N\xe8@\x02\"\x85\x01\n\x1fBluetoothGATTNoti\
-    fyDataResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\
-    \x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x12\n\x04data\x18\x03\
-    \x20\x01(\x0cR\x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@O\xe8@\x01\"\
-    H\n(SubscribeBluetoothConnectionsFreeRequest:\x1c\xf2@\x13USE_BLUETOOTH_\
-    PROXY\xe0@P\xe8@\x02\"\x88\x01\n\x20BluetoothConnectionsFreeResponse\x12\
-    \x12\n\x04free\x18\x01\x20\x01(\rR\x04free\x12\x14\n\x05limit\x18\x02\
-    \x20\x01(\rR\x05limit\x12\x1c\n\tallocated\x18\x03\x20\x03(\x04R\talloca\
-    ted:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@Q\xe8@\x01\"\x82\x01\n\x1aBluet\
-    oothGATTErrorResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07addr\
-    ess\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x14\n\x05error\
-    \x18\x03\x20\x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@R\
-    \xe8@\x01\"l\n\x1aBluetoothGATTWriteResponse\x12\x18\n\x07address\x18\
-    \x01\x20\x01(\x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\
-    \x06handle:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@S\xe8@\x01\"m\n\x1bBluet\
-    oothGATTNotifyResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07add\
-    ress\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle:\x1c\xf2@\x13USE_\
-    BLUETOOTH_PROXY\xe0@T\xe8@\x01\"\x86\x01\n\x1eBluetoothDevicePairingResp\
-    onse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06\
-    paired\x18\x02\x20\x01(\x08R\x06paired\x12\x14\n\x05error\x18\x03\x20\
-    \x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@U\xe8@\x01\"\
-    \x8a\x01\n\x20BluetoothDeviceUnpairingResponse\x12\x18\n\x07address\x18\
-    \x01\x20\x01(\x04R\x07address\x12\x18\n\x07success\x18\x02\x20\x01(\x08R\
-    \x07success\x12\x14\n\x05error\x18\x03\x20\x01(\x05R\x05error:\x1c\xf2@\
-    \x13USE_BLUETOOTH_PROXY\xe0@V\xe8@\x01\"K\n+UnsubscribeBluetoothLEAdvert\
-    isementsRequest:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@W\xe8@\x02\"\x8b\
-    \x01\n!BluetoothDeviceClearCacheResponse\x12\x18\n\x07address\x18\x01\
-    \x20\x01(\x04R\x07address\x12\x18\n\x07success\x18\x02\x20\x01(\x08R\x07\
-    success\x12\x14\n\x05error\x18\x03\x20\x01(\x05R\x05error:\x1c\xf2@\x13U\
-    SE_BLUETOOTH_PROXY\xe0@X\xe8@\x01\"\x96\x01\n\x1dBluetoothScannerStateRe\
-    sponse\x12,\n\x05state\x18\x01\x20\x01(\x0e2\x16.BluetoothScannerStateR\
-    \x05state\x12)\n\x04mode\x18\x02\x20\x01(\x0e2\x15.BluetoothScannerModeR\
-    \x04mode:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@~\xe8@\x01\"i\n\x1eBluetoo\
-    thScannerSetModeRequest\x12)\n\x04mode\x18\x01\x20\x01(\x0e2\x15.Bluetoo\
-    thScannerModeR\x04mode:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@\x7f\xe8@\
-    \x02\"r\n\x1eSubscribeVoiceAssistantRequest\x12\x1c\n\tsubscribe\x18\x01\
-    \x20\x01(\x08R\tsubscribe\x12\x14\n\x05flags\x18\x02\x20\x01(\rR\x05flag\
-    s:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@Y\xe8@\x02\"\x9f\x01\n\x1bVoiceAs\
-    sistantAudioSettings\x126\n\x17noise_suppression_level\x18\x01\x20\x01(\
-    \rR\x15noiseSuppressionLevel\x12\x1b\n\tauto_gain\x18\x02\x20\x01(\rR\
-    \x08autoGain\x12+\n\x11volume_multiplier\x18\x03\x20\x01(\x02R\x10volume\
-    Multiplier\"\xf9\x01\n\x15VoiceAssistantRequest\x12\x14\n\x05start\x18\
-    \x01\x20\x01(\x08R\x05start\x12'\n\x0fconversation_id\x18\x02\x20\x01(\t\
-    R\x0econversationId\x12\x14\n\x05flags\x18\x03\x20\x01(\rR\x05flags\x12C\
-    \n\x0eaudio_settings\x18\x04\x20\x01(\x0b2\x1c.VoiceAssistantAudioSettin\
-    gsR\raudioSettings\x12(\n\x10wake_word_phrase\x18\x05\x20\x01(\tR\x0ewak\
-    eWordPhrase:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@Z\xe8@\x01\"`\n\x16Voic\
-    eAssistantResponse\x12\x12\n\x04port\x18\x01\x20\x01(\rR\x04port\x12\x14\
-    \n\x05error\x18\x02\x20\x01(\x08R\x05error:\x1c\xf2@\x13USE_VOICE_ASSIST\
-    ANT\xe0@[\xe8@\x02\"C\n\x17VoiceAssistantEventData\x12\x12\n\x04name\x18\
-    \x01\x20\x01(\tR\x04name\x12\x14\n\x05value\x18\x02\x20\x01(\tR\x05value\
-    \"\x9e\x01\n\x1bVoiceAssistantEventResponse\x123\n\nevent_type\x18\x01\
-    \x20\x01(\x0e2\x14.VoiceAssistantEventR\teventType\x12,\n\x04data\x18\
-    \x02\x20\x03(\x0b2\x18.VoiceAssistantEventDataR\x04data:\x1c\xf2@\x13USE\
-    _VOICE_ASSISTANT\xe0@\\\xe8@\x02\"Y\n\x13VoiceAssistantAudio\x12\x12\n\
-    \x04data\x18\x01\x20\x01(\x0cR\x04data\x12\x10\n\x03end\x18\x02\x20\x01(\
-    \x08R\x03end:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@j\xe8@\0\"\x8e\x02\n\
-    \x20VoiceAssistantTimerEventResponse\x128\n\nevent_type\x18\x01\x20\x01(\
-    \x0e2\x19.VoiceAssistantTimerEventR\teventType\x12\x19\n\x08timer_id\x18\
-    \x02\x20\x01(\tR\x07timerId\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04nam\
-    e\x12#\n\rtotal_seconds\x18\x04\x20\x01(\rR\x0ctotalSeconds\x12!\n\x0cse\
-    conds_left\x18\x05\x20\x01(\rR\x0bsecondsLeft\x12\x1b\n\tis_active\x18\
-    \x06\x20\x01(\x08R\x08isActive:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@s\
-    \xe8@\x02\"\xcd\x01\n\x1dVoiceAssistantAnnounceRequest\x12\x19\n\x08medi\
-    a_id\x18\x01\x20\x01(\tR\x07mediaId\x12\x12\n\x04text\x18\x02\x20\x01(\t\
-    R\x04text\x120\n\x14preannounce_media_id\x18\x03\x20\x01(\tR\x12preannou\
-    nceMediaId\x12-\n\x12start_conversation\x18\x04\x20\x01(\x08R\x11startCo\
-    nversation:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@w\xe8@\x02\"X\n\x1eVoice\
-    AssistantAnnounceFinished\x12\x18\n\x07success\x18\x01\x20\x01(\x08R\x07\
-    success:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@x\xe8@\x01\"r\n\x16VoiceAss\
-    istantWakeWord\x12\x0e\n\x02id\x18\x01\x20\x01(\tR\x02id\x12\x1b\n\twake\
-    _word\x18\x02\x20\x01(\tR\x08wakeWord\x12+\n\x11trained_languages\x18\
-    \x03\x20\x03(\tR\x10trainedLanguages\"B\n\"VoiceAssistantConfigurationRe\
-    quest:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@y\xe8@\x02\"\xed\x01\n#VoiceA\
-    ssistantConfigurationResponse\x12I\n\x14available_wake_words\x18\x01\x20\
-    \x03(\x0b2\x17.VoiceAssistantWakeWordR\x12availableWakeWords\x12*\n\x11a\
-    ctive_wake_words\x18\x02\x20\x03(\tR\x0factiveWakeWords\x121\n\x15max_ac\
-    tive_wake_words\x18\x03\x20\x01(\rR\x12maxActiveWakeWords:\x1c\xf2@\x13U\
-    SE_VOICE_ASSISTANT\xe0@z\xe8@\x01\"j\n\x1eVoiceAssistantSetConfiguration\
-    \x12*\n\x11active_wake_words\x18\x01\x20\x03(\tR\x0factiveWakeWords:\x1c\
-    \xf2@\x13USE_VOICE_ASSISTANT\xe0@{\xe8@\x02\"\xc7\x03\n%ListEntitiesAlar\
-    mControlPanelResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08object\
-    Id\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\
-    \x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uni\
-    queId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_b\
-    y_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_ca\
-    tegory\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12-\
-    \n\x12supported_features\x18\x08\x20\x01(\rR\x11supportedFeatures\x12#\n\
-    \rrequires_code\x18\t\x20\x01(\x08R\x0crequiresCode\x12/\n\x14requires_c\
-    ode_to_arm\x18\n\x20\x01(\x08R\x11requiresCodeToArm:;\x8aA\x18InfoRespon\
-    seProtoMessage\xf2@\x17USE_ALARM_CONTROL_PANEL\xe0@^\xe8@\x01\"\xa2\x01\
-    \n\x1eAlarmControlPanelStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12-\n\x05state\x18\x02\x20\x01(\x0e2\x17.AlarmControlPanel\
-    StateR\x05state:?\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x17USE\
-    _ALARM_CONTROL_PANEL\xe0@_\xe8@\x01\"\xa6\x01\n\x1fAlarmControlPanelComm\
-    andRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x128\n\x07comma\
-    nd\x18\x02\x20\x01(\x0e2\x1e.AlarmControlPanelStateCommandR\x07command\
-    \x12\x12\n\x04code\x18\x03\x20\x01(\tR\x04code:#\x80A\x01\xf2@\x17USE_AL\
-    ARM_CONTROL_PANEL\xe0@`\xe8@\x02\"\x9d\x03\n\x18ListEntitiesTextResponse\
-    \x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\
-    \x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04n\
-    ame\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04ic\
-    on\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\
-    \x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\x07\x20\
-    \x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12\x1d\n\nmin_length\
-    \x18\x08\x20\x01(\rR\tminLength\x12\x1d\n\nmax_length\x18\t\x20\x01(\rR\
-    \tmaxLength\x12\x18\n\x07pattern\x18\n\x20\x01(\tR\x07pattern\x12\x1d\n\
-    \x04mode\x18\x0b\x20\x01(\x0e2\t.TextModeR\x04mode:,\x8aA\x18InfoRespons\
-    eProtoMessage\xf2@\x08USE_TEXT\xe0@a\xe8@\x01\"\x92\x01\n\x11TextStateRe\
-    sponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\
-    \x18\x02\x20\x01(\tR\x05state\x12#\n\rmissing_state\x18\x03\x20\x01(\x08\
-    R\x0cmissingState:0\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x08U\
-    SE_TEXT\xe0@b\xe8@\x01\"R\n\x12TextCommandRequest\x12\x10\n\x03key\x18\
-    \x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\x20\x01(\tR\x05stat\
-    e:\x14\x80A\x01\xf2@\x08USE_TEXT\xe0@c\xe8@\x02\"\xaf\x02\n\x18ListEntit\
-    iesDateResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\
-    \x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\
-    \x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\
-    \x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_def\
-    ault\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_categor\
-    y\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory:5\x8aA\x18\
-    InfoResponseProtoMessage\xf2@\x11USE_DATETIME_DATE\xe0@d\xe8@\x01\"\xc1\
-    \x01\n\x11DateStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03ke\
-    y\x12#\n\rmissing_state\x18\x02\x20\x01(\x08R\x0cmissingState\x12\x12\n\
-    \x04year\x18\x03\x20\x01(\rR\x04year\x12\x14\n\x05month\x18\x04\x20\x01(\
-    \rR\x05month\x12\x10\n\x03day\x18\x05\x20\x01(\rR\x03day:9\x8aA\x19State\
-    ResponseProtoMessage\x80A\x01\xf2@\x11USE_DATETIME_DATE\xe0@e\xe8@\x01\"\
-    \x81\x01\n\x12DateCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
+    ts\x12\x1b\n\tdevice_id\x18\n\x20\x01(\rR\x08deviceId:4\x8aA\x18InfoResp\
+    onseProtoMessage\xf2@\x10USE_MEDIA_PLAYER\xe0@?\xe8@\x01\"\xda\x01\n\x18\
+    MediaPlayerStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\
+    \x12'\n\x05state\x18\x02\x20\x01(\x0e2\x11.MediaPlayerStateR\x05state\
+    \x12\x16\n\x06volume\x18\x03\x20\x01(\x02R\x06volume\x12\x14\n\x05muted\
+    \x18\x04\x20\x01(\x08R\x05muted\x12\x1b\n\tdevice_id\x18\x05\x20\x01(\rR\
+    \x08deviceId:8\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x10USE_ME\
+    DIA_PLAYER\xe0@@\xe8@\x01\"\x95\x03\n\x19MediaPlayerCommandRequest\x12\
+    \x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x1f\n\x0bhas_command\x18\
+    \x02\x20\x01(\x08R\nhasCommand\x12-\n\x07command\x18\x03\x20\x01(\x0e2\
+    \x13.MediaPlayerCommandR\x07command\x12\x1d\n\nhas_volume\x18\x04\x20\
+    \x01(\x08R\thasVolume\x12\x16\n\x06volume\x18\x05\x20\x01(\x02R\x06volum\
+    e\x12\"\n\rhas_media_url\x18\x06\x20\x01(\x08R\x0bhasMediaUrl\x12\x1b\n\
+    \tmedia_url\x18\x07\x20\x01(\tR\x08mediaUrl\x12)\n\x10has_announcement\
+    \x18\x08\x20\x01(\x08R\x0fhasAnnouncement\x12\"\n\x0cannouncement\x18\t\
+    \x20\x01(\x08R\x0cannouncement\x12\x1b\n\tdevice_id\x18\n\x20\x01(\rR\
+    \x08deviceId:2\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\x10USE_MEDIA_PL\
+    AYER\xe0@A\xe8@\x02\"_\n)SubscribeBluetoothLEAdvertisementsRequest\x12\
+    \x14\n\x05flags\x18\x01\x20\x01(\rR\x05flags:\x1c\xf2@\x13USE_BLUETOOTH_\
+    PROXY\xe0@B\xe8@\x02\"c\n\x14BluetoothServiceData\x12\x12\n\x04uuid\x18\
+    \x01\x20\x01(\tR\x04uuid\x12#\n\x0blegacy_data\x18\x02\x20\x03(\rR\nlega\
+    cyDataB\x02\x18\x01\x12\x12\n\x04data\x18\x03\x20\x01(\x0cR\x04data\"\
+    \xcb\x02\n\x20BluetoothLEAdvertisementResponse\x12\x18\n\x07address\x18\
+    \x01\x20\x01(\x04R\x07address\x12\x12\n\x04name\x18\x02\x20\x01(\x0cR\
+    \x04name\x12\x12\n\x04rssi\x18\x03\x20\x01(\x11R\x04rssi\x12#\n\rservice\
+    _uuids\x18\x04\x20\x03(\tR\x0cserviceUuids\x128\n\x0cservice_data\x18\
+    \x05\x20\x03(\x0b2\x15.BluetoothServiceDataR\x0bserviceData\x12B\n\x11ma\
+    nufacturer_data\x18\x06\x20\x03(\x0b2\x15.BluetoothServiceDataR\x10manuf\
+    acturerData\x12!\n\x0caddress_type\x18\x07\x20\x01(\rR\x0baddressType:\
+    \x1f\x80A\x01\xf2@\x13USE_BLUETOOTH_PROXY\xe0@C\xe8@\x01\"\x82\x01\n\x1b\
+    BluetoothLERawAdvertisement\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\
+    \x07address\x12\x12\n\x04rssi\x18\x02\x20\x01(\x11R\x04rssi\x12!\n\x0cad\
+    dress_type\x18\x03\x20\x01(\rR\x0baddressType\x12\x12\n\x04data\x18\x04\
+    \x20\x01(\x0cR\x04data\"\x8d\x01\n$BluetoothLERawAdvertisementsResponse\
+    \x12D\n\x0eadvertisements\x18\x01\x20\x03(\x0b2\x1c.BluetoothLERawAdvert\
+    isementR\x0eadvertisements:\x1f\x80A\x01\xf2@\x13USE_BLUETOOTH_PROXY\xe0\
+    @]\xe8@\x01\"\xdd\x01\n\x16BluetoothDeviceRequest\x12\x18\n\x07address\
+    \x18\x01\x20\x01(\x04R\x07address\x12>\n\x0crequest_type\x18\x02\x20\x01\
+    (\x0e2\x1b.BluetoothDeviceRequestTypeR\x0brequestType\x12(\n\x10has_addr\
+    ess_type\x18\x03\x20\x01(\x08R\x0ehasAddressType\x12!\n\x0caddress_type\
+    \x18\x04\x20\x01(\rR\x0baddressType:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0\
+    @D\xe8@\x02\"\xa1\x01\n!BluetoothDeviceConnectionResponse\x12\x18\n\x07a\
+    ddress\x18\x01\x20\x01(\x04R\x07address\x12\x1c\n\tconnected\x18\x02\x20\
+    \x01(\x08R\tconnected\x12\x10\n\x03mtu\x18\x03\x20\x01(\rR\x03mtu\x12\
+    \x14\n\x05error\x18\x04\x20\x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOT\
+    H_PROXY\xe0@E\xe8@\x01\"Y\n\x1fBluetoothGATTGetServicesRequest\x12\x18\n\
+    \x07address\x18\x01\x20\x01(\x04R\x07address:\x1c\xf2@\x13USE_BLUETOOTH_\
+    PROXY\xe0@F\xe8@\x02\"E\n\x17BluetoothGATTDescriptor\x12\x12\n\x04uuid\
+    \x18\x01\x20\x03(\x04R\x04uuid\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\
+    \x06handle\"\xa5\x01\n\x1bBluetoothGATTCharacteristic\x12\x12\n\x04uuid\
+    \x18\x01\x20\x03(\x04R\x04uuid\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\
+    \x06handle\x12\x1e\n\nproperties\x18\x03\x20\x01(\rR\nproperties\x12:\n\
+    \x0bdescriptors\x18\x04\x20\x03(\x0b2\x18.BluetoothGATTDescriptorR\x0bde\
+    scriptors\"\x8a\x01\n\x14BluetoothGATTService\x12\x12\n\x04uuid\x18\x01\
+    \x20\x03(\x04R\x04uuid\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\
+    \x12F\n\x0fcharacteristics\x18\x03\x20\x03(\x0b2\x1c.BluetoothGATTCharac\
+    teristicR\x0fcharacteristics\"\x8d\x01\n\x20BluetoothGATTGetServicesResp\
+    onse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x121\n\x08ser\
+    vices\x18\x02\x20\x03(\x0b2\x15.BluetoothGATTServiceR\x08services:\x1c\
+    \xf2@\x13USE_BLUETOOTH_PROXY\xe0@G\xe8@\x01\"^\n$BluetoothGATTGetService\
+    sDoneResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address:\x1c\
+    \xf2@\x13USE_BLUETOOTH_PROXY\xe0@H\xe8@\x01\"j\n\x18BluetoothGATTReadReq\
+    uest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06\
+    handle\x18\x02\x20\x01(\rR\x06handle:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\
+    \xe0@I\xe8@\x02\"\x7f\n\x19BluetoothGATTReadResponse\x12\x18\n\x07addres\
+    s\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\
+    \rR\x06handle\x12\x12\n\x04data\x18\x03\x20\x01(\x0cR\x04data:\x1c\xf2@\
+    \x13USE_BLUETOOTH_PROXY\xe0@J\xe8@\x01\"\x9b\x01\n\x19BluetoothGATTWrite\
+    Request\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\
+    \x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x1a\n\x08response\x18\x03\
+    \x20\x01(\x08R\x08response\x12\x12\n\x04data\x18\x04\x20\x01(\x0cR\x04da\
+    ta:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@K\xe8@\x02\"t\n\"BluetoothGATTRe\
+    adDescriptorRequest\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07addres\
+    s\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle:\x1c\xf2@\x13USE_BLU\
+    ETOOTH_PROXY\xe0@L\xe8@\x02\"\x89\x01\n#BluetoothGATTWriteDescriptorRequ\
+    est\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06h\
+    andle\x18\x02\x20\x01(\rR\x06handle\x12\x12\n\x04data\x18\x03\x20\x01(\
+    \x0cR\x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@M\xe8@\x02\"\x84\x01\
+    \n\x1aBluetoothGATTNotifyRequest\x12\x18\n\x07address\x18\x01\x20\x01(\
+    \x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\
+    \x16\n\x06enable\x18\x03\x20\x01(\x08R\x06enable:\x1c\xf2@\x13USE_BLUETO\
+    OTH_PROXY\xe0@N\xe8@\x02\"\x85\x01\n\x1fBluetoothGATTNotifyDataResponse\
+    \x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06hand\
+    le\x18\x02\x20\x01(\rR\x06handle\x12\x12\n\x04data\x18\x03\x20\x01(\x0cR\
+    \x04data:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@O\xe8@\x01\"H\n(SubscribeB\
+    luetoothConnectionsFreeRequest:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@P\
+    \xe8@\x02\"\x88\x01\n\x20BluetoothConnectionsFreeResponse\x12\x12\n\x04f\
+    ree\x18\x01\x20\x01(\rR\x04free\x12\x14\n\x05limit\x18\x02\x20\x01(\rR\
+    \x05limit\x12\x1c\n\tallocated\x18\x03\x20\x03(\x04R\tallocated:\x1c\xf2\
+    @\x13USE_BLUETOOTH_PROXY\xe0@Q\xe8@\x01\"\x82\x01\n\x1aBluetoothGATTErro\
+    rResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\
+    \n\x06handle\x18\x02\x20\x01(\rR\x06handle\x12\x14\n\x05error\x18\x03\
+    \x20\x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@R\xe8@\x01\
+    \"l\n\x1aBluetoothGATTWriteResponse\x12\x18\n\x07address\x18\x01\x20\x01\
+    (\x04R\x07address\x12\x16\n\x06handle\x18\x02\x20\x01(\rR\x06handle:\x1c\
+    \xf2@\x13USE_BLUETOOTH_PROXY\xe0@S\xe8@\x01\"m\n\x1bBluetoothGATTNotifyR\
+    esponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\
+    \x06handle\x18\x02\x20\x01(\rR\x06handle:\x1c\xf2@\x13USE_BLUETOOTH_PROX\
+    Y\xe0@T\xe8@\x01\"\x86\x01\n\x1eBluetoothDevicePairingResponse\x12\x18\n\
+    \x07address\x18\x01\x20\x01(\x04R\x07address\x12\x16\n\x06paired\x18\x02\
+    \x20\x01(\x08R\x06paired\x12\x14\n\x05error\x18\x03\x20\x01(\x05R\x05err\
+    or:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@U\xe8@\x01\"\x8a\x01\n\x20Blueto\
+    othDeviceUnpairingResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\
+    \x07address\x12\x18\n\x07success\x18\x02\x20\x01(\x08R\x07success\x12\
+    \x14\n\x05error\x18\x03\x20\x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOT\
+    H_PROXY\xe0@V\xe8@\x01\"K\n+UnsubscribeBluetoothLEAdvertisementsRequest:\
+    \x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@W\xe8@\x02\"\x8b\x01\n!BluetoothDev\
+    iceClearCacheResponse\x12\x18\n\x07address\x18\x01\x20\x01(\x04R\x07addr\
+    ess\x12\x18\n\x07success\x18\x02\x20\x01(\x08R\x07success\x12\x14\n\x05e\
+    rror\x18\x03\x20\x01(\x05R\x05error:\x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0\
+    @X\xe8@\x01\"\x96\x01\n\x1dBluetoothScannerStateResponse\x12,\n\x05state\
+    \x18\x01\x20\x01(\x0e2\x16.BluetoothScannerStateR\x05state\x12)\n\x04mod\
+    e\x18\x02\x20\x01(\x0e2\x15.BluetoothScannerModeR\x04mode:\x1c\xf2@\x13U\
+    SE_BLUETOOTH_PROXY\xe0@~\xe8@\x01\"i\n\x1eBluetoothScannerSetModeRequest\
+    \x12)\n\x04mode\x18\x01\x20\x01(\x0e2\x15.BluetoothScannerModeR\x04mode:\
+    \x1c\xf2@\x13USE_BLUETOOTH_PROXY\xe0@\x7f\xe8@\x02\"r\n\x1eSubscribeVoic\
+    eAssistantRequest\x12\x1c\n\tsubscribe\x18\x01\x20\x01(\x08R\tsubscribe\
+    \x12\x14\n\x05flags\x18\x02\x20\x01(\rR\x05flags:\x1c\xf2@\x13USE_VOICE_\
+    ASSISTANT\xe0@Y\xe8@\x02\"\x9f\x01\n\x1bVoiceAssistantAudioSettings\x126\
+    \n\x17noise_suppression_level\x18\x01\x20\x01(\rR\x15noiseSuppressionLev\
+    el\x12\x1b\n\tauto_gain\x18\x02\x20\x01(\rR\x08autoGain\x12+\n\x11volume\
+    _multiplier\x18\x03\x20\x01(\x02R\x10volumeMultiplier\"\xf9\x01\n\x15Voi\
+    ceAssistantRequest\x12\x14\n\x05start\x18\x01\x20\x01(\x08R\x05start\x12\
+    '\n\x0fconversation_id\x18\x02\x20\x01(\tR\x0econversationId\x12\x14\n\
+    \x05flags\x18\x03\x20\x01(\rR\x05flags\x12C\n\x0eaudio_settings\x18\x04\
+    \x20\x01(\x0b2\x1c.VoiceAssistantAudioSettingsR\raudioSettings\x12(\n\
+    \x10wake_word_phrase\x18\x05\x20\x01(\tR\x0ewakeWordPhrase:\x1c\xf2@\x13\
+    USE_VOICE_ASSISTANT\xe0@Z\xe8@\x01\"`\n\x16VoiceAssistantResponse\x12\
+    \x12\n\x04port\x18\x01\x20\x01(\rR\x04port\x12\x14\n\x05error\x18\x02\
+    \x20\x01(\x08R\x05error:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@[\xe8@\x02\
+    \"C\n\x17VoiceAssistantEventData\x12\x12\n\x04name\x18\x01\x20\x01(\tR\
+    \x04name\x12\x14\n\x05value\x18\x02\x20\x01(\tR\x05value\"\x9e\x01\n\x1b\
+    VoiceAssistantEventResponse\x123\n\nevent_type\x18\x01\x20\x01(\x0e2\x14\
+    .VoiceAssistantEventR\teventType\x12,\n\x04data\x18\x02\x20\x03(\x0b2\
+    \x18.VoiceAssistantEventDataR\x04data:\x1c\xf2@\x13USE_VOICE_ASSISTANT\
+    \xe0@\\\xe8@\x02\"Y\n\x13VoiceAssistantAudio\x12\x12\n\x04data\x18\x01\
+    \x20\x01(\x0cR\x04data\x12\x10\n\x03end\x18\x02\x20\x01(\x08R\x03end:\
+    \x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@j\xe8@\0\"\x8e\x02\n\x20VoiceAssist\
+    antTimerEventResponse\x128\n\nevent_type\x18\x01\x20\x01(\x0e2\x19.Voice\
+    AssistantTimerEventR\teventType\x12\x19\n\x08timer_id\x18\x02\x20\x01(\t\
+    R\x07timerId\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12#\n\rtotal\
+    _seconds\x18\x04\x20\x01(\rR\x0ctotalSeconds\x12!\n\x0cseconds_left\x18\
+    \x05\x20\x01(\rR\x0bsecondsLeft\x12\x1b\n\tis_active\x18\x06\x20\x01(\
+    \x08R\x08isActive:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@s\xe8@\x02\"\xcd\
+    \x01\n\x1dVoiceAssistantAnnounceRequest\x12\x19\n\x08media_id\x18\x01\
+    \x20\x01(\tR\x07mediaId\x12\x12\n\x04text\x18\x02\x20\x01(\tR\x04text\
+    \x120\n\x14preannounce_media_id\x18\x03\x20\x01(\tR\x12preannounceMediaI\
+    d\x12-\n\x12start_conversation\x18\x04\x20\x01(\x08R\x11startConversatio\
+    n:\x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@w\xe8@\x02\"X\n\x1eVoiceAssistant\
+    AnnounceFinished\x12\x18\n\x07success\x18\x01\x20\x01(\x08R\x07success:\
+    \x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@x\xe8@\x01\"r\n\x16VoiceAssistantWa\
+    keWord\x12\x0e\n\x02id\x18\x01\x20\x01(\tR\x02id\x12\x1b\n\twake_word\
+    \x18\x02\x20\x01(\tR\x08wakeWord\x12+\n\x11trained_languages\x18\x03\x20\
+    \x03(\tR\x10trainedLanguages\"B\n\"VoiceAssistantConfigurationRequest:\
+    \x1c\xf2@\x13USE_VOICE_ASSISTANT\xe0@y\xe8@\x02\"\xed\x01\n#VoiceAssista\
+    ntConfigurationResponse\x12I\n\x14available_wake_words\x18\x01\x20\x03(\
+    \x0b2\x17.VoiceAssistantWakeWordR\x12availableWakeWords\x12*\n\x11active\
+    _wake_words\x18\x02\x20\x03(\tR\x0factiveWakeWords\x121\n\x15max_active_\
+    wake_words\x18\x03\x20\x01(\rR\x12maxActiveWakeWords:\x1c\xf2@\x13USE_VO\
+    ICE_ASSISTANT\xe0@z\xe8@\x01\"j\n\x1eVoiceAssistantSetConfiguration\x12*\
+    \n\x11active_wake_words\x18\x01\x20\x03(\tR\x0factiveWakeWords:\x1c\xf2@\
+    \x13USE_VOICE_ASSISTANT\xe0@{\xe8@\x02\"\xe4\x03\n%ListEntitiesAlarmCont\
+    rolPanelResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\
+    \x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\
+    \x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueI\
+    d\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_de\
+    fault\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_catego\
+    ry\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12-\n\
+    \x12supported_features\x18\x08\x20\x01(\rR\x11supportedFeatures\x12#\n\r\
+    requires_code\x18\t\x20\x01(\x08R\x0crequiresCode\x12/\n\x14requires_cod\
+    e_to_arm\x18\n\x20\x01(\x08R\x11requiresCodeToArm\x12\x1b\n\tdevice_id\
+    \x18\x0b\x20\x01(\rR\x08deviceId:;\x8aA\x18InfoResponseProtoMessage\xf2@\
+    \x17USE_ALARM_CONTROL_PANEL\xe0@^\xe8@\x01\"\xbf\x01\n\x1eAlarmControlPa\
+    nelStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12-\n\
+    \x05state\x18\x02\x20\x01(\x0e2\x17.AlarmControlPanelStateR\x05state\x12\
+    \x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:?\x8aA\x19StateRespons\
+    eProtoMessage\x80A\x01\xf2@\x17USE_ALARM_CONTROL_PANEL\xe0@_\xe8@\x01\"\
+    \xd9\x01\n\x1fAlarmControlPanelCommandRequest\x12\x10\n\x03key\x18\x01\
+    \x20\x01(\x07R\x03key\x128\n\x07command\x18\x02\x20\x01(\x0e2\x1e.AlarmC\
+    ontrolPanelStateCommandR\x07command\x12\x12\n\x04code\x18\x03\x20\x01(\t\
+    R\x04code\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\x08deviceId:9\x8aA\
+    \x13CommandProtoMessage\x80A\x01\xf2@\x17USE_ALARM_CONTROL_PANEL\xe0@`\
+    \xe8@\x02\"\xba\x03\n\x18ListEntitiesTextResponse\x12\x1b\n\tobject_id\
+    \x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\
+    \x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_\
+    id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\
+    \x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\x11disabled\
+    ByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCate\
+    goryR\x0eentityCategory\x12\x1d\n\nmin_length\x18\x08\x20\x01(\rR\tminLe\
+    ngth\x12\x1d\n\nmax_length\x18\t\x20\x01(\rR\tmaxLength\x12\x18\n\x07pat\
+    tern\x18\n\x20\x01(\tR\x07pattern\x12\x1d\n\x04mode\x18\x0b\x20\x01(\x0e\
+    2\t.TextModeR\x04mode\x12\x1b\n\tdevice_id\x18\x0c\x20\x01(\rR\x08device\
+    Id:,\x8aA\x18InfoResponseProtoMessage\xf2@\x08USE_TEXT\xe0@a\xe8@\x01\"\
+    \xaf\x01\n\x11TextStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
+    \x03key\x12\x14\n\x05state\x18\x02\x20\x01(\tR\x05state\x12#\n\rmissing_\
+    state\x18\x03\x20\x01(\x08R\x0cmissingState\x12\x1b\n\tdevice_id\x18\x04\
+    \x20\x01(\rR\x08deviceId:0\x8aA\x19StateResponseProtoMessage\x80A\x01\
+    \xf2@\x08USE_TEXT\xe0@b\xe8@\x01\"\x85\x01\n\x12TextCommandRequest\x12\
+    \x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x14\n\x05state\x18\x02\
+    \x20\x01(\tR\x05state\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08device\
+    Id:*\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\x08USE_TEXT\xe0@c\xe8@\
+    \x02\"\xcc\x02\n\x18ListEntitiesDateResponse\x12\x1b\n\tobject_id\x18\
+    \x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03k\
+    ey\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\
+    \x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\
+    \x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\x11disabled\
+    ByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCate\
+    goryR\x0eentityCategory\x12\x1b\n\tdevice_id\x18\x08\x20\x01(\rR\x08devi\
+    ceId:5\x8aA\x18InfoResponseProtoMessage\xf2@\x11USE_DATETIME_DATE\xe0@d\
+    \xe8@\x01\"\xde\x01\n\x11DateStateResponse\x12\x10\n\x03key\x18\x01\x20\
+    \x01(\x07R\x03key\x12#\n\rmissing_state\x18\x02\x20\x01(\x08R\x0cmissing\
+    State\x12\x12\n\x04year\x18\x03\x20\x01(\rR\x04year\x12\x14\n\x05month\
+    \x18\x04\x20\x01(\rR\x05month\x12\x10\n\x03day\x18\x05\x20\x01(\rR\x03da\
+    y\x12\x1b\n\tdevice_id\x18\x06\x20\x01(\rR\x08deviceId:9\x8aA\x19StateRe\
+    sponseProtoMessage\x80A\x01\xf2@\x11USE_DATETIME_DATE\xe0@e\xe8@\x01\"\
+    \xb4\x01\n\x12DateCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
     \x03key\x12\x12\n\x04year\x18\x02\x20\x01(\rR\x04year\x12\x14\n\x05month\
     \x18\x03\x20\x01(\rR\x05month\x12\x10\n\x03day\x18\x04\x20\x01(\rR\x03da\
-    y:\x1d\x80A\x01\xf2@\x11USE_DATETIME_DATE\xe0@f\xe8@\x02\"\xaf\x02\n\x18\
-    ListEntitiesTimeResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08obj\
-    ectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\
-    \x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\
-    \x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13dis\
-    abled_by_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fen\
-    tity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategor\
-    y:5\x8aA\x18InfoResponseProtoMessage\xf2@\x11USE_DATETIME_TIME\xe0@g\xe8\
-    @\x01\"\xc9\x01\n\x11TimeStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12#\n\rmissing_state\x18\x02\x20\x01(\x08R\x0cmissingState\
-    \x12\x12\n\x04hour\x18\x03\x20\x01(\rR\x04hour\x12\x16\n\x06minute\x18\
-    \x04\x20\x01(\rR\x06minute\x12\x16\n\x06second\x18\x05\x20\x01(\rR\x06se\
-    cond:9\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\x11USE_DATETIME_T\
-    IME\xe0@h\xe8@\x01\"\x89\x01\n\x12TimeCommandRequest\x12\x10\n\x03key\
-    \x18\x01\x20\x01(\x07R\x03key\x12\x12\n\x04hour\x18\x02\x20\x01(\rR\x04h\
-    our\x12\x16\n\x06minute\x18\x03\x20\x01(\rR\x06minute\x12\x16\n\x06secon\
-    d\x18\x04\x20\x01(\rR\x06second:\x1d\x80A\x01\xf2@\x11USE_DATETIME_TIME\
-    \xe0@i\xe8@\x02\"\xec\x02\n\x19ListEntitiesEventResponse\x12\x1b\n\tobje\
-    ct_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\
+    y\x12\x1b\n\tdevice_id\x18\x05\x20\x01(\rR\x08deviceId:3\x8aA\x13Command\
+    ProtoMessage\x80A\x01\xf2@\x11USE_DATETIME_DATE\xe0@f\xe8@\x02\"\xcc\x02\
+    \n\x18ListEntitiesTimeResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
+    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
+    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
+    R\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13di\
+    sabled_by_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fe\
+    ntity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCatego\
+    ry\x12\x1b\n\tdevice_id\x18\x08\x20\x01(\rR\x08deviceId:5\x8aA\x18InfoRe\
+    sponseProtoMessage\xf2@\x11USE_DATETIME_TIME\xe0@g\xe8@\x01\"\xe6\x01\n\
+    \x11TimeStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12#\
+    \n\rmissing_state\x18\x02\x20\x01(\x08R\x0cmissingState\x12\x12\n\x04hou\
+    r\x18\x03\x20\x01(\rR\x04hour\x12\x16\n\x06minute\x18\x04\x20\x01(\rR\
+    \x06minute\x12\x16\n\x06second\x18\x05\x20\x01(\rR\x06second\x12\x1b\n\t\
+    device_id\x18\x06\x20\x01(\rR\x08deviceId:9\x8aA\x19StateResponseProtoMe\
+    ssage\x80A\x01\xf2@\x11USE_DATETIME_TIME\xe0@h\xe8@\x01\"\xbc\x01\n\x12T\
+    imeCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x12\
+    \n\x04hour\x18\x02\x20\x01(\rR\x04hour\x12\x16\n\x06minute\x18\x03\x20\
+    \x01(\rR\x06minute\x12\x16\n\x06second\x18\x04\x20\x01(\rR\x06second\x12\
+    \x1b\n\tdevice_id\x18\x05\x20\x01(\rR\x08deviceId:3\x8aA\x13CommandProto\
+    Message\x80A\x01\xf2@\x11USE_DATETIME_TIME\xe0@i\xe8@\x02\"\x89\x03\n\
+    \x19ListEntitiesEventResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\
+    \x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04\
+    name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\t\
+    R\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13di\
+    sabled_by_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fe\
+    ntity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCatego\
+    ry\x12!\n\x0cdevice_class\x18\x08\x20\x01(\tR\x0bdeviceClass\x12\x1f\n\
+    \x0bevent_types\x18\t\x20\x03(\tR\neventTypes\x12\x1b\n\tdevice_id\x18\n\
+    \x20\x01(\rR\x08deviceId:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_EV\
+    ENT\xe0@k\xe8@\x01\"\x8d\x01\n\rEventResponse\x12\x10\n\x03key\x18\x01\
+    \x20\x01(\x07R\x03key\x12\x1d\n\nevent_type\x18\x02\x20\x01(\tR\teventTy\
+    pe\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:.\x8aA\x19StateR\
+    esponseProtoMessage\xf2@\tUSE_EVENT\xe0@l\xe8@\x01\"\xdf\x03\n\x19ListEn\
+    titiesValveResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\
+    \x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\
+    \x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueI\
+    d\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_de\
+    fault\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_catego\
+    ry\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12!\n\
+    \x0cdevice_class\x18\x08\x20\x01(\tR\x0bdeviceClass\x12#\n\rassumed_stat\
+    e\x18\t\x20\x01(\x08R\x0cassumedState\x12+\n\x11supports_position\x18\n\
+    \x20\x01(\x08R\x10supportsPosition\x12#\n\rsupports_stop\x18\x0b\x20\x01\
+    (\x08R\x0csupportsStop\x12\x1b\n\tdevice_id\x18\x0c\x20\x01(\rR\x08devic\
+    eId:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_VALVE\xe0@m\xe8@\x01\"\
+    \xd0\x01\n\x12ValveStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
+    \x03key\x12\x1a\n\x08position\x18\x02\x20\x01(\x02R\x08position\x12<\n\
+    \x11current_operation\x18\x03\x20\x01(\x0e2\x0f.ValveOperationR\x10curre\
+    ntOperation\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\x08deviceId:1\x8aA\
+    \x19StateResponseProtoMessage\x80A\x01\xf2@\tUSE_VALVE\xe0@n\xe8@\x01\"\
+    \xc4\x01\n\x13ValveCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
+    \x03key\x12!\n\x0chas_position\x18\x02\x20\x01(\x08R\x0bhasPosition\x12\
+    \x1a\n\x08position\x18\x03\x20\x01(\x02R\x08position\x12\x12\n\x04stop\
+    \x18\x04\x20\x01(\x08R\x04stop\x12\x1b\n\tdevice_id\x18\x05\x20\x01(\rR\
+    \x08deviceId:+\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\tUSE_VALVE\xe0@\
+    o\xe8@\x02\"\xd4\x02\n\x1cListEntitiesDateTimeResponse\x12\x1b\n\tobject\
+    _id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\
     \x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tun\
     ique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\
     \x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\x11\
     disabledByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.En\
-    tityCategoryR\x0eentityCategory\x12!\n\x0cdevice_class\x18\x08\x20\x01(\
-    \tR\x0bdeviceClass\x12\x1f\n\x0bevent_types\x18\t\x20\x03(\tR\neventType\
-    s:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_EVENT\xe0@k\xe8@\x01\"p\n\
-    \rEventResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12\x1d\n\
-    \nevent_type\x18\x02\x20\x01(\tR\teventType:.\x8aA\x19StateResponseProto\
-    Message\xf2@\tUSE_EVENT\xe0@l\xe8@\x01\"\xc2\x03\n\x19ListEntitiesValveR\
-    esponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\
-    \x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\
-    \tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\
-    \n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\
-    \x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\
-    \x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory\x12!\n\x0cdevic\
-    e_class\x18\x08\x20\x01(\tR\x0bdeviceClass\x12#\n\rassumed_state\x18\t\
-    \x20\x01(\x08R\x0cassumedState\x12+\n\x11supports_position\x18\n\x20\x01\
-    (\x08R\x10supportsPosition\x12#\n\rsupports_stop\x18\x0b\x20\x01(\x08R\
-    \x0csupportsStop:-\x8aA\x18InfoResponseProtoMessage\xf2@\tUSE_VALVE\xe0@\
-    m\xe8@\x01\"\xb3\x01\n\x12ValveStateResponse\x12\x10\n\x03key\x18\x01\
-    \x20\x01(\x07R\x03key\x12\x1a\n\x08position\x18\x02\x20\x01(\x02R\x08pos\
-    ition\x12<\n\x11current_operation\x18\x03\x20\x01(\x0e2\x0f.ValveOperati\
-    onR\x10currentOperation:1\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2\
-    @\tUSE_VALVE\xe0@n\xe8@\x01\"\x91\x01\n\x13ValveCommandRequest\x12\x10\n\
-    \x03key\x18\x01\x20\x01(\x07R\x03key\x12!\n\x0chas_position\x18\x02\x20\
-    \x01(\x08R\x0bhasPosition\x12\x1a\n\x08position\x18\x03\x20\x01(\x02R\
-    \x08position\x12\x12\n\x04stop\x18\x04\x20\x01(\x08R\x04stop:\x15\x80A\
-    \x01\xf2@\tUSE_VALVE\xe0@o\xe8@\x02\"\xb7\x02\n\x1cListEntitiesDateTimeR\
-    esponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\
-    \x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\x18\x03\x20\x01(\
-    \tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\
-    \n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13disabled_by_default\x18\
-    \x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fentity_category\x18\
-    \x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategory:9\x8aA\x18InfoR\
-    esponseProtoMessage\xf2@\x15USE_DATETIME_DATETIME\xe0@p\xe8@\x01\"\xb2\
-    \x01\n\x15DateTimeStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\
-    \x03key\x12#\n\rmissing_state\x18\x02\x20\x01(\x08R\x0cmissingState\x12#\
-    \n\repoch_seconds\x18\x03\x20\x01(\x07R\x0cepochSeconds:=\x8aA\x19StateR\
-    esponseProtoMessage\x80A\x01\xf2@\x15USE_DATETIME_DATETIME\xe0@q\xe8@\
-    \x01\"r\n\x16DateTimeCommandRequest\x12\x10\n\x03key\x18\x01\x20\x01(\
-    \x07R\x03key\x12#\n\repoch_seconds\x18\x02\x20\x01(\x07R\x0cepochSeconds\
-    :!\x80A\x01\xf2@\x15USE_DATETIME_DATETIME\xe0@r\xe8@\x02\"\xcd\x02\n\x1a\
-    ListEntitiesUpdateResponse\x12\x1b\n\tobject_id\x18\x01\x20\x01(\tR\x08o\
-    bjectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\x03key\x12\x12\n\x04name\
-    \x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_id\x18\x04\x20\x01(\tR\
-    \x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\x04icon\x12.\n\x13dis\
-    abled_by_default\x18\x06\x20\x01(\x08R\x11disabledByDefault\x128\n\x0fen\
-    tity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCategoryR\x0eentityCategor\
-    y\x12!\n\x0cdevice_class\x18\x08\x20\x01(\tR\x0bdeviceClass:.\x8aA\x18In\
-    foResponseProtoMessage\xf2@\nUSE_UPDATE\xe0@t\xe8@\x01\"\x90\x03\n\x13Up\
-    dateStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12#\n\r\
-    missing_state\x18\x02\x20\x01(\x08R\x0cmissingState\x12\x1f\n\x0bin_prog\
-    ress\x18\x03\x20\x01(\x08R\ninProgress\x12!\n\x0chas_progress\x18\x04\
+    tityCategoryR\x0eentityCategory\x12\x1b\n\tdevice_id\x18\x08\x20\x01(\rR\
+    \x08deviceId:9\x8aA\x18InfoResponseProtoMessage\xf2@\x15USE_DATETIME_DAT\
+    ETIME\xe0@p\xe8@\x01\"\xcf\x01\n\x15DateTimeStateResponse\x12\x10\n\x03k\
+    ey\x18\x01\x20\x01(\x07R\x03key\x12#\n\rmissing_state\x18\x02\x20\x01(\
+    \x08R\x0cmissingState\x12#\n\repoch_seconds\x18\x03\x20\x01(\x07R\x0cepo\
+    chSeconds\x12\x1b\n\tdevice_id\x18\x04\x20\x01(\rR\x08deviceId:=\x8aA\
+    \x19StateResponseProtoMessage\x80A\x01\xf2@\x15USE_DATETIME_DATETIME\xe0\
+    @q\xe8@\x01\"\xa5\x01\n\x16DateTimeCommandRequest\x12\x10\n\x03key\x18\
+    \x01\x20\x01(\x07R\x03key\x12#\n\repoch_seconds\x18\x02\x20\x01(\x07R\
+    \x0cepochSeconds\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId:7\
+    \x8aA\x13CommandProtoMessage\x80A\x01\xf2@\x15USE_DATETIME_DATETIME\xe0@\
+    r\xe8@\x02\"\xea\x02\n\x1aListEntitiesUpdateResponse\x12\x1b\n\tobject_i\
+    d\x18\x01\x20\x01(\tR\x08objectId\x12\x10\n\x03key\x18\x02\x20\x01(\x07R\
+    \x03key\x12\x12\n\x04name\x18\x03\x20\x01(\tR\x04name\x12\x1b\n\tunique_\
+    id\x18\x04\x20\x01(\tR\x08uniqueId\x12\x12\n\x04icon\x18\x05\x20\x01(\tR\
+    \x04icon\x12.\n\x13disabled_by_default\x18\x06\x20\x01(\x08R\x11disabled\
+    ByDefault\x128\n\x0fentity_category\x18\x07\x20\x01(\x0e2\x0f.EntityCate\
+    goryR\x0eentityCategory\x12!\n\x0cdevice_class\x18\x08\x20\x01(\tR\x0bde\
+    viceClass\x12\x1b\n\tdevice_id\x18\t\x20\x01(\rR\x08deviceId:.\x8aA\x18I\
+    nfoResponseProtoMessage\xf2@\nUSE_UPDATE\xe0@t\xe8@\x01\"\xad\x03\n\x13U\
+    pdateStateResponse\x12\x10\n\x03key\x18\x01\x20\x01(\x07R\x03key\x12#\n\
+    \rmissing_state\x18\x02\x20\x01(\x08R\x0cmissingState\x12\x1f\n\x0bin_pr\
+    ogress\x18\x03\x20\x01(\x08R\ninProgress\x12!\n\x0chas_progress\x18\x04\
     \x20\x01(\x08R\x0bhasProgress\x12\x1a\n\x08progress\x18\x05\x20\x01(\x02\
     R\x08progress\x12'\n\x0fcurrent_version\x18\x06\x20\x01(\tR\x0ecurrentVe\
     rsion\x12%\n\x0elatest_version\x18\x07\x20\x01(\tR\rlatestVersion\x12\
     \x14\n\x05title\x18\x08\x20\x01(\tR\x05title\x12'\n\x0frelease_summary\
     \x18\t\x20\x01(\tR\x0ereleaseSummary\x12\x1f\n\x0brelease_url\x18\n\x20\
-    \x01(\tR\nreleaseUrl:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\n\
-    USE_UPDATE\xe0@u\xe8@\x01\"j\n\x14UpdateCommandRequest\x12\x10\n\x03key\
-    \x18\x01\x20\x01(\x07R\x03key\x12(\n\x07command\x18\x02\x20\x01(\x0e2\
-    \x0e.UpdateCommandR\x07command:\x16\x80A\x01\xf2@\nUSE_UPDATE\xe0@v\xe8@\
-    \x02*f\n\x0eEntityCategory\x12\x18\n\x14ENTITY_CATEGORY_NONE\x10\0\x12\
-    \x1a\n\x16ENTITY_CATEGORY_CONFIG\x10\x01\x12\x1e\n\x1aENTITY_CATEGORY_DI\
-    AGNOSTIC\x10\x02*N\n\x10LegacyCoverState\x12\x1b\n\x17LEGACY_COVER_STATE\
-    _OPEN\x10\0\x12\x1d\n\x19LEGACY_COVER_STATE_CLOSED\x10\x01*j\n\x0eCoverO\
-    peration\x12\x18\n\x14COVER_OPERATION_IDLE\x10\0\x12\x1e\n\x1aCOVER_OPER\
-    ATION_IS_OPENING\x10\x01\x12\x1e\n\x1aCOVER_OPERATION_IS_CLOSING\x10\x02\
-    *r\n\x12LegacyCoverCommand\x12\x1d\n\x19LEGACY_COVER_COMMAND_OPEN\x10\0\
-    \x12\x1e\n\x1aLEGACY_COVER_COMMAND_CLOSE\x10\x01\x12\x1d\n\x19LEGACY_COV\
-    ER_COMMAND_STOP\x10\x02*G\n\x08FanSpeed\x12\x11\n\rFAN_SPEED_LOW\x10\0\
-    \x12\x14\n\x10FAN_SPEED_MEDIUM\x10\x01\x12\x12\n\x0eFAN_SPEED_HIGH\x10\
-    \x02*D\n\x0cFanDirection\x12\x19\n\x15FAN_DIRECTION_FORWARD\x10\0\x12\
-    \x19\n\x15FAN_DIRECTION_REVERSE\x10\x01*\xc7\x02\n\tColorMode\x12\x16\n\
-    \x12COLOR_MODE_UNKNOWN\x10\0\x12\x15\n\x11COLOR_MODE_ON_OFF\x10\x01\x12\
-    \x20\n\x1cCOLOR_MODE_LEGACY_BRIGHTNESS\x10\x02\x12\x19\n\x15COLOR_MODE_B\
-    RIGHTNESS\x10\x03\x12\x14\n\x10COLOR_MODE_WHITE\x10\x07\x12\x20\n\x1cCOL\
-    OR_MODE_COLOR_TEMPERATURE\x10\x0b\x12\x1e\n\x1aCOLOR_MODE_COLD_WARM_WHIT\
-    E\x10\x13\x12\x12\n\x0eCOLOR_MODE_RGB\x10#\x12\x18\n\x14COLOR_MODE_RGB_W\
-    HITE\x10'\x12$\n\x20COLOR_MODE_RGB_COLOR_TEMPERATURE\x10/\x12\"\n\x1eCOL\
-    OR_MODE_RGB_COLD_WARM_WHITE\x103*~\n\x10SensorStateClass\x12\x14\n\x10ST\
-    ATE_CLASS_NONE\x10\0\x12\x1b\n\x17STATE_CLASS_MEASUREMENT\x10\x01\x12\
-    \x20\n\x1cSTATE_CLASS_TOTAL_INCREASING\x10\x02\x12\x15\n\x11STATE_CLASS_\
-    TOTAL\x10\x03*U\n\x13SensorLastResetType\x12\x13\n\x0fLAST_RESET_NONE\
-    \x10\0\x12\x14\n\x10LAST_RESET_NEVER\x10\x01\x12\x13\n\x0fLAST_RESET_AUT\
-    O\x10\x02*\xb9\x01\n\x08LogLevel\x12\x12\n\x0eLOG_LEVEL_NONE\x10\0\x12\
-    \x13\n\x0fLOG_LEVEL_ERROR\x10\x01\x12\x12\n\x0eLOG_LEVEL_WARN\x10\x02\
-    \x12\x12\n\x0eLOG_LEVEL_INFO\x10\x03\x12\x14\n\x10LOG_LEVEL_CONFIG\x10\
-    \x04\x12\x13\n\x0fLOG_LEVEL_DEBUG\x10\x05\x12\x15\n\x11LOG_LEVEL_VERBOSE\
-    \x10\x06\x12\x1a\n\x16LOG_LEVEL_VERY_VERBOSE\x10\x07*\x84\x02\n\x0eServi\
-    ceArgType\x12\x19\n\x15SERVICE_ARG_TYPE_BOOL\x10\0\x12\x18\n\x14SERVICE_\
-    ARG_TYPE_INT\x10\x01\x12\x1a\n\x16SERVICE_ARG_TYPE_FLOAT\x10\x02\x12\x1b\
-    \n\x17SERVICE_ARG_TYPE_STRING\x10\x03\x12\x1f\n\x1bSERVICE_ARG_TYPE_BOOL\
-    _ARRAY\x10\x04\x12\x1e\n\x1aSERVICE_ARG_TYPE_INT_ARRAY\x10\x05\x12\x20\n\
-    \x1cSERVICE_ARG_TYPE_FLOAT_ARRAY\x10\x06\x12!\n\x1dSERVICE_ARG_TYPE_STRI\
-    NG_ARRAY\x10\x07*\xb5\x01\n\x0bClimateMode\x12\x14\n\x10CLIMATE_MODE_OFF\
-    \x10\0\x12\x1a\n\x16CLIMATE_MODE_HEAT_COOL\x10\x01\x12\x15\n\x11CLIMATE_\
-    MODE_COOL\x10\x02\x12\x15\n\x11CLIMATE_MODE_HEAT\x10\x03\x12\x19\n\x15CL\
-    IMATE_MODE_FAN_ONLY\x10\x04\x12\x14\n\x10CLIMATE_MODE_DRY\x10\x05\x12\
-    \x15\n\x11CLIMATE_MODE_AUTO\x10\x06*\xf1\x01\n\x0eClimateFanMode\x12\x12\
-    \n\x0eCLIMATE_FAN_ON\x10\0\x12\x13\n\x0fCLIMATE_FAN_OFF\x10\x01\x12\x14\
-    \n\x10CLIMATE_FAN_AUTO\x10\x02\x12\x13\n\x0fCLIMATE_FAN_LOW\x10\x03\x12\
-    \x16\n\x12CLIMATE_FAN_MEDIUM\x10\x04\x12\x14\n\x10CLIMATE_FAN_HIGH\x10\
-    \x05\x12\x16\n\x12CLIMATE_FAN_MIDDLE\x10\x06\x12\x15\n\x11CLIMATE_FAN_FO\
-    CUS\x10\x07\x12\x17\n\x13CLIMATE_FAN_DIFFUSE\x10\x08\x12\x15\n\x11CLIMAT\
-    E_FAN_QUIET\x10\t*{\n\x10ClimateSwingMode\x12\x15\n\x11CLIMATE_SWING_OFF\
-    \x10\0\x12\x16\n\x12CLIMATE_SWING_BOTH\x10\x01\x12\x1a\n\x16CLIMATE_SWIN\
-    G_VERTICAL\x10\x02\x12\x1c\n\x18CLIMATE_SWING_HORIZONTAL\x10\x03*\xab\
-    \x01\n\rClimateAction\x12\x16\n\x12CLIMATE_ACTION_OFF\x10\0\x12\x1a\n\
-    \x16CLIMATE_ACTION_COOLING\x10\x02\x12\x1a\n\x16CLIMATE_ACTION_HEATING\
-    \x10\x03\x12\x17\n\x13CLIMATE_ACTION_IDLE\x10\x04\x12\x19\n\x15CLIMATE_A\
-    CTION_DRYING\x10\x05\x12\x16\n\x12CLIMATE_ACTION_FAN\x10\x06*\xdf\x01\n\
-    \rClimatePreset\x12\x17\n\x13CLIMATE_PRESET_NONE\x10\0\x12\x17\n\x13CLIM\
-    ATE_PRESET_HOME\x10\x01\x12\x17\n\x13CLIMATE_PRESET_AWAY\x10\x02\x12\x18\
-    \n\x14CLIMATE_PRESET_BOOST\x10\x03\x12\x1a\n\x16CLIMATE_PRESET_COMFORT\
-    \x10\x04\x12\x16\n\x12CLIMATE_PRESET_ECO\x10\x05\x12\x18\n\x14CLIMATE_PR\
-    ESET_SLEEP\x10\x06\x12\x1b\n\x17CLIMATE_PRESET_ACTIVITY\x10\x07*O\n\nNum\
-    berMode\x12\x14\n\x10NUMBER_MODE_AUTO\x10\0\x12\x13\n\x0fNUMBER_MODE_BOX\
-    \x10\x01\x12\x16\n\x12NUMBER_MODE_SLIDER\x10\x02*\x99\x01\n\tLockState\
-    \x12\x13\n\x0fLOCK_STATE_NONE\x10\0\x12\x15\n\x11LOCK_STATE_LOCKED\x10\
-    \x01\x12\x17\n\x13LOCK_STATE_UNLOCKED\x10\x02\x12\x15\n\x11LOCK_STATE_JA\
-    MMED\x10\x03\x12\x16\n\x12LOCK_STATE_LOCKING\x10\x04\x12\x18\n\x14LOCK_S\
-    TATE_UNLOCKING\x10\x05*<\n\x0bLockCommand\x12\x0f\n\x0bLOCK_UNLOCK\x10\0\
-    \x12\r\n\tLOCK_LOCK\x10\x01\x12\r\n\tLOCK_OPEN\x10\x02*\x8b\x01\n\x10Med\
-    iaPlayerState\x12\x1b\n\x17MEDIA_PLAYER_STATE_NONE\x10\0\x12\x1b\n\x17ME\
-    DIA_PLAYER_STATE_IDLE\x10\x01\x12\x1e\n\x1aMEDIA_PLAYER_STATE_PLAYING\
-    \x10\x02\x12\x1d\n\x19MEDIA_PLAYER_STATE_PAUSED\x10\x03*\xb2\x01\n\x12Me\
-    diaPlayerCommand\x12\x1d\n\x19MEDIA_PLAYER_COMMAND_PLAY\x10\0\x12\x1e\n\
-    \x1aMEDIA_PLAYER_COMMAND_PAUSE\x10\x01\x12\x1d\n\x19MEDIA_PLAYER_COMMAND\
-    _STOP\x10\x02\x12\x1d\n\x19MEDIA_PLAYER_COMMAND_MUTE\x10\x03\x12\x1f\n\
-    \x1bMEDIA_PLAYER_COMMAND_UNMUTE\x10\x04*q\n\x18MediaPlayerFormatPurpose\
-    \x12'\n#MEDIA_PLAYER_FORMAT_PURPOSE_DEFAULT\x10\0\x12,\n(MEDIA_PLAYER_FO\
-    RMAT_PURPOSE_ANNOUNCEMENT\x10\x01*\xeb\x02\n\x1aBluetoothDeviceRequestTy\
-    pe\x12)\n%BLUETOOTH_DEVICE_REQUEST_TYPE_CONNECT\x10\0\x12,\n(BLUETOOTH_D\
-    EVICE_REQUEST_TYPE_DISCONNECT\x10\x01\x12&\n\"BLUETOOTH_DEVICE_REQUEST_T\
-    YPE_PAIR\x10\x02\x12(\n$BLUETOOTH_DEVICE_REQUEST_TYPE_UNPAIR\x10\x03\x12\
-    7\n3BLUETOOTH_DEVICE_REQUEST_TYPE_CONNECT_V3_WITH_CACHE\x10\x04\x12:\n6B\
-    LUETOOTH_DEVICE_REQUEST_TYPE_CONNECT_V3_WITHOUT_CACHE\x10\x05\x12-\n)BLU\
-    ETOOTH_DEVICE_REQUEST_TYPE_CLEAR_CACHE\x10\x06*\xf3\x01\n\x15BluetoothSc\
-    annerState\x12\x20\n\x1cBLUETOOTH_SCANNER_STATE_IDLE\x10\0\x12$\n\x20BLU\
-    ETOOTH_SCANNER_STATE_STARTING\x10\x01\x12#\n\x1fBLUETOOTH_SCANNER_STATE_\
-    RUNNING\x10\x02\x12\"\n\x1eBLUETOOTH_SCANNER_STATE_FAILED\x10\x03\x12$\n\
-    \x20BLUETOOTH_SCANNER_STATE_STOPPING\x10\x04\x12#\n\x1fBLUETOOTH_SCANNER\
-    _STATE_STOPPED\x10\x05*]\n\x14BluetoothScannerMode\x12\"\n\x1eBLUETOOTH_\
-    SCANNER_MODE_PASSIVE\x10\0\x12!\n\x1dBLUETOOTH_SCANNER_MODE_ACTIVE\x10\
-    \x01*j\n\x1bVoiceAssistantSubscribeFlag\x12\"\n\x1eVOICE_ASSISTANT_SUBSC\
-    RIBE_NONE\x10\0\x12'\n#VOICE_ASSISTANT_SUBSCRIBE_API_AUDIO\x10\x01*\x8d\
-    \x01\n\x19VoiceAssistantRequestFlag\x12\x20\n\x1cVOICE_ASSISTANT_REQUEST\
-    _NONE\x10\0\x12#\n\x1fVOICE_ASSISTANT_REQUEST_USE_VAD\x10\x01\x12)\n%VOI\
-    CE_ASSISTANT_REQUEST_USE_WAKE_WORD\x10\x02*\xa1\x04\n\x13VoiceAssistantE\
-    vent\x12\x19\n\x15VOICE_ASSISTANT_ERROR\x10\0\x12\x1d\n\x19VOICE_ASSISTA\
-    NT_RUN_START\x10\x01\x12\x1b\n\x17VOICE_ASSISTANT_RUN_END\x10\x02\x12\
-    \x1d\n\x19VOICE_ASSISTANT_STT_START\x10\x03\x12\x1b\n\x17VOICE_ASSISTANT\
-    _STT_END\x10\x04\x12\x20\n\x1cVOICE_ASSISTANT_INTENT_START\x10\x05\x12\
-    \x1e\n\x1aVOICE_ASSISTANT_INTENT_END\x10\x06\x12\x1d\n\x19VOICE_ASSISTAN\
-    T_TTS_START\x10\x07\x12\x1b\n\x17VOICE_ASSISTANT_TTS_END\x10\x08\x12#\n\
-    \x1fVOICE_ASSISTANT_WAKE_WORD_START\x10\t\x12!\n\x1dVOICE_ASSISTANT_WAKE\
-    _WORD_END\x10\n\x12!\n\x1dVOICE_ASSISTANT_STT_VAD_START\x10\x0b\x12\x1f\
-    \n\x1bVOICE_ASSISTANT_STT_VAD_END\x10\x0c\x12$\n\x20VOICE_ASSISTANT_TTS_\
-    STREAM_START\x10b\x12\"\n\x1eVOICE_ASSISTANT_TTS_STREAM_END\x10c\x12#\n\
-    \x1fVOICE_ASSISTANT_INTENT_PROGRESS\x10d*\xa9\x01\n\x18VoiceAssistantTim\
-    erEvent\x12!\n\x1dVOICE_ASSISTANT_TIMER_STARTED\x10\0\x12!\n\x1dVOICE_AS\
-    SISTANT_TIMER_UPDATED\x10\x01\x12#\n\x1fVOICE_ASSISTANT_TIMER_CANCELLED\
-    \x10\x02\x12\"\n\x1eVOICE_ASSISTANT_TIMER_FINISHED\x10\x03*\xb3\x02\n\
-    \x16AlarmControlPanelState\x12\x18\n\x14ALARM_STATE_DISARMED\x10\0\x12\
-    \x1a\n\x16ALARM_STATE_ARMED_HOME\x10\x01\x12\x1a\n\x16ALARM_STATE_ARMED_\
-    AWAY\x10\x02\x12\x1b\n\x17ALARM_STATE_ARMED_NIGHT\x10\x03\x12\x1e\n\x1aA\
-    LARM_STATE_ARMED_VACATION\x10\x04\x12#\n\x1fALARM_STATE_ARMED_CUSTOM_BYP\
-    ASS\x10\x05\x12\x17\n\x13ALARM_STATE_PENDING\x10\x06\x12\x16\n\x12ALARM_\
-    STATE_ARMING\x10\x07\x12\x19\n\x15ALARM_STATE_DISARMING\x10\x08\x12\x19\
-    \n\x15ALARM_STATE_TRIGGERED\x10\t*\x98\x02\n\x1dAlarmControlPanelStateCo\
-    mmand\x12\x1e\n\x1aALARM_CONTROL_PANEL_DISARM\x10\0\x12\x20\n\x1cALARM_C\
-    ONTROL_PANEL_ARM_AWAY\x10\x01\x12\x20\n\x1cALARM_CONTROL_PANEL_ARM_HOME\
-    \x10\x02\x12!\n\x1dALARM_CONTROL_PANEL_ARM_NIGHT\x10\x03\x12$\n\x20ALARM\
-    _CONTROL_PANEL_ARM_VACATION\x10\x04\x12)\n%ALARM_CONTROL_PANEL_ARM_CUSTO\
-    M_BYPASS\x10\x05\x12\x1f\n\x1bALARM_CONTROL_PANEL_TRIGGER\x10\x06*6\n\
-    \x08TextMode\x12\x12\n\x0eTEXT_MODE_TEXT\x10\0\x12\x16\n\x12TEXT_MODE_PA\
-    SSWORD\x10\x01*j\n\x0eValveOperation\x12\x18\n\x14VALVE_OPERATION_IDLE\
-    \x10\0\x12\x1e\n\x1aVALVE_OPERATION_IS_OPENING\x10\x01\x12\x1e\n\x1aVALV\
-    E_OPERATION_IS_CLOSING\x10\x02*]\n\rUpdateCommand\x12\x17\n\x13UPDATE_CO\
-    MMAND_NONE\x10\0\x12\x19\n\x15UPDATE_COMMAND_UPDATE\x10\x01\x12\x18\n\
-    \x14UPDATE_COMMAND_CHECK\x10\x022\xc8\x16\n\rAPIConnection\x12.\n\x05hel\
-    lo\x12\r.HelloRequest\x1a\x0e.HelloResponse\"\x06\xf0@\0\xf8@\0\x124\n\
-    \x07connect\x12\x0f.ConnectRequest\x1a\x10.ConnectResponse\"\x06\xf0@\0\
-    \xf8@\0\x12=\n\ndisconnect\x12\x12.DisconnectRequest\x1a\x13.DisconnectR\
-    esponse\"\x06\xf0@\0\xf8@\0\x12+\n\x04ping\x12\x0c.PingRequest\x1a\r.Pin\
-    gResponse\"\x06\xf0@\0\xf8@\0\x12;\n\x0bdevice_info\x12\x12.DeviceInfoRe\
-    quest\x1a\x13.DeviceInfoResponse\"\x03\xf8@\0\x12.\n\rlist_entities\x12\
-    \x14.ListEntitiesRequest\x1a\x05.void\"\0\x124\n\x10subscribe_states\x12\
-    \x17.SubscribeStatesRequest\x1a\x05.void\"\0\x120\n\x0esubscribe_logs\
-    \x12\x15.SubscribeLogsRequest\x1a\x05.void\"\0\x12S\n\x20subscribe_homea\
-    ssistant_services\x12&.SubscribeHomeassistantServicesRequest\x1a\x05.voi\
-    d\"\0\x12P\n\x1fsubscribe_home_assistant_states\x12$.SubscribeHomeAssist\
-    antStatesRequest\x1a\x05.void\"\0\x122\n\x08get_time\x12\x0f.GetTimeRequ\
-    est\x1a\x10.GetTimeResponse\"\x03\xf8@\0\x122\n\x0fexecute_service\x12\
-    \x16.ExecuteServiceRequest\x1a\x05.void\"\0\x12[\n\x18noise_encryption_s\
-    et_key\x12\x1d.NoiseEncryptionSetKeyRequest\x1a\x1e.NoiseEncryptionSetKe\
-    yResponse\"\0\x120\n\x0ebutton_command\x12\x15.ButtonCommandRequest\x1a\
-    \x05.void\"\0\x12,\n\x0ccamera_image\x12\x13.CameraImageRequest\x1a\x05.\
-    void\"\0\x122\n\x0fclimate_command\x12\x16.ClimateCommandRequest\x1a\x05\
-    .void\"\0\x12.\n\rcover_command\x12\x14.CoverCommandRequest\x1a\x05.void\
-    \"\0\x12,\n\x0cdate_command\x12\x13.DateCommandRequest\x1a\x05.void\"\0\
-    \x124\n\x10datetime_command\x12\x17.DateTimeCommandRequest\x1a\x05.void\
-    \"\0\x12*\n\x0bfan_command\x12\x12.FanCommandRequest\x1a\x05.void\"\0\
-    \x12.\n\rlight_command\x12\x14.LightCommandRequest\x1a\x05.void\"\0\x12,\
-    \n\x0clock_command\x12\x13.LockCommandRequest\x1a\x05.void\"\0\x12;\n\
-    \x14media_player_command\x12\x1a.MediaPlayerCommandRequest\x1a\x05.void\
-    \"\0\x120\n\x0enumber_command\x12\x15.NumberCommandRequest\x1a\x05.void\
-    \"\0\x120\n\x0eselect_command\x12\x15.SelectCommandRequest\x1a\x05.void\
-    \"\0\x12.\n\rsiren_command\x12\x14.SirenCommandRequest\x1a\x05.void\"\0\
-    \x120\n\x0eswitch_command\x12\x15.SwitchCommandRequest\x1a\x05.void\"\0\
-    \x12,\n\x0ctext_command\x12\x13.TextCommandRequest\x1a\x05.void\"\0\x12,\
-    \n\x0ctime_command\x12\x13.TimeCommandRequest\x1a\x05.void\"\0\x120\n\
-    \x0eupdate_command\x12\x15.UpdateCommandRequest\x1a\x05.void\"\0\x12.\n\
-    \rvalve_command\x12\x14.ValveCommandRequest\x1a\x05.void\"\0\x12\\\n%sub\
-    scribe_bluetooth_le_advertisements\x12*.SubscribeBluetoothLEAdvertisemen\
-    tsRequest\x1a\x05.void\"\0\x12<\n\x18bluetooth_device_request\x12\x17.Bl\
-    uetoothDeviceRequest\x1a\x05.void\"\0\x12H\n\x1bbluetooth_gatt_get_servi\
-    ces\x12\x20.BluetoothGATTGetServicesRequest\x1a\x05.void\"\0\x129\n\x13b\
-    luetooth_gatt_read\x12\x19.BluetoothGATTReadRequest\x1a\x05.void\"\0\x12\
-    ;\n\x14bluetooth_gatt_write\x12\x1a.BluetoothGATTWriteRequest\x1a\x05.vo\
-    id\"\0\x12N\n\x1ebluetooth_gatt_read_descriptor\x12#.BluetoothGATTReadDe\
-    scriptorRequest\x1a\x05.void\"\0\x12P\n\x1fbluetooth_gatt_write_descript\
-    or\x12$.BluetoothGATTWriteDescriptorRequest\x1a\x05.void\"\0\x12=\n\x15b\
-    luetooth_gatt_notify\x12\x1b.BluetoothGATTNotifyRequest\x1a\x05.void\"\0\
-    \x12v\n$subscribe_bluetooth_connections_free\x12).SubscribeBluetoothConn\
-    ectionsFreeRequest\x1a!.BluetoothConnectionsFreeResponse\"\0\x12`\n'unsu\
-    bscribe_bluetooth_le_advertisements\x12,.UnsubscribeBluetoothLEAdvertise\
-    mentsRequest\x1a\x05.void\"\0\x12F\n\x1abluetooth_scanner_set_mode\x12\
-    \x1f.BluetoothScannerSetModeRequest\x1a\x05.void\"\0\x12E\n\x19subscribe\
-    _voice_assistant\x12\x1f.SubscribeVoiceAssistantRequest\x1a\x05.void\"\0\
-    \x12p\n!voice_assistant_get_configuration\x12#.VoiceAssistantConfigurati\
-    onRequest\x1a$.VoiceAssistantConfigurationResponse\"\0\x12M\n!voice_assi\
-    stant_set_configuration\x12\x1f.VoiceAssistantSetConfiguration\x1a\x05.v\
-    oid\"\0\x12H\n\x1balarm_control_panel_command\x12\x20.AlarmControlPanelC\
-    ommandRequest\x1a\x05.void\"\0b\x06proto3\
+    \x01(\tR\nreleaseUrl\x12\x1b\n\tdevice_id\x18\x0b\x20\x01(\rR\x08deviceI\
+    d:2\x8aA\x19StateResponseProtoMessage\x80A\x01\xf2@\nUSE_UPDATE\xe0@u\
+    \xe8@\x01\"\x9d\x01\n\x14UpdateCommandRequest\x12\x10\n\x03key\x18\x01\
+    \x20\x01(\x07R\x03key\x12(\n\x07command\x18\x02\x20\x01(\x0e2\x0e.Update\
+    CommandR\x07command\x12\x1b\n\tdevice_id\x18\x03\x20\x01(\rR\x08deviceId\
+    :,\x8aA\x13CommandProtoMessage\x80A\x01\xf2@\nUSE_UPDATE\xe0@v\xe8@\x02*\
+    f\n\x0eEntityCategory\x12\x18\n\x14ENTITY_CATEGORY_NONE\x10\0\x12\x1a\n\
+    \x16ENTITY_CATEGORY_CONFIG\x10\x01\x12\x1e\n\x1aENTITY_CATEGORY_DIAGNOST\
+    IC\x10\x02*N\n\x10LegacyCoverState\x12\x1b\n\x17LEGACY_COVER_STATE_OPEN\
+    \x10\0\x12\x1d\n\x19LEGACY_COVER_STATE_CLOSED\x10\x01*j\n\x0eCoverOperat\
+    ion\x12\x18\n\x14COVER_OPERATION_IDLE\x10\0\x12\x1e\n\x1aCOVER_OPERATION\
+    _IS_OPENING\x10\x01\x12\x1e\n\x1aCOVER_OPERATION_IS_CLOSING\x10\x02*r\n\
+    \x12LegacyCoverCommand\x12\x1d\n\x19LEGACY_COVER_COMMAND_OPEN\x10\0\x12\
+    \x1e\n\x1aLEGACY_COVER_COMMAND_CLOSE\x10\x01\x12\x1d\n\x19LEGACY_COVER_C\
+    OMMAND_STOP\x10\x02*G\n\x08FanSpeed\x12\x11\n\rFAN_SPEED_LOW\x10\0\x12\
+    \x14\n\x10FAN_SPEED_MEDIUM\x10\x01\x12\x12\n\x0eFAN_SPEED_HIGH\x10\x02*D\
+    \n\x0cFanDirection\x12\x19\n\x15FAN_DIRECTION_FORWARD\x10\0\x12\x19\n\
+    \x15FAN_DIRECTION_REVERSE\x10\x01*\xc7\x02\n\tColorMode\x12\x16\n\x12COL\
+    OR_MODE_UNKNOWN\x10\0\x12\x15\n\x11COLOR_MODE_ON_OFF\x10\x01\x12\x20\n\
+    \x1cCOLOR_MODE_LEGACY_BRIGHTNESS\x10\x02\x12\x19\n\x15COLOR_MODE_BRIGHTN\
+    ESS\x10\x03\x12\x14\n\x10COLOR_MODE_WHITE\x10\x07\x12\x20\n\x1cCOLOR_MOD\
+    E_COLOR_TEMPERATURE\x10\x0b\x12\x1e\n\x1aCOLOR_MODE_COLD_WARM_WHITE\x10\
+    \x13\x12\x12\n\x0eCOLOR_MODE_RGB\x10#\x12\x18\n\x14COLOR_MODE_RGB_WHITE\
+    \x10'\x12$\n\x20COLOR_MODE_RGB_COLOR_TEMPERATURE\x10/\x12\"\n\x1eCOLOR_M\
+    ODE_RGB_COLD_WARM_WHITE\x103*~\n\x10SensorStateClass\x12\x14\n\x10STATE_\
+    CLASS_NONE\x10\0\x12\x1b\n\x17STATE_CLASS_MEASUREMENT\x10\x01\x12\x20\n\
+    \x1cSTATE_CLASS_TOTAL_INCREASING\x10\x02\x12\x15\n\x11STATE_CLASS_TOTAL\
+    \x10\x03*U\n\x13SensorLastResetType\x12\x13\n\x0fLAST_RESET_NONE\x10\0\
+    \x12\x14\n\x10LAST_RESET_NEVER\x10\x01\x12\x13\n\x0fLAST_RESET_AUTO\x10\
+    \x02*\xb9\x01\n\x08LogLevel\x12\x12\n\x0eLOG_LEVEL_NONE\x10\0\x12\x13\n\
+    \x0fLOG_LEVEL_ERROR\x10\x01\x12\x12\n\x0eLOG_LEVEL_WARN\x10\x02\x12\x12\
+    \n\x0eLOG_LEVEL_INFO\x10\x03\x12\x14\n\x10LOG_LEVEL_CONFIG\x10\x04\x12\
+    \x13\n\x0fLOG_LEVEL_DEBUG\x10\x05\x12\x15\n\x11LOG_LEVEL_VERBOSE\x10\x06\
+    \x12\x1a\n\x16LOG_LEVEL_VERY_VERBOSE\x10\x07*\x84\x02\n\x0eServiceArgTyp\
+    e\x12\x19\n\x15SERVICE_ARG_TYPE_BOOL\x10\0\x12\x18\n\x14SERVICE_ARG_TYPE\
+    _INT\x10\x01\x12\x1a\n\x16SERVICE_ARG_TYPE_FLOAT\x10\x02\x12\x1b\n\x17SE\
+    RVICE_ARG_TYPE_STRING\x10\x03\x12\x1f\n\x1bSERVICE_ARG_TYPE_BOOL_ARRAY\
+    \x10\x04\x12\x1e\n\x1aSERVICE_ARG_TYPE_INT_ARRAY\x10\x05\x12\x20\n\x1cSE\
+    RVICE_ARG_TYPE_FLOAT_ARRAY\x10\x06\x12!\n\x1dSERVICE_ARG_TYPE_STRING_ARR\
+    AY\x10\x07*\xb5\x01\n\x0bClimateMode\x12\x14\n\x10CLIMATE_MODE_OFF\x10\0\
+    \x12\x1a\n\x16CLIMATE_MODE_HEAT_COOL\x10\x01\x12\x15\n\x11CLIMATE_MODE_C\
+    OOL\x10\x02\x12\x15\n\x11CLIMATE_MODE_HEAT\x10\x03\x12\x19\n\x15CLIMATE_\
+    MODE_FAN_ONLY\x10\x04\x12\x14\n\x10CLIMATE_MODE_DRY\x10\x05\x12\x15\n\
+    \x11CLIMATE_MODE_AUTO\x10\x06*\xf1\x01\n\x0eClimateFanMode\x12\x12\n\x0e\
+    CLIMATE_FAN_ON\x10\0\x12\x13\n\x0fCLIMATE_FAN_OFF\x10\x01\x12\x14\n\x10C\
+    LIMATE_FAN_AUTO\x10\x02\x12\x13\n\x0fCLIMATE_FAN_LOW\x10\x03\x12\x16\n\
+    \x12CLIMATE_FAN_MEDIUM\x10\x04\x12\x14\n\x10CLIMATE_FAN_HIGH\x10\x05\x12\
+    \x16\n\x12CLIMATE_FAN_MIDDLE\x10\x06\x12\x15\n\x11CLIMATE_FAN_FOCUS\x10\
+    \x07\x12\x17\n\x13CLIMATE_FAN_DIFFUSE\x10\x08\x12\x15\n\x11CLIMATE_FAN_Q\
+    UIET\x10\t*{\n\x10ClimateSwingMode\x12\x15\n\x11CLIMATE_SWING_OFF\x10\0\
+    \x12\x16\n\x12CLIMATE_SWING_BOTH\x10\x01\x12\x1a\n\x16CLIMATE_SWING_VERT\
+    ICAL\x10\x02\x12\x1c\n\x18CLIMATE_SWING_HORIZONTAL\x10\x03*\xab\x01\n\rC\
+    limateAction\x12\x16\n\x12CLIMATE_ACTION_OFF\x10\0\x12\x1a\n\x16CLIMATE_\
+    ACTION_COOLING\x10\x02\x12\x1a\n\x16CLIMATE_ACTION_HEATING\x10\x03\x12\
+    \x17\n\x13CLIMATE_ACTION_IDLE\x10\x04\x12\x19\n\x15CLIMATE_ACTION_DRYING\
+    \x10\x05\x12\x16\n\x12CLIMATE_ACTION_FAN\x10\x06*\xdf\x01\n\rClimatePres\
+    et\x12\x17\n\x13CLIMATE_PRESET_NONE\x10\0\x12\x17\n\x13CLIMATE_PRESET_HO\
+    ME\x10\x01\x12\x17\n\x13CLIMATE_PRESET_AWAY\x10\x02\x12\x18\n\x14CLIMATE\
+    _PRESET_BOOST\x10\x03\x12\x1a\n\x16CLIMATE_PRESET_COMFORT\x10\x04\x12\
+    \x16\n\x12CLIMATE_PRESET_ECO\x10\x05\x12\x18\n\x14CLIMATE_PRESET_SLEEP\
+    \x10\x06\x12\x1b\n\x17CLIMATE_PRESET_ACTIVITY\x10\x07*O\n\nNumberMode\
+    \x12\x14\n\x10NUMBER_MODE_AUTO\x10\0\x12\x13\n\x0fNUMBER_MODE_BOX\x10\
+    \x01\x12\x16\n\x12NUMBER_MODE_SLIDER\x10\x02*\x99\x01\n\tLockState\x12\
+    \x13\n\x0fLOCK_STATE_NONE\x10\0\x12\x15\n\x11LOCK_STATE_LOCKED\x10\x01\
+    \x12\x17\n\x13LOCK_STATE_UNLOCKED\x10\x02\x12\x15\n\x11LOCK_STATE_JAMMED\
+    \x10\x03\x12\x16\n\x12LOCK_STATE_LOCKING\x10\x04\x12\x18\n\x14LOCK_STATE\
+    _UNLOCKING\x10\x05*<\n\x0bLockCommand\x12\x0f\n\x0bLOCK_UNLOCK\x10\0\x12\
+    \r\n\tLOCK_LOCK\x10\x01\x12\r\n\tLOCK_OPEN\x10\x02*\x8b\x01\n\x10MediaPl\
+    ayerState\x12\x1b\n\x17MEDIA_PLAYER_STATE_NONE\x10\0\x12\x1b\n\x17MEDIA_\
+    PLAYER_STATE_IDLE\x10\x01\x12\x1e\n\x1aMEDIA_PLAYER_STATE_PLAYING\x10\
+    \x02\x12\x1d\n\x19MEDIA_PLAYER_STATE_PAUSED\x10\x03*\xb2\x01\n\x12MediaP\
+    layerCommand\x12\x1d\n\x19MEDIA_PLAYER_COMMAND_PLAY\x10\0\x12\x1e\n\x1aM\
+    EDIA_PLAYER_COMMAND_PAUSE\x10\x01\x12\x1d\n\x19MEDIA_PLAYER_COMMAND_STOP\
+    \x10\x02\x12\x1d\n\x19MEDIA_PLAYER_COMMAND_MUTE\x10\x03\x12\x1f\n\x1bMED\
+    IA_PLAYER_COMMAND_UNMUTE\x10\x04*q\n\x18MediaPlayerFormatPurpose\x12'\n#\
+    MEDIA_PLAYER_FORMAT_PURPOSE_DEFAULT\x10\0\x12,\n(MEDIA_PLAYER_FORMAT_PUR\
+    POSE_ANNOUNCEMENT\x10\x01*\xeb\x02\n\x1aBluetoothDeviceRequestType\x12)\
+    \n%BLUETOOTH_DEVICE_REQUEST_TYPE_CONNECT\x10\0\x12,\n(BLUETOOTH_DEVICE_R\
+    EQUEST_TYPE_DISCONNECT\x10\x01\x12&\n\"BLUETOOTH_DEVICE_REQUEST_TYPE_PAI\
+    R\x10\x02\x12(\n$BLUETOOTH_DEVICE_REQUEST_TYPE_UNPAIR\x10\x03\x127\n3BLU\
+    ETOOTH_DEVICE_REQUEST_TYPE_CONNECT_V3_WITH_CACHE\x10\x04\x12:\n6BLUETOOT\
+    H_DEVICE_REQUEST_TYPE_CONNECT_V3_WITHOUT_CACHE\x10\x05\x12-\n)BLUETOOTH_\
+    DEVICE_REQUEST_TYPE_CLEAR_CACHE\x10\x06*\xf3\x01\n\x15BluetoothScannerSt\
+    ate\x12\x20\n\x1cBLUETOOTH_SCANNER_STATE_IDLE\x10\0\x12$\n\x20BLUETOOTH_\
+    SCANNER_STATE_STARTING\x10\x01\x12#\n\x1fBLUETOOTH_SCANNER_STATE_RUNNING\
+    \x10\x02\x12\"\n\x1eBLUETOOTH_SCANNER_STATE_FAILED\x10\x03\x12$\n\x20BLU\
+    ETOOTH_SCANNER_STATE_STOPPING\x10\x04\x12#\n\x1fBLUETOOTH_SCANNER_STATE_\
+    STOPPED\x10\x05*]\n\x14BluetoothScannerMode\x12\"\n\x1eBLUETOOTH_SCANNER\
+    _MODE_PASSIVE\x10\0\x12!\n\x1dBLUETOOTH_SCANNER_MODE_ACTIVE\x10\x01*j\n\
+    \x1bVoiceAssistantSubscribeFlag\x12\"\n\x1eVOICE_ASSISTANT_SUBSCRIBE_NON\
+    E\x10\0\x12'\n#VOICE_ASSISTANT_SUBSCRIBE_API_AUDIO\x10\x01*\x8d\x01\n\
+    \x19VoiceAssistantRequestFlag\x12\x20\n\x1cVOICE_ASSISTANT_REQUEST_NONE\
+    \x10\0\x12#\n\x1fVOICE_ASSISTANT_REQUEST_USE_VAD\x10\x01\x12)\n%VOICE_AS\
+    SISTANT_REQUEST_USE_WAKE_WORD\x10\x02*\xa1\x04\n\x13VoiceAssistantEvent\
+    \x12\x19\n\x15VOICE_ASSISTANT_ERROR\x10\0\x12\x1d\n\x19VOICE_ASSISTANT_R\
+    UN_START\x10\x01\x12\x1b\n\x17VOICE_ASSISTANT_RUN_END\x10\x02\x12\x1d\n\
+    \x19VOICE_ASSISTANT_STT_START\x10\x03\x12\x1b\n\x17VOICE_ASSISTANT_STT_E\
+    ND\x10\x04\x12\x20\n\x1cVOICE_ASSISTANT_INTENT_START\x10\x05\x12\x1e\n\
+    \x1aVOICE_ASSISTANT_INTENT_END\x10\x06\x12\x1d\n\x19VOICE_ASSISTANT_TTS_\
+    START\x10\x07\x12\x1b\n\x17VOICE_ASSISTANT_TTS_END\x10\x08\x12#\n\x1fVOI\
+    CE_ASSISTANT_WAKE_WORD_START\x10\t\x12!\n\x1dVOICE_ASSISTANT_WAKE_WORD_E\
+    ND\x10\n\x12!\n\x1dVOICE_ASSISTANT_STT_VAD_START\x10\x0b\x12\x1f\n\x1bVO\
+    ICE_ASSISTANT_STT_VAD_END\x10\x0c\x12$\n\x20VOICE_ASSISTANT_TTS_STREAM_S\
+    TART\x10b\x12\"\n\x1eVOICE_ASSISTANT_TTS_STREAM_END\x10c\x12#\n\x1fVOICE\
+    _ASSISTANT_INTENT_PROGRESS\x10d*\xa9\x01\n\x18VoiceAssistantTimerEvent\
+    \x12!\n\x1dVOICE_ASSISTANT_TIMER_STARTED\x10\0\x12!\n\x1dVOICE_ASSISTANT\
+    _TIMER_UPDATED\x10\x01\x12#\n\x1fVOICE_ASSISTANT_TIMER_CANCELLED\x10\x02\
+    \x12\"\n\x1eVOICE_ASSISTANT_TIMER_FINISHED\x10\x03*\xb3\x02\n\x16AlarmCo\
+    ntrolPanelState\x12\x18\n\x14ALARM_STATE_DISARMED\x10\0\x12\x1a\n\x16ALA\
+    RM_STATE_ARMED_HOME\x10\x01\x12\x1a\n\x16ALARM_STATE_ARMED_AWAY\x10\x02\
+    \x12\x1b\n\x17ALARM_STATE_ARMED_NIGHT\x10\x03\x12\x1e\n\x1aALARM_STATE_A\
+    RMED_VACATION\x10\x04\x12#\n\x1fALARM_STATE_ARMED_CUSTOM_BYPASS\x10\x05\
+    \x12\x17\n\x13ALARM_STATE_PENDING\x10\x06\x12\x16\n\x12ALARM_STATE_ARMIN\
+    G\x10\x07\x12\x19\n\x15ALARM_STATE_DISARMING\x10\x08\x12\x19\n\x15ALARM_\
+    STATE_TRIGGERED\x10\t*\x98\x02\n\x1dAlarmControlPanelStateCommand\x12\
+    \x1e\n\x1aALARM_CONTROL_PANEL_DISARM\x10\0\x12\x20\n\x1cALARM_CONTROL_PA\
+    NEL_ARM_AWAY\x10\x01\x12\x20\n\x1cALARM_CONTROL_PANEL_ARM_HOME\x10\x02\
+    \x12!\n\x1dALARM_CONTROL_PANEL_ARM_NIGHT\x10\x03\x12$\n\x20ALARM_CONTROL\
+    _PANEL_ARM_VACATION\x10\x04\x12)\n%ALARM_CONTROL_PANEL_ARM_CUSTOM_BYPASS\
+    \x10\x05\x12\x1f\n\x1bALARM_CONTROL_PANEL_TRIGGER\x10\x06*6\n\x08TextMod\
+    e\x12\x12\n\x0eTEXT_MODE_TEXT\x10\0\x12\x16\n\x12TEXT_MODE_PASSWORD\x10\
+    \x01*j\n\x0eValveOperation\x12\x18\n\x14VALVE_OPERATION_IDLE\x10\0\x12\
+    \x1e\n\x1aVALVE_OPERATION_IS_OPENING\x10\x01\x12\x1e\n\x1aVALVE_OPERATIO\
+    N_IS_CLOSING\x10\x02*]\n\rUpdateCommand\x12\x17\n\x13UPDATE_COMMAND_NONE\
+    \x10\0\x12\x19\n\x15UPDATE_COMMAND_UPDATE\x10\x01\x12\x18\n\x14UPDATE_CO\
+    MMAND_CHECK\x10\x022\xc8\x16\n\rAPIConnection\x12.\n\x05hello\x12\r.Hell\
+    oRequest\x1a\x0e.HelloResponse\"\x06\xf0@\0\xf8@\0\x124\n\x07connect\x12\
+    \x0f.ConnectRequest\x1a\x10.ConnectResponse\"\x06\xf0@\0\xf8@\0\x12=\n\n\
+    disconnect\x12\x12.DisconnectRequest\x1a\x13.DisconnectResponse\"\x06\
+    \xf0@\0\xf8@\0\x12+\n\x04ping\x12\x0c.PingRequest\x1a\r.PingResponse\"\
+    \x06\xf0@\0\xf8@\0\x12;\n\x0bdevice_info\x12\x12.DeviceInfoRequest\x1a\
+    \x13.DeviceInfoResponse\"\x03\xf8@\0\x12.\n\rlist_entities\x12\x14.ListE\
+    ntitiesRequest\x1a\x05.void\"\0\x124\n\x10subscribe_states\x12\x17.Subsc\
+    ribeStatesRequest\x1a\x05.void\"\0\x120\n\x0esubscribe_logs\x12\x15.Subs\
+    cribeLogsRequest\x1a\x05.void\"\0\x12S\n\x20subscribe_homeassistant_serv\
+    ices\x12&.SubscribeHomeassistantServicesRequest\x1a\x05.void\"\0\x12P\n\
+    \x1fsubscribe_home_assistant_states\x12$.SubscribeHomeAssistantStatesReq\
+    uest\x1a\x05.void\"\0\x122\n\x08get_time\x12\x0f.GetTimeRequest\x1a\x10.\
+    GetTimeResponse\"\x03\xf8@\0\x122\n\x0fexecute_service\x12\x16.ExecuteSe\
+    rviceRequest\x1a\x05.void\"\0\x12[\n\x18noise_encryption_set_key\x12\x1d\
+    .NoiseEncryptionSetKeyRequest\x1a\x1e.NoiseEncryptionSetKeyResponse\"\0\
+    \x120\n\x0ebutton_command\x12\x15.ButtonCommandRequest\x1a\x05.void\"\0\
+    \x12,\n\x0ccamera_image\x12\x13.CameraImageRequest\x1a\x05.void\"\0\x122\
+    \n\x0fclimate_command\x12\x16.ClimateCommandRequest\x1a\x05.void\"\0\x12\
+    .\n\rcover_command\x12\x14.CoverCommandRequest\x1a\x05.void\"\0\x12,\n\
+    \x0cdate_command\x12\x13.DateCommandRequest\x1a\x05.void\"\0\x124\n\x10d\
+    atetime_command\x12\x17.DateTimeCommandRequest\x1a\x05.void\"\0\x12*\n\
+    \x0bfan_command\x12\x12.FanCommandRequest\x1a\x05.void\"\0\x12.\n\rlight\
+    _command\x12\x14.LightCommandRequest\x1a\x05.void\"\0\x12,\n\x0clock_com\
+    mand\x12\x13.LockCommandRequest\x1a\x05.void\"\0\x12;\n\x14media_player_\
+    command\x12\x1a.MediaPlayerCommandRequest\x1a\x05.void\"\0\x120\n\x0enum\
+    ber_command\x12\x15.NumberCommandRequest\x1a\x05.void\"\0\x120\n\x0esele\
+    ct_command\x12\x15.SelectCommandRequest\x1a\x05.void\"\0\x12.\n\rsiren_c\
+    ommand\x12\x14.SirenCommandRequest\x1a\x05.void\"\0\x120\n\x0eswitch_com\
+    mand\x12\x15.SwitchCommandRequest\x1a\x05.void\"\0\x12,\n\x0ctext_comman\
+    d\x12\x13.TextCommandRequest\x1a\x05.void\"\0\x12,\n\x0ctime_command\x12\
+    \x13.TimeCommandRequest\x1a\x05.void\"\0\x120\n\x0eupdate_command\x12\
+    \x15.UpdateCommandRequest\x1a\x05.void\"\0\x12.\n\rvalve_command\x12\x14\
+    .ValveCommandRequest\x1a\x05.void\"\0\x12\\\n%subscribe_bluetooth_le_adv\
+    ertisements\x12*.SubscribeBluetoothLEAdvertisementsRequest\x1a\x05.void\
+    \"\0\x12<\n\x18bluetooth_device_request\x12\x17.BluetoothDeviceRequest\
+    \x1a\x05.void\"\0\x12H\n\x1bbluetooth_gatt_get_services\x12\x20.Bluetoot\
+    hGATTGetServicesRequest\x1a\x05.void\"\0\x129\n\x13bluetooth_gatt_read\
+    \x12\x19.BluetoothGATTReadRequest\x1a\x05.void\"\0\x12;\n\x14bluetooth_g\
+    att_write\x12\x1a.BluetoothGATTWriteRequest\x1a\x05.void\"\0\x12N\n\x1eb\
+    luetooth_gatt_read_descriptor\x12#.BluetoothGATTReadDescriptorRequest\
+    \x1a\x05.void\"\0\x12P\n\x1fbluetooth_gatt_write_descriptor\x12$.Bluetoo\
+    thGATTWriteDescriptorRequest\x1a\x05.void\"\0\x12=\n\x15bluetooth_gatt_n\
+    otify\x12\x1b.BluetoothGATTNotifyRequest\x1a\x05.void\"\0\x12v\n$subscri\
+    be_bluetooth_connections_free\x12).SubscribeBluetoothConnectionsFreeRequ\
+    est\x1a!.BluetoothConnectionsFreeResponse\"\0\x12`\n'unsubscribe_bluetoo\
+    th_le_advertisements\x12,.UnsubscribeBluetoothLEAdvertisementsRequest\
+    \x1a\x05.void\"\0\x12F\n\x1abluetooth_scanner_set_mode\x12\x1f.Bluetooth\
+    ScannerSetModeRequest\x1a\x05.void\"\0\x12E\n\x19subscribe_voice_assista\
+    nt\x12\x1f.SubscribeVoiceAssistantRequest\x1a\x05.void\"\0\x12p\n!voice_\
+    assistant_get_configuration\x12#.VoiceAssistantConfigurationRequest\x1a$\
+    .VoiceAssistantConfigurationResponse\"\0\x12M\n!voice_assistant_set_conf\
+    iguration\x12\x1f.VoiceAssistantSetConfiguration\x1a\x05.void\"\0\x12H\n\
+    \x1balarm_control_panel_command\x12\x20.AlarmControlPanelCommandRequest\
+    \x1a\x05.void\"\0b\x06proto3\
 ";
 
 /// `FileDescriptorProto` object which was a source for this generated file
@@ -29710,7 +31260,7 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
         let generated_file_descriptor = generated_file_descriptor_lazy.get(|| {
             let mut deps = ::std::vec::Vec::with_capacity(1);
             deps.push(super::api_options::file_descriptor().clone());
-            let mut messages = ::std::vec::Vec::with_capacity(139);
+            let mut messages = ::std::vec::Vec::with_capacity(141);
             messages.push(HelloRequest::generated_message_descriptor_data());
             messages.push(HelloResponse::generated_message_descriptor_data());
             messages.push(ConnectRequest::generated_message_descriptor_data());
@@ -29720,6 +31270,8 @@ pub fn file_descriptor() -> &'static ::protobuf::reflect::FileDescriptor {
             messages.push(PingRequest::generated_message_descriptor_data());
             messages.push(PingResponse::generated_message_descriptor_data());
             messages.push(DeviceInfoRequest::generated_message_descriptor_data());
+            messages.push(AreaInfo::generated_message_descriptor_data());
+            messages.push(DeviceInfo::generated_message_descriptor_data());
             messages.push(DeviceInfoResponse::generated_message_descriptor_data());
             messages.push(ListEntitiesRequest::generated_message_descriptor_data());
             messages.push(ListEntitiesDoneResponse::generated_message_descriptor_data());
