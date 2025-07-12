@@ -6,7 +6,7 @@ use tokio::net::TcpStream;
 
 use crate::api::api::{
     BluetoothConnectionsFreeResponse, //,
-                                      //  SensorStateClass, ListEntitiesSensorResponse
+    //  SensorStateClass, ListEntitiesSensorResponse
     BluetoothLEAdvertisementResponse,
     ConnectRequest,
     ConnectResponse,
@@ -21,11 +21,38 @@ use crate::api::api::{
     PingRequest,
     PingResponse,
     SubscribeBluetoothConnectionsFreeRequest,
+    SubscribeBluetoothLEAdvertisementsRequest,
 };
 use crate::context::ProxyContext;
 use crate::proto::{encode_varint, get_message_id};
 use crate::utils::format_mac;
 use log::info;
+
+// Bluetooth proxy subscription flags (from ESPHome)
+const SUBSCRIPTION_RAW_ADVERTISEMENTS: u32 = 1 << 0;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct SubscriptionFlags {
+    pub regular: bool,
+    pub raw: bool,
+}
+
+impl SubscriptionFlags {
+    pub fn none() -> Self {
+        SubscriptionFlags { regular: false, raw: false }
+    }
+    
+    pub fn from_flags(flags: u32) -> Self {
+        SubscriptionFlags {
+            regular: flags == 0 || (flags & SUBSCRIPTION_RAW_ADVERTISEMENTS) == 0,
+            raw: (flags & SUBSCRIPTION_RAW_ADVERTISEMENTS) != 0,
+        }
+    }
+    
+    pub fn is_subscribed(&self) -> bool {
+        self.regular || self.raw
+    }
+}
 
 fn encode_response<M: Message>(msg_type: u32, message: &M) -> Result<Vec<u8>, std::io::Error> {
     let size = message.compute_size() as usize;
@@ -213,6 +240,27 @@ pub async fn list_entities_request(
         )?)
         .await?;
     Ok(())
+}
+
+pub async fn subscribe_bluetooth_le_advertisements_request(
+    stream: &mut TcpStream,
+    payload: &[u8],
+) -> Result<SubscriptionFlags, std::io::Error> {
+    // Parse the subscription request to get flags
+    info!(
+        "Handling SubscribeBluetoothLEAdvertisementsRequest from {}",
+        stream.peer_addr()?.ip()
+    );
+    
+    let req = SubscribeBluetoothLEAdvertisementsRequest::parse_from_bytes(payload)?;
+    let subscription_flags = SubscriptionFlags::from_flags(req.flags);
+    
+    info!(
+        "BLE advertisement subscription flags: {:?} (raw flags: 0x{:02x})",
+        subscription_flags, req.flags
+    );
+    
+    Ok(subscription_flags)
 }
 
 pub async fn forward_ble_advertisement(

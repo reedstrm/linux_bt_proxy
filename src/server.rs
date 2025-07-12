@@ -11,7 +11,8 @@ use crate::context::ProxyContext;
 use crate::handlers::{
     connect_request, device_info_request, disconnect_request, forward_ble_advertisement,
     hello_request, list_entities_request, ping_request,
-    subscribe_bluetooth_connections_free_request,
+    subscribe_bluetooth_connections_free_request, subscribe_bluetooth_le_advertisements_request,
+    SubscriptionFlags,
 };
 use crate::proto::next_message;
 
@@ -43,7 +44,7 @@ async fn handle_client(
 ) -> std::io::Result<()> {
     let mut buf = BytesMut::with_capacity(1024);
 
-    let mut subscribed = false;
+    let mut subscription_flags = SubscriptionFlags::none();
     loop {
         tokio::select! {
             n = stream.read_buf(&mut buf) => {
@@ -61,11 +62,21 @@ async fn handle_client(
                                 0x07 => ping_request(&mut stream, &payload).await?,
                                 0x09 => device_info_request(ctx.clone(), &mut stream, &payload).await?,
                                 0x0b => list_entities_request(&mut stream, &payload).await?,
-                                0x42 => {info!("Handling BLE Adv subscribe request");
-                                    subscribed = true},
+                                0x42 => {
+                                    match subscribe_bluetooth_le_advertisements_request(&mut stream, &payload).await {
+                                        Ok(sub_flags) => {
+                                            subscription_flags = sub_flags;
+                                        }
+                                        Err(e) => {
+                                            warn!("Failed to handle BLE advertisement subscription: {}", e);
+                                        }
+                                    }
+                                },
                                 0x50 => subscribe_bluetooth_connections_free_request(&mut stream, &payload).await?,
-                                0x57 => {info!("Handling BLE Adv unsubscribe request");
-                                    subscribed = false},
+                                0x57 => {
+                                    info!("Handling BLE Adv unsubscribe request");
+                                    subscription_flags = SubscriptionFlags::none();
+                                },
                                 _ => {
                                     warn!("Unknown message type: 0x{:02x} ({}) from {}", msg_type, msg_type, stream.peer_addr()?.ip());
                                 }
@@ -81,8 +92,9 @@ async fn handle_client(
             ble_msg = rx.recv() => {
                 match ble_msg {
                     Ok(advert) => {
-                        if subscribed == true {
-                            debug!("Forwarding BLE advertisement to {}", stream.peer_addr()?.ip());
+                        if subscription_flags.is_subscribed() {
+                            debug!("Forwarding BLE advertisement to {} (flags: {:?})", 
+                                   stream.peer_addr()?.ip(), subscription_flags);
                             forward_ble_advertisement(&mut stream, advert).await?;
                         }
                     },
