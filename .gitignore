@@ -6,3 +6,4 @@ bin
 include
 doc
 pyvenv.cfg
+dist/

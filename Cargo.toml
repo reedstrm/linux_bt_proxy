@@ -23,6 +23,14 @@ A Bluetooth advertisement proxy for Home Assistant using the ESPHome API.
 Runs as a daemon, forwarding BLE advertisements via TCP to Home Assistant.
 """
 
+[package.metadata.generate-rpm]
+assets = [
+    { source = "target/release/linux_bt_proxy", dest = "/usr/bin/linux_bt_proxy", mode = "755" },
+    { source = "systemd/linux-bt-proxy.service", dest = "/lib/systemd/system/linux-bt-proxy.service", mode = "644" }
+]
+[package.metadata.generate-rpm.requires]
+systemd = "*"
+
 [dependencies]
 clap = { version = "4", features = ["derive"] }
 tokio = { version = "1", features = ["full"] }
