@@ -96,6 +96,25 @@ Prerequisites for packaging:
 
    cargo install cargo-deb cargo-generate-rpm
 
+Releasing
+---------
+
+Releases are automatically built and published when version tags are pushed:
+
+.. code-block:: bash
+
+   # Update version in Cargo.toml first, then:
+   git tag v0.1.1
+   git push origin v0.1.1
+
+This triggers a GitHub Actions workflow that:
+
+- Builds DEB, RPM, and tarball packages
+- Creates a GitHub release with auto-generated notes
+- Uploads all package formats as release assets
+
+The workflow validates that the tag version matches ``Cargo.toml`` before building.
+
 Project Structure
 -----------------
 

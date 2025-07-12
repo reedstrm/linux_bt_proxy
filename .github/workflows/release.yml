@@ -1,0 +1,119 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Rust
+      uses: actions-rust-lang/setup-rust-toolchain@v1
+      with:
+        toolchain: stable
+        
+    - name: Install packaging tools
+      run: |
+        cargo install cargo-deb cargo-generate-rpm
+        
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libbluetooth-dev pkg-config
+        
+    - name: Build release binary
+      run: cargo build --release
+      
+    - name: Extract version from tag
+      id: version
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "tag=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        
+    - name: Verify version matches Cargo.toml
+      run: |
+        CARGO_VERSION=$(grep '^version = ' Cargo.toml | sed 's/version = "\(.*\)"/\1/')
+        if [ "${{ steps.version.outputs.version }}" != "$CARGO_VERSION" ]; then
+          echo "Tag version ${{ steps.version.outputs.version }} doesn't match Cargo.toml version $CARGO_VERSION"
+          exit 1
+        fi
+        
+    - name: Build packages
+      run: ./scripts/build-packages.sh --skip-build
+      
+    - name: Create release notes
+      id: release_notes
+      run: |
+        cat > release_notes.md << EOF
+        # Linux Bluetooth Proxy v${{ steps.version.outputs.version }}
+        
+        ## Installation
+        
+        **Debian/Ubuntu:**
+        \`\`\`bash
+        wget https://github.com/reedstrm/linux_bt_proxy/releases/download/${{ steps.version.outputs.tag }}/linux-bt-proxy_${{ steps.version.outputs.version }}_amd64.deb
+        sudo dpkg -i linux-bt-proxy_${{ steps.version.outputs.version }}_amd64.deb
+        \`\`\`
+        
+        **Red Hat/Fedora/CentOS:**
+        \`\`\`bash
+        wget https://github.com/reedstrm/linux_bt_proxy/releases/download/${{ steps.version.outputs.tag }}/linux_bt_proxy-${{ steps.version.outputs.version }}-1.x86_64.rpm
+        sudo rpm -i linux_bt_proxy-${{ steps.version.outputs.version }}-1.x86_64.rpm
+        \`\`\`
+        
+        **Arch Linux/Other:**
+        \`\`\`bash
+        wget https://github.com/reedstrm/linux_bt_proxy/releases/download/${{ steps.version.outputs.tag }}/linux-bt-proxy-${{ steps.version.outputs.version }}-x86_64-unknown-linux-gnu.tar.gz
+        tar -xzf linux-bt-proxy-${{ steps.version.outputs.version }}-x86_64-unknown-linux-gnu.tar.gz
+        cd linux-bt-proxy-${{ steps.version.outputs.version }}-x86_64-unknown-linux-gnu
+        sudo ./install.sh
+        \`\`\`
+        
+        ## What's New
+        
+        <!-- Add changelog here manually or generate from commits -->
+        
+        ## Usage
+        
+        After installation, enable and start the service:
+        \`\`\`bash
+        sudo systemctl enable linux-bt-proxy
+        sudo systemctl start linux-bt-proxy
+        \`\`\`
+        EOF
+        
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ steps.version.outputs.tag }}
+        name: Linux Bluetooth Proxy v${{ steps.version.outputs.version }}
+        body_path: release_notes.md
+        files: |
+          dist/*.deb
+          dist/*.rpm
+          dist/*.tar.gz
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: packages-${{ steps.version.outputs.version }}
+        path: |
+          dist/*.deb
+          dist/*.rpm
+          dist/*.tar.gz
+        retention-days: 30
