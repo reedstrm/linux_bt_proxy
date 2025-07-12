@@ -1,6 +1,5 @@
 use crate::api::api_options;
 use bytes::{Bytes, BytesMut};
-use protobuf;
 use protobuf::MessageFull;
 use std::io::{Error, ErrorKind};
 
@@ -48,7 +47,7 @@ pub fn encode_varint(mut value: u64) -> Vec<u8> {
 
 pub fn next_message(buf: &mut BytesMut) -> Option<(u32, Bytes)> {
     // Step 1: check framing byte
-    if buf.len() < 1 || buf[0] != 0x00 {
+    if buf.is_empty() || buf[0] != 0x00 {
         return None;
     }
 

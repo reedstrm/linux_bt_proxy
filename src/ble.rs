@@ -54,7 +54,7 @@ pub async fn run_bluez_advertisement_listener(
 
                     if interface == "org.bluez.Adapter1" {
                         if let Some(value) = changed.get("Discovering") {
-                            if let Some(is_discovering) = value.downcast_ref::<bool>().ok() {
+                            if let Ok(is_discovering) = value.downcast_ref::<bool>() {
                                 if !is_discovering {
                                     info!("Discovery was turned off — restarting discovery.");
                                     try_start_discovery(&conn, adapter_index).await?;
@@ -71,23 +71,23 @@ pub async fn run_bluez_advertisement_listener(
                     if let Some(path) = device_path {
                         match get_device_properties(&conn, &path).await {
                             Ok(props) => {
-                                debug!("Changed properties for device {}", path);
+                                debug!("Changed properties for device {path}");
                                 if log::log_enabled!(log::Level::Debug) {
                                     print_props(&props);
                                 }
                                 match build_advertisement_response(&props) {
                                     Some(msg) => {
                                         if let Err(e) = tx.send(msg) {
-                                            warn!("Failed to send advertisement response: {}", e);
+                                            warn!("Failed to send advertisement response: {e}");
                                         }
                                     }
                                     None => {
-                                        warn!("Failed to build advertisement response for {}", path);
+                                        warn!("Failed to build advertisement response for {path}");
                                     }
                                 };
                                 }
                             Err(e) => {
-                                warn!("Failed to fetch properties for {}: {}", path, e);
+                                warn!("Failed to fetch properties for {path}: {e}");
                             }
                         }
                     }
@@ -102,26 +102,26 @@ pub async fn run_bluez_advertisement_listener(
                         HashMap<String, HashMap<String, OwnedValue>>
                     ) = body.deserialize()?;
 
-                    debug!("InterfacesAdded at path: {}", path);
+                    debug!("InterfacesAdded at path: {path}");
                     match interfaces.get("org.bluez.Device1") {
                         Some(props) => {
-                            debug!("New properties for device {}", path);
+                            debug!("New properties for device {path}");
                             if log::log_enabled!(log::Level::Debug) {
                                 print_props(props);
                             }
-                            match build_advertisement_response(&props) {
+                            match build_advertisement_response(props) {
                                 Some(msg) => {
                                     if let Err(e) = tx.send(msg) {
-                                        warn!("Failed to send advertisement response: {}", e);
+                                        warn!("Failed to send advertisement response: {e}");
                                     }
                                 }
                                 None => {
-                                    warn!("Failed to build advertisement response for {}", path);
+                                    warn!("Failed to build advertisement response for {path}");
                                 }
                             };
                         }
                         _ => {
-                            debug!("Failed to fetch properties for {}", path);
+                            debug!("Failed to fetch properties for {path}");
                         }
                     }
                 }
@@ -196,12 +196,12 @@ async fn get_device_properties(
 
 fn print_props(props: &HashMap<String, OwnedValue>) {
     for (key, value) in props {
-        debug!("  {} => {:?}", key, value);
+        debug!("  {key} => {value:?}");
     }
 }
 
 async fn try_start_discovery(conn: &Connection, adapter_index: u16) -> zbus::Result<()> {
-    let adapter_path = format!("/org/bluez/hci{}", adapter_index);
+    let adapter_path = format!("/org/bluez/hci{adapter_index}");
     let proxy = Proxy::new(
         conn,
         "org.bluez",

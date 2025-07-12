@@ -68,7 +68,7 @@ async fn main() -> std::io::Result<()> {
                 std::process::exit(1);
             }
             Err(e) => {
-                log::error!("Error while getting MAC address: {}", e);
+                log::error!("Error while getting MAC address: {e}");
                 log::error!("Fatal: Could not determine MAC address.");
                 std::process::exit(1);
             }
@@ -88,7 +88,7 @@ async fn main() -> std::io::Result<()> {
         hostname: cli.hostname,
         port: cli.listen.port(),
         net_mac: mac,
-        bt_mac: bt_mac,
+        bt_mac,
         build_time: env!("BUILD_TIME"),
         version: env!("CARGO_PKG_VERSION"),
     });
@@ -106,12 +106,12 @@ async fn main() -> std::io::Result<()> {
         result = &mut ble_handle => {
             match result {
                 Ok(Err(e)) => {
-                    log::error!("Failed to start BLE advertisement listener: {}", e);
+                    log::error!("Failed to start BLE advertisement listener: {e}");
                     log::error!("Fatal: Cannot connect to BlueZ D-Bus service. Check if bluetoothd is running.");
                     std::process::exit(1);
                 }
                 Err(e) => {
-                    log::error!("BLE advertisement listener task panicked: {}", e);
+                    log::error!("BLE advertisement listener task panicked: {e}");
                     log::error!("Fatal: Critical error in BLE listener.");
                     std::process::exit(1);
                 }
@@ -126,15 +126,15 @@ async fn main() -> std::io::Result<()> {
 
     info!("Listening for ble advertisements on hci{}", cli.hci);
 
-    let _mdns_service = mdns::start_mdns(ctx.clone()).unwrap_or_else(|e| {
-        warn!("Critical error: failed to register mDNS service: {}", e);
+    mdns::start_mdns(ctx.clone()).unwrap_or_else(|e| {
+        warn!("Critical error: failed to register mDNS service: {e}");
         std::process::exit(1);
     });
 
     info!("mDNS service registered");
 
     if let Err(e) = server::run_tcp_server(ctx.clone(), cli.listen, rx).await {
-        log::error!("TCP server error: {}", e);
+        log::error!("TCP server error: {e}");
         log::error!("Fatal: TCP server failed to start or crashed.");
         std::process::exit(1);
     }

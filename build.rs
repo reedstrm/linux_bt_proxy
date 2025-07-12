@@ -1,5 +1,4 @@
 use chrono::Utc;
-use protobuf_codegen;
 use std::{fs, path::PathBuf};
 
 fn main() {

@@ -22,16 +22,16 @@ pub async fn run_tcp_server(
     rx: broadcast::Receiver<BluetoothLEAdvertisementResponse>,
 ) -> std::io::Result<()> {
     let listener = TcpListener::bind(addr).await?;
-    info!("Listening on {}", addr);
+    info!("Listening on {addr}");
 
     loop {
         let (stream, peer) = listener.accept().await?;
-        info!("New connection from {}", peer);
+        info!("New connection from {peer}");
         let mut client_rx = rx.resubscribe();
         let ctx = Arc::clone(&ctx);
         tokio::spawn(async move {
             if let Err(e) = handle_client(ctx, stream, &mut client_rx).await {
-                warn!("Client error: {:?}", e);
+                warn!("Client error: {e:?}");
             }
         });
     }
@@ -68,7 +68,7 @@ async fn handle_client(
                                             subscription_flags = sub_flags;
                                         }
                                         Err(e) => {
-                                            warn!("Failed to handle BLE advertisement subscription: {}", e);
+                                            warn!("Failed to handle BLE advertisement subscription: {e}");
                                         }
                                     }
                                 },
@@ -84,7 +84,7 @@ async fn handle_client(
                         }
                     },
                     Err(e) => {
-                        warn!("Read Error: {}", e);
+                        warn!("Read Error: {e}");
                         break;
                     },
                 }
@@ -99,7 +99,7 @@ async fn handle_client(
                         }
                     },
                     Err(broadcast::error::RecvError::Lagged(n)) => {
-                        warn!("Lagged behind on BLE broadcast: {} messages dropped", n);
+                        warn!("Lagged behind on BLE broadcast: {n} messages dropped");
                     },
                     Err(broadcast::error::RecvError::Closed) => {
                         warn!("BLE broadcast channel closed");

@@ -19,11 +19,11 @@ pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
         _padding: [u8; 84], // full size = 104
     }
 
-    log::debug!("Attempting to open HCI device hci{}", hci_index);
+    log::debug!("Attempting to open HCI device hci{hci_index}");
 
     let sock = unsafe { libc::socket(AF_BLUETOOTH, SOCK_RAW, BTPROTO_HCI) };
     if sock < 0 {
-        log::error!("Failed to open raw HCI socket: errno {}", sock);
+        log::error!("Failed to open raw HCI socket: errno {sock}");
         return None;
     }
 
@@ -38,9 +38,7 @@ pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
 
     if ret < 0 {
         log::error!(
-            "ioctl HCIGETDEVINFO failed for hci{} (ret = {})",
-            hci_index,
-            ret
+            "ioctl HCIGETDEVINFO failed for hci{hci_index} (ret = {ret})"
         );
         return None;
     }
@@ -58,14 +56,14 @@ pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
     log::info!(
         "Retrieved MAC for hci{}: {}",
         hci_index,
-        format_mac(&mac, &":")
+        format_mac(&mac, ":")
     );
     Some(mac)
 }
 
 pub fn format_mac(mac: &[u8], sep: &str) -> String {
     mac.iter()
-        .map(|b| format!("{:02X}", b))
+        .map(|b| format!("{b:02X}"))
         .collect::<Vec<_>>()
         .join(sep)
 }
@@ -79,7 +77,7 @@ pub fn parse_mac(s: &str) -> Result<[u8; 6], String> {
     let mut mac = [0u8; 6];
     for (i, part) in parts.iter().enumerate() {
         mac[i] =
-            u8::from_str_radix(part, 16).map_err(|_| format!("Invalid hex byte: '{}'", part))?;
+            u8::from_str_radix(part, 16).map_err(|_| format!("Invalid hex byte: '{part}'"))?;
     }
     Ok(mac)
 }
