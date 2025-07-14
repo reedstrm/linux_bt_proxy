@@ -37,9 +37,7 @@ pub fn get_bt_mac(hci_index: u16) -> Option<[u8; 6]> {
     }
 
     if ret < 0 {
-        log::error!(
-            "ioctl HCIGETDEVINFO failed for hci{hci_index} (ret = {ret})"
-        );
+        log::error!("ioctl HCIGETDEVINFO failed for hci{hci_index} (ret = {ret})");
         return None;
     }
 
@@ -76,8 +74,7 @@ pub fn parse_mac(s: &str) -> Result<[u8; 6], String> {
 
     let mut mac = [0u8; 6];
     for (i, part) in parts.iter().enumerate() {
-        mac[i] =
-            u8::from_str_radix(part, 16).map_err(|_| format!("Invalid hex byte: '{part}'"))?;
+        mac[i] = u8::from_str_radix(part, 16).map_err(|_| format!("Invalid hex byte: '{part}'"))?;
     }
     Ok(mac)
 }

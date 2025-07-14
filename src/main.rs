@@ -30,8 +30,8 @@ struct Cli {
     #[arg(short = 'a', long, default_value_t = 0)]
     hci: u16,
 
-    /// TCP listen address (default: 0.0.0.0:6053)
-    #[arg(short, long, default_value = "0.0.0.0:6053")]
+    /// TCP listen address (default: [::]:6053)
+    #[arg(short, long, default_value = "[::]:6053")]
     listen: SocketAddr,
 
     /// Hostname to advertise (default: system hostname)
